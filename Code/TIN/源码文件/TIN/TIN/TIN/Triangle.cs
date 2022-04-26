@@ -75,8 +75,28 @@ namespace TIN.TIN
         }
         private double GetR(double x, double y, double x1, double y1)
         {
-            double r = Math.Sqrt((x - x1) * (x - x1) + (y - y1) * (y - y1));
+            double r;
+            r = Math.Sqrt((x - x1) * (x - x1) + (y - y1) * (y - y1));
             return r;
+        }
+
+        /// <summary>
+        /// 判断点是否在三角形外接圆内部
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public bool IsInCircle(Point point)
+        {
+            double d;
+            bool isIn = false;
+
+            d = PointA.GetDistance(point);
+            if (R >= d)
+            {
+                isIn = true;
+            }
+
+            return isIn;
         }
     }
 }

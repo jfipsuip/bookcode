@@ -43,5 +43,23 @@ namespace TIN.TIN
             X = x;
             Y = y;
         }
+
+        public double GetDistance(Point point)
+        {
+            double d;
+
+            d = GetDistance(X, Y, point.X, point.Y);
+
+            return d;
+        }
+
+        private static double GetDistance(double x1, double y1, double x2, double y2)
+        {
+            double d;
+
+            d = Math.Sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+
+            return d;
+        }
     }
 }

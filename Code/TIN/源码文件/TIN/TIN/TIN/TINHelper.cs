@@ -35,7 +35,24 @@ namespace TIN.TIN
                 }
                 // 1.3.4 获取边列表S;
                 List<Side> sides = GetSide(t2);
+
+                // 1.3.5 添加新三角形到列表T1
+                var triangles = GetAddTriangle(sides, point);
+                t1.AddRange(triangles);
             }
+        }
+
+        private static List<Triangle> GetAddTriangle(List<Side> sides, Point point)
+        {
+            List<Triangle> triangles;
+
+            triangles = new List<Triangle>();
+            foreach (var side in sides)
+            {
+                triangles.Add(new Triangle(side.PointA, side.PointB, point));
+            }
+
+            return triangles;
         }
 
         private static List<Side> GetSide(List<Triangle> triangles)
@@ -56,7 +73,7 @@ namespace TIN.TIN
             // 清空T2
             triangles = new List<Triangle>();
 
-            return sides;
+            return result;
         }
         /// <summary>
         /// 获取删除公共边后的边列表

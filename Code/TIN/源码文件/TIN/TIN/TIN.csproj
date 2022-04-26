@@ -55,6 +55,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TIN\Point.cs" />
+    <Compile Include="TIN\Side.cs" />
     <Compile Include="TIN\Test.cs" />
     <Compile Include="TIN\TINHelper.cs" />
     <Compile Include="TIN\Triangle.cs" />

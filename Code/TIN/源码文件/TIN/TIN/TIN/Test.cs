@@ -13,11 +13,16 @@ namespace TIN.TIN
             string str = "P01,3778.594,2885.732,9.468";
             Point point = new Point(str);
         }
-        public static void Usage()
+        public static void Usage2()
         {
 
             Triangle triangle = new Triangle(new Point("P1,0,0,0"), new Point("P1,4,0,0"), new Point("P1,0,2,0"));
 
+        }
+        public static void Usage()
+         {
+            string path = @"D:\github\jfipsuip\bookcode\Code\TIN\测试数据\1.txt";
+            TINHelper.GetTIN(path);
         }
     }
 }

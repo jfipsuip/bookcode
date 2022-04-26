@@ -36,5 +36,12 @@ namespace TIN.TIN
             Y = Convert.ToDouble(strs[2]);
             H = Convert.ToDouble(strs[3]);
         }
+
+        public Point(string name, double x, double y, double h = 0)
+        {
+            Name = name;
+            X = x;
+            Y = y;
+        }
     }
 }

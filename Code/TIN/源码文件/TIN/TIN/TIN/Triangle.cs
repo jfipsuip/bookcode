@@ -99,6 +99,28 @@ namespace TIN.TIN
             return isIn;
         }
 
+        private bool IsContain(Point point)
+        {
+            bool isContain = false;
+
+            if (PointA == point || PointB == point || PointC == point)
+            {
+                isContain = true;
+            }
+
+            return isContain;
+        }
+        public bool IsContain(params Point[] points)
+        {
+            foreach (var point in points)
+            {
+                if (IsContain(point))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public override string ToString()
         {
             return $"{PointA.Name} {PointB.Name} {PointC.Name}";

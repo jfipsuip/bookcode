@@ -11,8 +11,25 @@ namespace TIN.TIN
     {
         public static void GetTIN(IEnumerable<Point> points)
         {
-            GetInitialTriangets(points);
+            List<Triangle> t1, t2;
 
+            // 三角形列表T1
+            t1 = GetInitialTriangets(points);
+            // 三角形列表T2
+            t2 = new List<Triangle>();
+            foreach (var point in points)
+            {
+                // 1.3.3 遍历T1三角形列表，获得T2列表 
+                foreach (var triangle in t1)
+                {
+                    //判断P点是否在三角形ABC外接圆的内部，若是，将该三角形剪切到三角形列表T2中(即从T1移动到T2）
+                    if (triangle.IsInCircle(point))
+                    {
+                        t2.Add(triangle);
+                        t1.Remove(triangle);
+                    }
+                }
+            }
         }
         /// <summary>
         /// 获得初始三角形列表

@@ -9,15 +9,37 @@ namespace TIN.TIN
 {
     public class TINHelper
     {
-        public static void GetTIN(IEnumerable<Point> points)
+        private readonly List<Point> points;
+
+        double xMax, xMin, yMax, yMin;
+        Point p1, p2, p3, p4;
+
+        public List<Point> Points
+        {
+            get
+            {
+                return points;
+            }
+        }
+        /// <summary>
+        /// 参考高程
+        /// </summary>
+        public double H { get; set; }
+
+        public TINHelper(List<Point> points)
+        {
+            this.points = points;
+        }
+
+        public void GetTIN()
         {
             List<Triangle> t1, t2;
 
             // 三角形列表T1
-            t1 = GetInitialTriangets(points);
+            t1 = GetInitialTriangets(Points);
             // 三角形列表T2
             t2 = new List<Triangle>();
-            foreach (var point in points)
+            foreach (var point in Points)
             {
                 // 1.3.3 遍历T1三角形列表，获得T2列表 
                 foreach (var triangle in t1)
@@ -39,6 +61,19 @@ namespace TIN.TIN
                 // 1.3.5 添加新三角形到列表T1
                 var triangles = GetAddTriangle(sides, point);
                 t1.AddRange(triangles);
+            }
+            // 1.4  删除包含初始矩形顶点的所有三角形
+            List<Triangle> ts = new List<Triangle>();
+            foreach (var triangle in t1)
+            {
+                if (triangle.IsContain(p1, p2, p3, p4))
+                {
+                    ts.Add(triangle);
+                }
+            }
+            foreach (var triangle in ts)
+            {
+                t1.Remove(triangle);
             }
         }
 
@@ -71,7 +106,7 @@ namespace TIN.TIN
             // 获取删除公共边后的边列表 
             result = GetSide(sides);
             // 清空T2
-            triangles = new List<Triangle>();
+            triangles.Clear();
 
             return result;
         }
@@ -114,10 +149,8 @@ namespace TIN.TIN
         /// </summary>
         /// <param name="points"></param>
         /// <returns></returns>
-        private static List<Triangle> GetInitialTriangets(IEnumerable<Point> points)
+        private List<Triangle> GetInitialTriangets(IEnumerable<Point> points)
         {
-            double xMax, xMin, yMax, yMin;
-            Point p1, p2, p3, p4;
             List<Triangle> triangles;
 
             xMax = points.Select(t => t.X).Max();
@@ -134,14 +167,14 @@ namespace TIN.TIN
             triangles.Add(new Triangle(p1, p3, p2));
             triangles.Add(new Triangle(p1, p3, p4));
 
-
             return triangles;
         }
 
         public static void GetTIN(string path)
         {
             List<Point> points = GetPoints(path);
-            GetTIN(points);
+            var tin = new TINHelper(points);
+            tin.GetTIN();
         }
 
         private static List<Point> GetPoints(string path)

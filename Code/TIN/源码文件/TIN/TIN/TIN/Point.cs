@@ -61,5 +61,10 @@ namespace TIN.TIN
 
             return d;
         }
+
+        public override string ToString()
+        {
+            return $"{Name} {X} {Y} {H}";
+        }
     }
 }

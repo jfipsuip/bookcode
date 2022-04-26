@@ -41,9 +41,9 @@ namespace TIN.TIN
             return isCommon;
         }
 
-        private static void adfdf()
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"{PointA.Name} {PointB.Name}";
         }
     }
 }

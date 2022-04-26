@@ -98,5 +98,10 @@ namespace TIN.TIN
 
             return isIn;
         }
+
+        public override string ToString()
+        {
+            return $"{PointA.Name} {PointB.Name} {PointC.Name}";
+        }
     }
 }

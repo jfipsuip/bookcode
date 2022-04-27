@@ -23,7 +23,22 @@ namespace TIN.TIN
         /// 三角形的第一个点C
         /// </summary>
         public Point PointC { get; set; }
-
+        /// <summary>
+        /// 平均高程
+        /// </summary>
+        public double? H
+        {
+            get
+            {
+                double? result;
+                result = (PointA.H + PointB.H + PointC.H) / 3 - Hc;
+                return result;
+            }
+        }
+        /// <summary>
+        /// 参考高程
+        /// </summary>
+        public double? Hc { get; set; }
         /// <summary>
         /// 三角形外接圆圆心 Xo 坐标
         /// </summary>
@@ -54,8 +69,35 @@ namespace TIN.TIN
                 return GetR(X, Y, PointA.X, PointB.Y);
             }
         }
+        /// <summary>
+        /// 三角形投影底面积
+        /// </summary>
+        public double S
+        {
+            get
+            {
+                return GetS(PointA.X, PointB.X, PointC.X, PointA.Y, PointB.Y, PointC.Y);
+            }
+        }
+        /// <summary>
+        /// 斜三棱柱的体积
+        /// </summary>
+        public double? V
+        {
+            get
+            {
+                return S * H;
+            }
+        }
 
+        private double GetS(double x1, double x2, double x3, double y1, double y2, double y3)
+        {
+            double s;
 
+            s = Math.Abs((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1)) / 2;
+
+            return s;
+        }
 
         public Triangle(Point pointA, Point pointB, Point pointC)
         {

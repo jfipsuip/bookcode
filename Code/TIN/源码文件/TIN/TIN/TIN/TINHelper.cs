@@ -9,18 +9,14 @@ namespace TIN.TIN
 {
     public class TINHelper
     {
-        private readonly List<Point> points;
 
         double xMax, xMin, yMax, yMin;
         Point p1, p2, p3, p4;
 
-        public List<Point> Points
-        {
-            get
-            {
-                return points;
-            }
-        }
+        public List<Point> Points { get; }
+
+        List<Triangle> Triangles { get; } = new List<Triangle>();
+        List<Triangle> InitialTriangets { get; } = new List<Triangle>();
         /// <summary>
         /// 参考高程
         /// </summary>
@@ -28,41 +24,33 @@ namespace TIN.TIN
 
         public TINHelper(List<Point> points)
         {
-            this.points = points;
+            Points = points;
         }
 
         public void GetTIN()
         {
-            List<Triangle> t1, t2;
-
             // 三角形列表T1
-            t1 = GetInitialTriangets(Points);
-            // 三角形列表T2
-            t2 = new List<Triangle>();
+            var ts = GetInitialTriangets(Points);
+            InitialTriangets.AddRange(ts);
+            Triangles.AddRange(ts);
+            // 1.3 遍历离散点 生成平面三角网
             foreach (var point in Points)
             {
-                // 1.3.3 遍历T1三角形列表，获得T2列表 
-                foreach (var triangle in t1)
-                {
-                    //判断P点是否在三角形ABC外接圆的内部，若是，将该三角形剪切到三角形列表T2中(即从T1移动到T2）
-                    if (triangle.IsInCircle(point))
-                    {
-                        t2.Add(triangle);
-                    }
-                }
-                // 从T1移除
-                foreach (var triangle in t2)
-                {
-                    t1.Remove(triangle);
-                }
-                // 1.3.4 获取边列表S;
-                List<Side> sides = GetSide(t2);
-
-                // 1.3.5 添加新三角形到列表T1
-                var triangles = GetAddTriangle(sides, point);
-                t1.AddRange(triangles);
+                // 生成点P的平面三角网
+                GetTriangles(Triangles, point);
             }
             // 1.4  删除包含初始矩形顶点的所有三角形
+            ReMoveTrianges(Triangles);
+
+
+        }
+
+        /// <summary>
+        /// 删除包含初始矩形顶点的所有三角形
+        /// </summary>
+        /// <param name="t1"></param>
+        private void ReMoveTrianges(List<Triangle> t1)
+        {
             List<Triangle> ts = new List<Triangle>();
             foreach (var triangle in t1)
             {
@@ -75,6 +63,39 @@ namespace TIN.TIN
             {
                 t1.Remove(triangle);
             }
+        }
+
+        /// <summary>
+        /// 生成点P的平面三角网
+        /// </summary>
+        /// <param name="t1"></param>
+        /// <param name="point"></param>
+        private static void GetTriangles(List<Triangle> t1, Point point)
+        {
+            List<Triangle> t2;
+
+            // 三角形列表T2
+            t2 = new List<Triangle>();
+            // 1.3.3 遍历T1三角形列表，获得T2列表 
+            foreach (var triangle in t1)
+            {
+                //判断P点是否在三角形ABC外接圆的内部，若是，将该三角形剪切到三角形列表T2中(即从T1移动到T2）
+                if (triangle.IsInCircle(point))
+                {
+                    t2.Add(triangle);
+                }
+            }
+            // 从T1移除
+            foreach (var triangle in t2)
+            {
+                t1.Remove(triangle);
+            }
+            // 1.3.4 获取边列表S;
+            List<Side> sides = GetSide(t2);
+
+            // 1.3.5 添加新三角形到列表T1
+            var triangles = GetAddTriangle(sides, point);
+            t1.AddRange(triangles);
         }
 
         private static List<Triangle> GetAddTriangle(List<Side> sides, Point point)

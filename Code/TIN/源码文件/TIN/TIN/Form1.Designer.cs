@@ -73,6 +73,7 @@ namespace TIN
             this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
             this.文件ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.文件ToolStripMenuItem.Text = "文件";
+            this.文件ToolStripMenuItem.Click += new System.EventHandler(this.文件ToolStripMenuItem_Click);
             // 
             // 新建ToolStripMenuItem
             // 
@@ -106,8 +107,9 @@ namespace TIN
             // 计算三角网体积ToolStripMenuItem
             // 
             this.计算三角网体积ToolStripMenuItem.Name = "计算三角网体积ToolStripMenuItem";
-            this.计算三角网体积ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.计算三角网体积ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.计算三角网体积ToolStripMenuItem.Text = "计算三角网体积";
+            this.计算三角网体积ToolStripMenuItem.Click += new System.EventHandler(this.计算三角网体积ToolStripMenuItem_Click);
             // 
             // 查看ToolStripMenuItem
             // 
@@ -211,6 +213,7 @@ namespace TIN
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "不规则三角网体积计算";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);

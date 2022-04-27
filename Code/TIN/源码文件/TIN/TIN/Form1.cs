@@ -16,5 +16,19 @@ namespace TIN
         {
             InitializeComponent();
         }
+
+        private void 新建ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -44,16 +44,7 @@ namespace TIN.TIN
             Y = y;
         }
 
-        public double GetDistance(Point point)
-        {
-            double d;
-
-            d = GetDistance(X, Y, point.X, point.Y);
-
-            return d;
-        }
-
-        private static double GetDistance(double x1, double y1, double x2, double y2)
+        public static double GetDistance(double x1, double y1, double x2, double y2)
         {
             double d;
 

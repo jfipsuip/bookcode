@@ -17,14 +17,45 @@ namespace TIN.TIN
 
         List<Triangle> Triangles { get; } = new List<Triangle>();
         List<Triangle> InitialTriangets { get; } = new List<Triangle>();
+
+        List<Triangle> TrianglesMin5
+        {
+            get
+            {
+                return Triangles.OrderBy(t => t.V).Take(5).ToList();
+            }
+        }
+        List<Triangle> TrianglesMAX5
+        {
+            get
+            {
+                return Triangles.OrderByDescending(t => t.V).Take(5).ToList();
+            }
+        }
         /// <summary>
-        /// 参考高程
+        /// 基准高程
         /// </summary>
         public double H { get; set; }
 
-        public TINHelper(List<Point> points)
+        /// <summary>
+        /// 计算总体积
+        /// </summary>
+        public double? V
+        {
+            get
+            {
+                return Triangles.Select(t => t.V).Sum();
+            }
+        }
+        /// <summary>
+        /// 初始化三角网
+        /// </summary>
+        /// <param name="points">构成三角网的所有点</param>
+        /// <param name="h">三角网的基准高程</param>
+        public TINHelper(List<Point> points, double h = 0)
         {
             Points = points;
+            H = h;
         }
 
         public void GetTIN()
@@ -42,7 +73,16 @@ namespace TIN.TIN
             // 1.4  删除包含初始矩形顶点的所有三角形
             ReMoveTrianges(Triangles);
 
+            SetTinH(Triangles, H);
 
+        }
+
+        private static void SetTinH(List<Triangle> triangles, double hc)
+        {
+            foreach (var triangle in triangles)
+            {
+                triangle.Hc = hc;
+            }
         }
 
         /// <summary>
@@ -126,8 +166,6 @@ namespace TIN.TIN
 
             // 获取删除公共边后的边列表 
             result = GetSide(sides);
-            // 清空T2
-            triangles.Clear();
 
             return result;
         }
@@ -194,7 +232,7 @@ namespace TIN.TIN
         public static void GetTIN(string path)
         {
             List<Point> points = GetPoints(path);
-            var tin = new TINHelper(points);
+            var tin = new TINHelper(points, 9);
             tin.GetTIN();
         }
 

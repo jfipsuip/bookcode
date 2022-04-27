@@ -66,7 +66,7 @@ namespace TIN.TIN
         {
             get
             {
-                return GetR(X, Y, PointA.X, PointB.Y);
+                return GetR(X, Y, PointA.X, PointA.Y);
             }
         }
         /// <summary>
@@ -132,7 +132,7 @@ namespace TIN.TIN
             double d;
             bool isIn = false;
 
-            d = PointA.GetDistance(point);
+            d = Point.GetDistance(X, Y, point.X, point.Y);
             if (R >= d)
             {
                 isIn = true;

@@ -236,6 +236,14 @@ namespace TIN.TIN
             tin.GetTIN();
         }
 
+        public static TINHelper GetTIN(List<Point> points, double h)
+        {
+            var tin = new TINHelper(points, h);
+            tin.GetTIN();
+
+            return tin;
+        }
+
         private static List<Point> GetPoints(string path)
         {
             string[] lines = File.ReadAllLines(path);

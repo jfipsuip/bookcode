@@ -80,7 +80,7 @@ namespace TIN
         }
         public void Calculate()
         {
-            Common.Calculate(dataGridView);
+            Common.Calculate(dataGridView, richTextBox1);
         }
 
         private void 计算三角网体积ToolStripMenuItem_Click(object sender, EventArgs e)

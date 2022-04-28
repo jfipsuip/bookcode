@@ -49,13 +49,15 @@ namespace TIN.TIN
             return data;
         }
 
-        public static void Calculate(DataGridView dataGrid)
+        public static void Calculate(DataGridView dataGrid, RichTextBox richTextBox)
         {
             List<Point> points;
 
             points = GetPoints(dataGrid);
 
             var tin = Common.GetTIN(points, 9);
+
+            richTextBox.Text = tin.Report();
 
         }
         private static List<Point> GetPoints(DataGridView dataGrid)

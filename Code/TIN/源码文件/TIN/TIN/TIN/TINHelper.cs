@@ -15,10 +15,10 @@ namespace TIN.TIN
 
         public List<Point> Points { get; }
 
-        List<Triangle> Triangles { get; } = new List<Triangle>();
-        List<Triangle> InitialTriangets { get; } = new List<Triangle>();
+        public List<Triangle> Triangles { get; } = new List<Triangle>();
+        public List<Triangle> InitialTriangets { get; } = new List<Triangle>();
 
-        List<Triangle> TrianglesMin5
+        public List<Triangle> TrianglesMin5
         {
             get
             {
@@ -76,6 +76,38 @@ namespace TIN.TIN
             SetTinH(Triangles, H);
 
         }
+
+        public string Report()
+        {
+            List<string> list = new List<string>();
+            list.Add("------------基本信息------------");
+            list.Add($"基准高程：{H}m");
+            list.Add($"三角形个数：{Triangles.Count}");
+            list.Add($"体积：{V:F3}");
+            list.Add($"");
+            list.Add($"------------20个三角形说明------------");
+            list.Add($"序号     三个顶点");
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add($"{i + 1}     {Triangles[i]}");
+            }
+            list.Add($"");
+            list.Add($"------------体积最小的5个三棱柱体积------------");
+            for (int i = 0; i < TrianglesMin5.Count; i++)
+            {
+                list.Add($"{i + 1}：   {TrianglesMin5[i].V:F3}");
+            }
+            list.Add($"");
+            list.Add($"------------体积最大的5个三棱柱体积------------");
+            for (int i = 0; i < TrianglesMAX5.Count; i++)
+            {
+                list.Add($"{i + 1}：   {TrianglesMAX5[i].V:F3}");
+            }
+            string result = list.Aggregate((m, n) => m + "\n" + n);
+
+            return result;
+        }
+
 
         private static void SetTinH(List<Triangle> triangles, double hc)
         {

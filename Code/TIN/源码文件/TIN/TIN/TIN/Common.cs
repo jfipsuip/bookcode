@@ -55,7 +55,7 @@ namespace TIN.TIN
 
             points = GetPoints(dataGrid);
 
-            var tin = TINHelper.GetTIN(points, 9);
+            var tin = Common.GetTIN(points, 9);
 
         }
         private static List<Point> GetPoints(DataGridView dataGrid)
@@ -84,6 +84,29 @@ namespace TIN.TIN
             point = new Point(name, x, y, h);
 
             return point;
+        }
+
+        public static void GetTIN(string path)
+        {
+            List<Point> points = GetPoints(path);
+            var tin = new TINHelper(points, 9);
+            tin.Calculate();
+        }
+
+        public static TINHelper GetTIN(List<Point> points, double h)
+        {
+            var tin = new TINHelper(points, h);
+            tin.Calculate();
+
+            return tin;
+        }
+        private static List<Point> GetPoints(string path)
+        {
+            string[] lines = File.ReadAllLines(path);
+            string[] strs = lines.Where(t => t.Split(',').Length >= 4).ToArray();
+            List<Point> points = strs.Select(t => new Point(t)).ToList();
+
+            return points;
         }
     }
 }

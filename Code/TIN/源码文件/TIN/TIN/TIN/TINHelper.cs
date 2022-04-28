@@ -58,7 +58,7 @@ namespace TIN.TIN
             H = h;
         }
 
-        public void GetTIN()
+        public void Calculate()
         {
             // 三角形列表T1
             var ts = GetInitialTriangets(Points);
@@ -227,30 +227,6 @@ namespace TIN.TIN
             triangles.Add(new Triangle(p1, p3, p4));
 
             return triangles;
-        }
-
-        public static void GetTIN(string path)
-        {
-            List<Point> points = GetPoints(path);
-            var tin = new TINHelper(points, 9);
-            tin.GetTIN();
-        }
-
-        public static TINHelper GetTIN(List<Point> points, double h)
-        {
-            var tin = new TINHelper(points, h);
-            tin.GetTIN();
-
-            return tin;
-        }
-
-        private static List<Point> GetPoints(string path)
-        {
-            string[] lines = File.ReadAllLines(path);
-            string[] strs = lines.Where(t => t.Split(',').Length >= 4).ToArray();
-            List<Point> points = strs.Select(t => new Point(t)).ToList();
-
-            return points;
         }
     }
 }

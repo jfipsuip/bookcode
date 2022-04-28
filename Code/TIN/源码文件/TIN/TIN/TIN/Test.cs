@@ -20,9 +20,9 @@ namespace TIN.TIN
 
         }
         public static void Usage()
-         {
+        {
             string path = @"D:\github\jfipsuip\bookcode\Code\TIN\测试数据\1.txt";
-            TINHelper.GetTIN(path);
+            Common.GetTIN(path);
         }
     }
 }

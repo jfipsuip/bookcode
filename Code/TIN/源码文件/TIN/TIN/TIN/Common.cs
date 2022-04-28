@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TIN.Draws;
 
 namespace TIN.TIN
 {
@@ -49,7 +50,7 @@ namespace TIN.TIN
             return data;
         }
 
-        public static void Calculate(DataGridView dataGrid, RichTextBox richTextBox)
+        public static void Calculate(DataGridView dataGrid, RichTextBox richTextBox, PictureBox pictureBox)
         {
             List<Point> points;
 
@@ -59,6 +60,19 @@ namespace TIN.TIN
 
             richTextBox.Text = tin.Report();
 
+            Draws.DrawHelper draw = new Draws.DrawHelper();
+
+            draw.pictureBox1 = pictureBox;
+            draw.Points = tin.Points.Select(t => new PointF() { x = t.X, y = t.Y, z = t.H }).ToArray();
+            List<PointF> list = new List<PointF>();
+            tin.Triangles.ForEach(t =>
+            {
+                list.Add(new PointF() { x = t.PointA.X, y = t.PointA.Y, z = t.PointA.H });
+                list.Add(new PointF() { x = t.PointB.X, y = t.PointB.Y, z = t.PointB.H });
+                list.Add(new PointF() { x = t.PointC.X, y = t.PointC.Y, z = t.PointC.H });
+            });
+            draw.PointLines = list;
+            draw.Draw();
         }
         private static List<Point> GetPoints(DataGridView dataGrid)
         {

@@ -60,6 +60,10 @@ namespace TIN.TIN
 
         public void Calculate()
         {
+            if (Points?.Count() == 0)
+            {
+                return;
+            }
             // 三角形列表T1
             var ts = GetInitialTriangets(Points);
             InitialTriangets.AddRange(ts);
@@ -87,7 +91,7 @@ namespace TIN.TIN
             list.Add($"");
             list.Add($"------------20个三角形说明------------");
             list.Add($"序号     三个顶点");
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 20 && i < Triangles.Count(); i++)
             {
                 list.Add($"{i + 1}     {Triangles[i]}");
             }

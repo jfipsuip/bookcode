@@ -62,9 +62,9 @@ namespace TIN.TIN
 
             Draws.DrawHelper draw = new Draws.DrawHelper(pictureBox);
 
-            draw.Points = tin.Points.Select(t => new PointF() { X = t.X, Y = t.Y, Z = t.H }).ToArray();
+            draw.Points = tin.Points.ToArray();
 
-            List<PointF> ps = new List<PointF>();
+            List<Point> ps = new List<Point>();
 
             tin.Triangles.ForEach(t =>
             {

@@ -27,7 +27,10 @@ namespace TIN.TIN
         /// H坐标
         /// </summary>
         public double H { get; set; }
+        public Point()
+        {
 
+        }
         public Point(string line)
         {
             string[] strs = line.Split(',');
@@ -57,19 +60,6 @@ namespace TIN.TIN
         public override string ToString()
         {
             return $"{Name} {X} {Y} {H}";
-        }
-
-        public static implicit operator PointF(Point point)
-        {
-            PointF result;
-            result = new PointF()
-            {
-                X = point.X,
-                Y = point.Y,
-            };
-
-            return result;
-
         }
     }
 }

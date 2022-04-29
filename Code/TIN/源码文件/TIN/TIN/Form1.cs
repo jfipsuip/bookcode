@@ -16,7 +16,6 @@ namespace TIN
     {
 
         OpenFileDialog OpenFileDialog = new OpenFileDialog();
-        DataGridView dataGridView;
 
         public Form1()
         {
@@ -50,11 +49,11 @@ namespace TIN
         private void NewFile(int n = 11)
         {
             tabPage1.Controls.Clear();
-            dataGridView = new DataGridView();
-            tabPage1.Controls.Add(dataGridView);
-            dataGridView.Dock = DockStyle.Fill;
+            dataGridView1 = new DataGridView();
+            tabPage1.Controls.Add(dataGridView1);
+            dataGridView1.Dock = DockStyle.Fill;
 
-            Common.NewGrid(dataGridView, n);
+            Common.NewGrid(dataGridView1, n);
 
             tabControl1.SelectedTab = tabPage1;
 
@@ -76,16 +75,26 @@ namespace TIN
 
             tabControl1.SelectedTab = tabPage1;
             NewFile(points.Length);
-            Common.BindData(dataGridView, points);
+            Common.BindData(dataGridView1, points);
         }
         public void Calculate()
         {
-            Common.Calculate(dataGridView, richTextBox1, pictureBox1);
+            Common.Calculate(dataGridView1, richTextBox1, pictureBox1);
         }
 
         private void 计算三角网体积ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Calculate();
+        }
+
+        private void 放大ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void 缩小ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

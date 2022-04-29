@@ -46,14 +46,19 @@ namespace TIN
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.放大ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.缩小ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -129,19 +134,22 @@ namespace TIN
             // 数据表格ToolStripMenuItem
             // 
             this.数据表格ToolStripMenuItem.Name = "数据表格ToolStripMenuItem";
-            this.数据表格ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.数据表格ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.数据表格ToolStripMenuItem.Text = "数据表格";
             // 
             // 示意图ToolStripMenuItem
             // 
+            this.示意图ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.放大ToolStripMenuItem,
+            this.缩小ToolStripMenuItem});
             this.示意图ToolStripMenuItem.Name = "示意图ToolStripMenuItem";
-            this.示意图ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.示意图ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.示意图ToolStripMenuItem.Text = "示意图";
             // 
             // 计算报告ToolStripMenuItem
             // 
             this.计算报告ToolStripMenuItem.Name = "计算报告ToolStripMenuItem";
-            this.计算报告ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.计算报告ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.计算报告ToolStripMenuItem.Text = "计算报告";
             // 
             // 帮助ToolStripMenuItem
@@ -180,6 +188,7 @@ namespace TIN
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -199,6 +208,14 @@ namespace TIN
             this.tabPage2.Text = "示意图";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(775, 347);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.richTextBox1);
@@ -217,13 +234,28 @@ namespace TIN
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
-            // pictureBox1
+            // 放大ToolStripMenuItem
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(775, 347);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.放大ToolStripMenuItem.Name = "放大ToolStripMenuItem";
+            this.放大ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.放大ToolStripMenuItem.Text = "放大";
+            this.放大ToolStripMenuItem.Click += new System.EventHandler(this.放大ToolStripMenuItem_Click);
+            // 
+            // 缩小ToolStripMenuItem
+            // 
+            this.缩小ToolStripMenuItem.Name = "缩小ToolStripMenuItem";
+            this.缩小ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.缩小ToolStripMenuItem.Text = "缩小";
+            this.缩小ToolStripMenuItem.Click += new System.EventHandler(this.缩小ToolStripMenuItem_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 6);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(770, 347);
+            this.dataGridView1.TabIndex = 3;
             // 
             // Form1
             // 
@@ -240,9 +272,11 @@ namespace TIN
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,6 +304,9 @@ namespace TIN
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem 放大ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 缩小ToolStripMenuItem;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

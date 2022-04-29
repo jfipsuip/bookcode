@@ -58,5 +58,18 @@ namespace TIN.TIN
         {
             return $"{Name} {X} {Y} {H}";
         }
+
+        public static implicit operator PointF(Point point)
+        {
+            PointF result;
+            result = new PointF()
+            {
+                X = point.X,
+                Y = point.Y,
+            };
+
+            return result;
+
+        }
     }
 }

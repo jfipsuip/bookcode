@@ -60,18 +60,22 @@ namespace TIN.TIN
 
             richTextBox.Text = tin.Report();
 
-            Draws.DrawHelper draw = new Draws.DrawHelper();
+            Draws.DrawHelper draw = new Draws.DrawHelper(pictureBox);
 
-            draw.pictureBox = pictureBox;
             draw.Points = tin.Points.Select(t => new PointF() { X = t.X, Y = t.Y, Z = t.H }).ToArray();
-            List<PointF> list = new List<PointF>();
+
+            List<PointF> ps = new List<PointF>();
+
             tin.Triangles.ForEach(t =>
             {
-                list.Add(new PointF() { X = t.PointA.X, Y = t.PointA.Y, H = t.PointA.H });
-                list.Add(new PointF() { X = t.PointB.X, Y = t.PointB.Y, H = t.PointB.H });
-                list.Add(new PointF() { X = t.PointC.X, Y = t.PointC.Y, H = t.PointC.H });
+                ps.Add(t.PointA);
+                ps.Add(t.PointB);
+                ps.Add(t.PointA);
+                ps.Add(t.PointC);
+                ps.Add(t.PointB);
+                ps.Add(t.PointC);
             });
-            draw.PointLines = list;
+            draw.PointsL = ps;
             draw.Draw();
         }
         private static List<Point> GetPoints(DataGridView dataGrid)

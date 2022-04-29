@@ -10,99 +10,131 @@ namespace TIN.Draws
 {
     public class DrawHelper
     {
-        public PictureBox pictureBox1;
+        public PictureBox pictureBox;
 
-        internal PointF[] Points;    //输入的点集
+        /// <summary>
+        /// 输入的点集
+        /// </summary>
+        public PointF[] Points { get; set; }   //输入的点集
+        /// <summary>
+        /// 输入的线集
+        /// </summary>
+        public List<PointF> PointLines { get; set; }
 
-        public List<PointF> PointLines;
+
         internal List<PointF> contourLine = new List<PointF>(); //等高线
 
-        bool rdbcheck = false;
+        // bool rdbcheck = false;
         /// <summary>
-        /// 画图相关
+        /// 画图相关 
         /// </summary>
-        public double zoom = 3.00;
-        public PointF[] p;
-        double x_average = 0;
-        double y_average = 0;
-        double x_max = 0;
-        double y_max = 0;
+
+        double x_average
+        {
+            get
+            {
+                return Points.Average(t => t.X);
+            }
+        }
+        double y_average
+        {
+            get
+            {
+                return Points.Average(t => t.Y);
+            }
+        }
+        double x_max
+        {
+            get
+            {
+                return Points.Max(t => Math.Abs(t.X - x_average));
+            }
+        }
+        double y_max
+        {
+            get
+            {
+                return Points.Max(t => Math.Abs(t.Y - y_average));
+            }
+        }
         public PointF[] ph;
         public Point[] q;
         public Point[] qh;
-        public Point[] go = { new Point(0, 0), new Point(0, 0) };
+        /// <summary>
+        /// 图形大小
+        /// </summary>
+        public double Zoom = 3.00;
+        /// <summary>
+        /// 偏移坐标
+        /// </summary>
+        public Point Go = new Point();
         public bool Clicked = false;
 
 
-        public void GetPic_Point(double zoom, Point go)
+        public void GetPic_Point()
         {
+            List<Point> points;
+            double pic_H;
 
-            int n = Points.Length;
-            p = new PointF[n];
-            for (int i = 0; i < n; i++)
-            {
-                p[i].X = Points[i].X;
-                p[i].Y = Points[i].Y;
-            }
+            pic_H = pictureBox.Size.Height;
 
-            for (int i = 0; i < n; i++)
-            {
-                x_average += p[i].X;
-                y_average += p[i].Y;
-            }
-            x_average /= n;
-            y_average /= n;
-            for (int i = 0; i < n; i++)
-            {
-                p[i].X -= x_average;
-                p[i].Y -= y_average;
-                if (Math.Abs(p[i].X) > x_max)
-                {
-                    x_max = Math.Abs(p[i].X);
-                }
-                if (Math.Abs(p[i].Y) > y_max)
-                {
-                    y_max = Math.Abs(p[i].Y);
-                }
-            }
-            double pic_height = pictureBox1.Size.Height;
+            points = new List<Point>();
             //投影到图像坐标系
-            q = new Point[n];
-            for (int i = 0; i < n; i++)
+            foreach (var point in Points)
             {
-                q[i].X = (int)(pic_height / 2 + go.X + p[i].X * pic_height / x_max / zoom);
-                q[i].Y = (int)(pic_height / 2 - go.Y - p[i].Y * pic_height / y_max / zoom);
+                int x = (int)(pic_H / 2 + Go.X + (point.X - x_average) * pic_H / x_max / Zoom);
+                int y = (int)(pic_H / 2 - Go.Y - (point.Y - y_average) * pic_H / y_max / Zoom);
+                points.Add(new Point(x, y));
             }
+
             //画点
-            Bitmap map = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);
-            Image ge = map;
-            Graphics gra = Graphics.FromImage(ge);
-
-            Bitmap oo = new Bitmap(3, 3);
-            Image o = oo;
-            for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++)
-                    oo.SetPixel(i, j, Color.Red);
-
-            for (int i = 0; i < n; i++)
-            {
-                gra.DrawImage(o, q[i]);
-                // gra.DrawString(tpoints[i].Name, new Font("宋体", 8), new SolidBrush(Color.Black), q[i]);
-            }
-            pictureBox1.Image = ge;
+            DrawPoint(pictureBox, points);
         }
-        private void GetPic_Line(double zoom, Point go)
+
+        private static void DrawPoint(PictureBox pictureBox, IEnumerable<Point> points)
+        {
+            Image image = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
+            Graphics graphics = Graphics.FromImage(image);
+            Bitmap map = CreateMap();
+            foreach (var point in points)
+            {
+                graphics.DrawImage(map, point);
+            }
+            pictureBox.Image = image;
+        }
+
+        /// <summary>
+        /// 画一个点
+        /// </summary>
+        /// <returns></returns>
+        private static Bitmap CreateMap()
+        {
+            Bitmap map = new Bitmap(3, 3);
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    map.SetPixel(i, j, Color.Red);
+                }
+            }
+
+            return map;
+        }
+
+        private void GetPic_Line()
         {
             int n1 = contourLine.Count;
             int n = PointLines.Count;
-            p = new PointF[n];
+
+            PointF[] PointsD;
+            PointsD = new PointF[n];
             ph = new PointF[n1];
             //
             for (int i = 0; i < n; i++)
             {
-                p[i].X = PointLines[i].X;
-                p[i].Y = PointLines[i].Y;
-                p[i].Z = PointLines[i].H;
+                PointsD[i].X = PointLines[i].X;
+                PointsD[i].Y = PointLines[i].Y;
+                PointsD[i].Z = PointLines[i].H;
             }
             for (int i = 0; i < n1; i++)
             {
@@ -116,8 +148,8 @@ namespace TIN.Draws
             //
             for (int i = 0; i < n; i++)
             {
-                p[i].X -= x_average;
-                p[i].Y -= y_average;
+                PointsD[i].X -= x_average;
+                PointsD[i].Y -= y_average;
             }
 
             for (int i = 0; i < n1; i++)
@@ -126,19 +158,19 @@ namespace TIN.Draws
                 ph[i].Y -= y_average;
             }
 
-            double pic_width = pictureBox1.Size.Width;
-            double pic_height = pictureBox1.Size.Height;
+            double pic_width = pictureBox.Size.Width;
+            double pic_height = pictureBox.Size.Height;
             //
             for (int i = 0; i < n; i++)
             {
-                q[i].X = (int)(pic_height / 2 + go.X + p[i].X * pic_height / x_max / zoom);
-                q[i].Y = (int)(pic_height / 2 - go.Y - p[i].Y * pic_height / y_max / zoom);
+                q[i].X = (int)(pic_height / 2 + Go.X + PointsD[i].X * pic_height / x_max / Zoom);
+                q[i].Y = (int)(pic_height / 2 - Go.Y - PointsD[i].Y * pic_height / y_max / Zoom);
             }
 
             for (int i = 0; i < n1; i++)
             {
-                qh[i].X = (int)(pic_height / 2 + go.X + ph[i].X * pic_height / zoom / x_max);
-                qh[i].Y = (int)(pic_height / 2 - go.Y - ph[i].Y * pic_height / zoom / y_max);
+                qh[i].X = (int)(pic_height / 2 + Go.X + ph[i].X * pic_height / Zoom / x_max);
+                qh[i].Y = (int)(pic_height / 2 - Go.Y - ph[i].Y * pic_height / Zoom / y_max);
             }
             //
             Bitmap bitmap = new Bitmap(3, 3);
@@ -147,7 +179,7 @@ namespace TIN.Draws
                 for (int j = 0; j < 3; j++)
                     bitmap.SetPixel(i, j, Color.Red);
 
-            Bitmap map = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);
+            Bitmap map = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
             Image ge = map;
             Graphics gra = Graphics.FromImage(ge);
 
@@ -156,18 +188,18 @@ namespace TIN.Draws
                 gra.DrawImage(image, q[i]);
             }
 
-            if (true)
+            if (Clicked)
             {
                 Point[] q2 = new Point[q.Length];  //三角形点的偏移坐标
                 q.CopyTo(q2, 0);
                 for (int i = 0; i < n; i++)
                 {
-                    q2[i].X += (int)(10 / zoom);
-                    q2[i].Y += (int)(10 / zoom);
+                    q2[i].X += (int)(10 / Zoom);
+                    q2[i].Y += (int)(10 / Zoom);
                 }
                 for (int i = 0; i < n; i++)
                 {
-                    gra.DrawString(p[i].Z.ToString("f1"), new Font("Verdana", (int)(pictureBox1.Size.Height / x_max / zoom)), new SolidBrush(Color.Red), q[i]);
+                    gra.DrawString(PointsD[i].Z.ToString("f1"), new Font("Verdana", (int)(pictureBox.Size.Height / x_max / Zoom)), new SolidBrush(Color.Red), q[i]);
                 }
             }
             else
@@ -202,13 +234,13 @@ namespace TIN.Draws
                 gra.DrawLine(pen, qh[i], qh[i + 1]);
             }
 
-            pictureBox1.Image = ge;
+            pictureBox.Image = ge;
         }
 
         public void Draw()
         {
-            GetPic_Point(zoom, go[1]);
-            GetPic_Line(zoom, go[1]);
+            GetPic_Point();
+            GetPic_Line();
         }
 
     }

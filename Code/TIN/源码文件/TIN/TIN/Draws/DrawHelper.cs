@@ -41,28 +41,28 @@ namespace TIN.Draws
             p = new PointF[n];
             for (int i = 0; i < n; i++)
             {
-                p[i].x = Points[i].x;
-                p[i].y = Points[i].y;
+                p[i].X = Points[i].X;
+                p[i].Y = Points[i].Y;
             }
 
             for (int i = 0; i < n; i++)
             {
-                x_average += p[i].x;
-                y_average += p[i].y;
+                x_average += p[i].X;
+                y_average += p[i].Y;
             }
             x_average /= n;
             y_average /= n;
             for (int i = 0; i < n; i++)
             {
-                p[i].x -= x_average;
-                p[i].y -= y_average;
-                if (Math.Abs(p[i].x) > x_max)
+                p[i].X -= x_average;
+                p[i].Y -= y_average;
+                if (Math.Abs(p[i].X) > x_max)
                 {
-                    x_max = Math.Abs(p[i].x);
+                    x_max = Math.Abs(p[i].X);
                 }
-                if (Math.Abs(p[i].y) > y_max)
+                if (Math.Abs(p[i].Y) > y_max)
                 {
-                    y_max = Math.Abs(p[i].y);
+                    y_max = Math.Abs(p[i].Y);
                 }
             }
             double pic_height = pictureBox1.Size.Height;
@@ -70,8 +70,8 @@ namespace TIN.Draws
             q = new Point[n];
             for (int i = 0; i < n; i++)
             {
-                q[i].X = (int)(pic_height / 2 + go.X + p[i].x * pic_height / x_max / zoom);
-                q[i].Y = (int)(pic_height / 2 - go.Y - p[i].y * pic_height / y_max / zoom);
+                q[i].X = (int)(pic_height / 2 + go.X + p[i].X * pic_height / x_max / zoom);
+                q[i].Y = (int)(pic_height / 2 - go.Y - p[i].Y * pic_height / y_max / zoom);
             }
             //画点
             Bitmap map = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);
@@ -100,15 +100,15 @@ namespace TIN.Draws
             //
             for (int i = 0; i < n; i++)
             {
-                p[i].x = PointLines[i].x;
-                p[i].y = PointLines[i].y;
-                p[i].z = PointLines[i].h;
+                p[i].X = PointLines[i].X;
+                p[i].Y = PointLines[i].Y;
+                p[i].Z = PointLines[i].H;
             }
             for (int i = 0; i < n1; i++)
             {
-                ph[i].x = contourLine[i].x;
-                ph[i].y = contourLine[i].y;
-                ph[i].z = contourLine[i].z;
+                ph[i].X = contourLine[i].X;
+                ph[i].Y = contourLine[i].Y;
+                ph[i].Z = contourLine[i].Z;
             }
             //
             q = new Point[n];
@@ -116,14 +116,14 @@ namespace TIN.Draws
             //
             for (int i = 0; i < n; i++)
             {
-                p[i].x -= x_average;
-                p[i].y -= y_average;
+                p[i].X -= x_average;
+                p[i].Y -= y_average;
             }
 
             for (int i = 0; i < n1; i++)
             {
-                ph[i].x -= x_average;
-                ph[i].y -= y_average;
+                ph[i].X -= x_average;
+                ph[i].Y -= y_average;
             }
 
             double pic_width = pictureBox1.Size.Width;
@@ -131,14 +131,14 @@ namespace TIN.Draws
             //
             for (int i = 0; i < n; i++)
             {
-                q[i].X = (int)(pic_height / 2 + go.X + p[i].x * pic_height / x_max / zoom);
-                q[i].Y = (int)(pic_height / 2 - go.Y - p[i].y * pic_height / y_max / zoom);
+                q[i].X = (int)(pic_height / 2 + go.X + p[i].X * pic_height / x_max / zoom);
+                q[i].Y = (int)(pic_height / 2 - go.Y - p[i].Y * pic_height / y_max / zoom);
             }
 
             for (int i = 0; i < n1; i++)
             {
-                qh[i].X = (int)(pic_height / 2 + go.X + ph[i].x * pic_height / zoom / x_max);
-                qh[i].Y = (int)(pic_height / 2 - go.Y - ph[i].y * pic_height / zoom / y_max);
+                qh[i].X = (int)(pic_height / 2 + go.X + ph[i].X * pic_height / zoom / x_max);
+                qh[i].Y = (int)(pic_height / 2 - go.Y - ph[i].Y * pic_height / zoom / y_max);
             }
             //
             Bitmap bitmap = new Bitmap(3, 3);
@@ -167,7 +167,7 @@ namespace TIN.Draws
                 }
                 for (int i = 0; i < n; i++)
                 {
-                    gra.DrawString(p[i].z.ToString("f1"), new Font("Verdana", (int)(pictureBox1.Size.Height / x_max / zoom)), new SolidBrush(Color.Red), q[i]);
+                    gra.DrawString(p[i].Z.ToString("f1"), new Font("Verdana", (int)(pictureBox1.Size.Height / x_max / zoom)), new SolidBrush(Color.Red), q[i]);
                 }
             }
             else

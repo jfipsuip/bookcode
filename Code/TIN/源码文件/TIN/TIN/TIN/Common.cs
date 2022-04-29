@@ -63,13 +63,13 @@ namespace TIN.TIN
             Draws.DrawHelper draw = new Draws.DrawHelper();
 
             draw.pictureBox1 = pictureBox;
-            draw.Points = tin.Points.Select(t => new PointF() { x = t.X, y = t.Y, z = t.H }).ToArray();
+            draw.Points = tin.Points.Select(t => new PointF() { X = t.X, Y = t.Y, Z = t.H }).ToArray();
             List<PointF> list = new List<PointF>();
             tin.Triangles.ForEach(t =>
             {
-                list.Add(new PointF() { x = t.PointA.X, y = t.PointA.Y, z = t.PointA.H });
-                list.Add(new PointF() { x = t.PointB.X, y = t.PointB.Y, z = t.PointB.H });
-                list.Add(new PointF() { x = t.PointC.X, y = t.PointC.Y, z = t.PointC.H });
+                list.Add(new PointF() { X = t.PointA.X, Y = t.PointA.Y, H = t.PointA.H });
+                list.Add(new PointF() { X = t.PointB.X, Y = t.PointB.Y, H = t.PointB.H });
+                list.Add(new PointF() { X = t.PointC.X, Y = t.PointC.Y, H = t.PointC.H });
             });
             draw.PointLines = list;
             draw.Draw();

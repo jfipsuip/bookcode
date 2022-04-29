@@ -8,9 +8,9 @@ namespace TIN.Draws
 {
     public struct PointF
     {
-        public double x { get; set; }
-        public double y { get; set; }
-        public double z { get; set; }
-        public double h { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Z { get; set; }
+        public double H { get; set; }
     }
 }

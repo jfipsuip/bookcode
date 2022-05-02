@@ -25,7 +25,7 @@ namespace Grid.Grids
         /// <summary>
         /// P1 到 P4 组成的 点集
         /// </summary>
-        List<Point> PointsP = new List<Point>();
+        List<Point> PointsP;
         /// <summary>
         /// 初始点集
         /// </summary>
@@ -76,12 +76,12 @@ namespace Grid.Grids
 
         private void CalculateGrid()
         {
-            h = yMax - yMin;
             w = xMax - xMin;
-            r = (h + w) * 0.4;
-            m = (int)Math.Ceiling(h / L);
+            h = yMax - yMin;
+            r = (h + w) / 2 * 0.4;
             n = (int)Math.Ceiling(w / L);
-            Point[,] points = new Point[m + 1, n + 1];
+            m = (int)Math.Ceiling(h / L);
+            Point[,] points = new Point[n + 1, m + 1];
             for (int i = 0; i < points.GetLength(0); i++)
             {
                 for (int j = 0; j < points.GetLength(1); j++)
@@ -94,7 +94,7 @@ namespace Grid.Grids
                 }
             }
 
-            Gs = new G[m, n];
+            Gs = new G[n, m];
             for (int i = 0; i < Gs.GetLength(0); i++)
             {
                 for (int j = 0; j < Gs.GetLength(1); j++)
@@ -103,8 +103,8 @@ namespace Grid.Grids
                     Gs[i, j].Name = $"{i + 1} {j + 1}";
                     Gs[i, j].PointA = points[i, j];
                     Gs[i, j].PointB = points[i, j + 1];
-                    Gs[i, j].PointC = points[i + 1, j];
-                    Gs[i, j].PointD = points[i + 1, j + 1];
+                    Gs[i, j].PointC = points[i + 1, j + 1];
+                    Gs[i, j].PointD = points[i + 1, j];
                 }
             }
 
@@ -131,11 +131,16 @@ namespace Grid.Grids
         }
         private static double GetH(Point point, List<Point> points, double r)
         {
-            double h = 0;
+            double h = 0, hSum = 0, dSum = 0;
 
             var list = points.Select(t => new { D = Distance(point, t), P = t }).ToList();
-            var q = list.Where(t => t.D <= r).Select(t => t.P).ToList();
-            h = q.Average(t => t.H.Value);
+            var q = list.Where(t => t.D <= r).Select(t => new { t.P.H, t.D }).ToList();
+            foreach (var item in q)
+            {
+                hSum += item.H.Value / item.D;
+                dSum += 1 / item.D;
+            }
+            h = hSum / dSum;
             return h;
         }
         private static double Distance(Point pointA, Point pointB)
@@ -144,8 +149,8 @@ namespace Grid.Grids
 
             x1 = pointA.X;
             y1 = pointA.Y;
-            x2 = pointA.X;
-            y2 = pointA.Y;
+            x2 = pointB.X;
+            y2 = pointB.Y;
             d = Math.Sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
             return d;
@@ -295,6 +300,7 @@ namespace Grid.Grids
             M.Remove(p3);
             M.Remove(p4);
 
+            PointsP = new List<Point>();
             PointsP.Add(p1);
             PointsP.Add(p2);
             PointsP.Add(p3);

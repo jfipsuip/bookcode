@@ -42,21 +42,7 @@ namespace Grid.Grids
         public List<Point> CH { get; set; } = new List<Point>();
 
         public G[,] Gs { get; set; }
-        public double V
-        {
-            get
-            {
-                double v = 0;
-                foreach (var g in Gs)
-                {
-                    if (g.IsIN == true)
-                    {
-                        v += g.V.Value;
-                    }
-                }
-                return v;
-            }
-        }
+        public double V { get; set; }
         public Grid(List<Point> points, double h)
         {
             Points = points;
@@ -72,6 +58,21 @@ namespace Grid.Grids
             CalculatePoint();
 
             CalculateGrid();
+
+            V = CalculateV();
+        }
+
+        private double CalculateV()
+        {
+            double v = 0;
+            foreach (var g in Gs)
+            {
+                if (g.IsIN == true)
+                {
+                    v += g.V.Value;
+                }
+            }
+            return v;
         }
 
         private void CalculateGrid()

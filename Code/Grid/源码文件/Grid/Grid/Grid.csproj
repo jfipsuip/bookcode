@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Grids\Grid.cs" />
     <Compile Include="Grids\Point.cs" />
+    <Compile Include="Grids\Test.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

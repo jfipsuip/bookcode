@@ -19,7 +19,15 @@ namespace Grid.Grids
 
             List<Point> points = linePoints.Select(t => new Point(t)).ToList();
             Grid grid = new Grid(points, h);
-            grid.Calculate();
+            grid.Calculate(5);
+            var v = grid.V;
+            grid.Calculate(1);
+            var vvv = grid.V;
+            var v1 = new Grid(points, h);
+            v1.Calculate(1);
+
+            var v3 = grid.V;
+
         }
     }
 }

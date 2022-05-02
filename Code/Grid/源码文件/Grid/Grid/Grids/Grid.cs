@@ -8,8 +8,20 @@ namespace Grid.Grids
 {
     public class Grid
     {
-        double xMin, xMax, yMin, yMax;
+        int m, n;
+        double xMin, xMax, yMin, yMax, h, w, r;
         Point p1, p2, p3, p4;
+        Point pointMin
+        {
+            get
+            {
+                return new Point()
+                {
+                    X = xMin,
+                    Y = yMin,
+                };
+            }
+        }
         /// <summary>
         /// P1 到 P4 组成的 点集
         /// </summary>
@@ -22,22 +34,169 @@ namespace Grid.Grids
         /// 基准高程
         /// </summary>
         public double H { get; set; }
-
+        public double L { get; set; } = 5;
         public List<Point> M { get; set; }
-
         /// <summary>
         /// 凸包点集
         /// </summary>
         public List<Point> CH { get; set; } = new List<Point>();
+
+        public G[,] Gs { get; set; }
+        public double V
+        {
+            get
+            {
+                double v = 0;
+                foreach (var g in Gs)
+                {
+                    if (g.IsIN == true)
+                    {
+                        v += g.V.Value;
+                    }
+                }
+                return v;
+            }
+        }
         public Grid(List<Point> points, double h)
         {
             Points = points;
             H = h;
         }
-        public void Calculate()
+        public void Calculate(double l)
         {
+            L = l;
+            CH = new List<Point>();
+
             InitialPoint();
 
+            CalculatePoint();
+
+            CalculateGrid();
+        }
+
+        private void CalculateGrid()
+        {
+            h = yMax - yMin;
+            w = xMax - xMin;
+            r = (h + w) * 0.4;
+            m = (int)Math.Ceiling(h / L);
+            n = (int)Math.Ceiling(w / L);
+            Point[,] points = new Point[m + 1, n + 1];
+            for (int i = 0; i < points.GetLength(0); i++)
+            {
+                for (int j = 0; j < points.GetLength(1); j++)
+                {
+                    points[i, j] = new Point()
+                    {
+                        X = xMin + i * L,
+                        Y = yMin + j * L,
+                    };
+                }
+            }
+
+            Gs = new G[m, n];
+            for (int i = 0; i < Gs.GetLength(0); i++)
+            {
+                for (int j = 0; j < Gs.GetLength(1); j++)
+                {
+                    Gs[i, j] = new G();
+                    Gs[i, j].Name = $"{i + 1} {j + 1}";
+                    Gs[i, j].PointA = points[i, j];
+                    Gs[i, j].PointB = points[i, j + 1];
+                    Gs[i, j].PointC = points[i + 1, j];
+                    Gs[i, j].PointD = points[i + 1, j + 1];
+                }
+            }
+
+            foreach (var g in Gs)
+            {
+                g.IsIN = IsIN(CH, g.PointCenter);
+                if (g.IsIN == true)
+                {
+                    GetH(g.PointA);
+                    GetH(g.PointB);
+                    GetH(g.PointC);
+                    GetH(g.PointD);
+                    g.H = H;
+                }
+            }
+        }
+
+        private void GetH(Point point)
+        {
+            if (!point.H.HasValue)
+            {
+                point.H = GetH(point, Points, r);
+            }
+        }
+        private static double GetH(Point point, List<Point> points, double r)
+        {
+            double h = 0;
+
+            var list = points.Select(t => new { D = Distance(point, t), P = t }).ToList();
+            var q = list.Where(t => t.D <= r).Select(t => t.P).ToList();
+            h = q.Average(t => t.H.Value);
+            return h;
+        }
+        private static double Distance(Point pointA, Point pointB)
+        {
+            double d, x1, y1, x2, y2;
+
+            x1 = pointA.X;
+            y1 = pointA.Y;
+            x2 = pointA.X;
+            y2 = pointA.Y;
+            d = Math.Sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+
+            return d;
+        }
+
+        private static bool IsIN(List<Point> points, Point point)
+        {
+            bool isIn = false;
+            int sum = 0;
+            for (int i = 0; i < points.Count; i++)
+            {
+                Point pointA, pointB;
+
+                pointA = points[i];
+                if (i == points.Count - 1)
+                {
+                    pointB = points[0];
+                }
+                else
+                {
+                    pointB = points[i + 1];
+                }
+                int n = GetX(pointA.X, pointA.Y, pointB.X, pointB.Y, point.X, point.Y);
+                sum += n;
+            }
+
+            if (sum % 2 == 1)
+            {
+                isIn = true;
+            }
+
+            return isIn;
+        }
+        private static int GetX(double xi, double yi, double xj, double yj, double x, double y)
+        {
+            int result = 0;
+
+            if ((yi > y && yj < y) || (yi < y && yj > y))
+            {
+                double x2 = ((xj - xi) / (yj - yi)) * (y - yi) + xi;
+                if (x2 > x)
+                {
+                    result = 1;
+                }
+            }
+
+            return result;
+        }
+
+        private void CalculatePoint()
+        {
             CH.Add(p1);
 
             for (int i = 0; i < PointsP.Count() - 1; i++)
@@ -47,6 +206,7 @@ namespace Grid.Grids
                 CalculatePoint(pointA, pointB, M);
             }
         }
+
         /// <summary>
         /// 获取凸包点
         /// </summary>

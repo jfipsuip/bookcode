@@ -30,8 +30,8 @@ namespace Grid.Grids
             string[] strs = line.Split(',');
             Name = strs[0];
             X = Convert.ToDouble(strs[1]);
-            Y = Convert.ToDouble(strs[1]);
-            H = Convert.ToDouble(strs[1]);
+            Y = Convert.ToDouble(strs[2]);
+            H = Convert.ToDouble(strs[3]);
         }
         public override string ToString()
         {

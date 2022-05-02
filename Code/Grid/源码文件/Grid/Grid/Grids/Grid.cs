@@ -11,6 +11,10 @@ namespace Grid.Grids
         double xMin, xMax, yMin, yMax;
         Point p1, p2, p3, p4;
         /// <summary>
+        /// P1 到 P4 组成的 点集
+        /// </summary>
+        List<Point> PointsP = new List<Point>();
+        /// <summary>
         /// 初始点集
         /// </summary>
         public List<Point> Points { get; }
@@ -20,6 +24,7 @@ namespace Grid.Grids
         public double H { get; set; }
 
         public List<Point> M { get; set; }
+
         /// <summary>
         /// 凸包点集
         /// </summary>
@@ -34,11 +39,13 @@ namespace Grid.Grids
             InitialPoint();
 
             CH.Add(p1);
-            int i = 1;
-            CalculatePoint(p1, p2, M);
-            CalculatePoint(p2, p3, M);
-            CalculatePoint(p3, p4, M);
-            CalculatePoint(p4, p1, M);
+
+            for (int i = 0; i < PointsP.Count() - 1; i++)
+            {
+                Point pointA = PointsP[i];
+                Point pointB = PointsP[i + 1];
+                CalculatePoint(pointA, pointB, M);
+            }
         }
         /// <summary>
         /// 获取凸包点
@@ -127,6 +134,12 @@ namespace Grid.Grids
             M.Remove(p2);
             M.Remove(p3);
             M.Remove(p4);
+
+            PointsP.Add(p1);
+            PointsP.Add(p2);
+            PointsP.Add(p3);
+            PointsP.Add(p4);
+            PointsP.Add(p1);
         }
 
         /// <summary>

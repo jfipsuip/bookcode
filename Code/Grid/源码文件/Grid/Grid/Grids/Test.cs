@@ -19,7 +19,7 @@ namespace Grid.Grids
 
             List<Point> points = linePoints.Select(t => new Point(t)).ToList();
             Grid grid = new Grid(points, h);
-
+            grid.Calculate();
         }
     }
 }

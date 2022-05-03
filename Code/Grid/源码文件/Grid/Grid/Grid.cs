@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using TIN.TIN;
 
 namespace TIN
 {
@@ -43,6 +44,7 @@ namespace TIN
         /// <param name="e"></param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            NewFile();
         }
 
 
@@ -57,7 +59,7 @@ namespace TIN
         /// <param name="e"></param>
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-
+            OpenFile();
         }
         /// <summary>
         /// Tin计算
@@ -150,5 +152,40 @@ namespace TIN
         private void point_h_Click(object sender, EventArgs e)
         {
         }
+
+        #region 通用代码
+
+        private void NewFile(int n = 11)
+        {
+            tabPage1.Controls.Clear();
+            dataGridView1 = new DataGridView();
+            tabPage1.Controls.Add(dataGridView1);
+            dataGridView1.Dock = DockStyle.Fill;
+
+            Common.NewGrid(dataGridView1, n);
+
+            tabControl1.SelectedTab = tabPage1;
+
+        }
+
+        public void OpenFile()
+        {
+            openFileDialog1.Filter = "*.txt|*.txt";
+            if (openFileDialog1.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            string path = openFileDialog1.FileName;
+            string[] lines = File.ReadAllLines(path);
+
+            string[] points = lines.Where(t => t.Split(',').Length >= 4).ToArray();
+
+
+            tabControl1.SelectedTab = tabPage1;
+            NewFile(points.Length);
+            Common.BindData(dataGridView1, points);
+        }
+        #endregion 
     }
 }

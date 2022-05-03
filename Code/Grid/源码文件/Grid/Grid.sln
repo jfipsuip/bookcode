@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grid", "Grid\Grid.csproj", "{AF00209A-6B13-43F6-B83C-953608CA52E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TINJM", "..\..\..\..\bookcode\Part3-ch04\TIN\TINJM.csproj", "{8847691D-5361-4FA4-A881-EB3623F13C30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TIN", "..\..\..\TIN\源码文件\TIN\TIN\TIN.csproj", "{5F5CDB7D-97C2-4257-A67A-1E8F4010B0AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{AF00209A-6B13-43F6-B83C-953608CA52E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF00209A-6B13-43F6-B83C-953608CA52E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF00209A-6B13-43F6-B83C-953608CA52E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8847691D-5361-4FA4-A881-EB3623F13C30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8847691D-5361-4FA4-A881-EB3623F13C30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8847691D-5361-4FA4-A881-EB3623F13C30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8847691D-5361-4FA4-A881-EB3623F13C30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F5CDB7D-97C2-4257-A67A-1E8F4010B0AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F5CDB7D-97C2-4257-A67A-1E8F4010B0AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F5CDB7D-97C2-4257-A67A-1E8F4010B0AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F5CDB7D-97C2-4257-A67A-1E8F4010B0AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

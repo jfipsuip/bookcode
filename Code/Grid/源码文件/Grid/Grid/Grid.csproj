@@ -92,11 +92,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\TIN\源码文件\TIN\TIN\TIN.csproj">
-      <Project>{5f5cdb7d-97c2-4257-a67a-1e8f4010b0ae}</Project>
-      <Name>TIN</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

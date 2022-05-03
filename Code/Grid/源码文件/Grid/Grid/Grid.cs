@@ -31,14 +31,6 @@ namespace TIN
         {
         }
 
-        private void GetPic_Point(double zoom, Point go)
-        {
-        }
-
-
-
-
-
         private void Grid_Load(object sender, EventArgs e)
         {
 

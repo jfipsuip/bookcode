@@ -10,10 +10,9 @@ using System.IO;
 
 namespace TIN
 {
-    public partial class Grid : Form
+    public partial class GridForm : Form
     {
-
-        public Grid()
+        public GridForm()
         {
             InitializeComponent();
             point_h.Checked = false;

@@ -16,7 +16,7 @@ namespace Grid
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TIN.Grid());
+            Application.Run(new TIN.GridForm());
         }
     }
 }

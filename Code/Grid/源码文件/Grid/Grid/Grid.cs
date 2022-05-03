@@ -206,9 +206,7 @@ namespace TIN
             grid.Calculate(10);
 
 
-            DrawHelper draw = new DrawHelper(pictureBox1);
-            draw.Points = grid.Points;
-            // draw.PointLines = ps;
+            DrawHelper draw = grid.GetDarw(pictureBox1);
             draw.Draw();
         }
 

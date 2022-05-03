@@ -150,6 +150,25 @@ namespace Grid.Draws
 
             }
         }
+        public void DrawFill()
+        {
+            Point[] points;
+            if (PointLines == null || PointLines.Count == 0)
+            {
+                return;
+            }
+            //投影到图像坐标系
+            points = PointLines.Select(t => GetPoint(t)).ToArray();
+
+            // 画线
+            DrawFill(graphics, points);
+        }
+        private static void DrawFill(Graphics graphics, Point[] points)
+        {
+            Brush brush = new SolidBrush(Color.FromArgb(128, Color.Red));
+            graphics.FillPolygon(brush, points);      //填充图形，（为半透明色）
+
+        }
         /// <summary>
         /// 画一个点
         /// </summary>
@@ -174,6 +193,7 @@ namespace Grid.Draws
 
             DrawPoint();
             DrawLine();
+            DrawFill();
         }
 
     }

@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using TIN.TIN;
+using Grid.Grids;
+using Grid.Draws;
 
 namespace TIN
 {
     public partial class GridForm : Form
     {
+        Grid.Grids.Grid grid;
         public GridForm()
         {
             InitializeComponent();
@@ -68,6 +70,7 @@ namespace TIN
         /// <param name="e"></param>
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
+            Calculate();
         }
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -181,11 +184,35 @@ namespace TIN
 
             string[] points = lines.Where(t => t.Split(',').Length >= 4).ToArray();
 
+            string[,] array = new string[points.Length, 4];
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    string[] strs = points[i].Split(',');
+                    array[i, j] = strs[j];
+                }
+            }
+            Common.NewGrid(dataGridView1, array.Length);
+            Common.BindData(dataGridView1, array);
 
             tabControl1.SelectedTab = tabPage1;
-            NewFile(points.Length);
-            Common.BindData(dataGridView1, points);
         }
+        public void Calculate()
+        {
+            var points = Common.GetPoints(dataGridView1);
+            var h = Convert.ToDouble(toolStripTextBox1.Text);
+            grid = new Grid.Grids.Grid(points, h);
+            grid.Calculate(10);
+
+
+            DrawHelper draw = new DrawHelper(pictureBox1);
+            draw.Points = grid.Points;
+            // draw.PointLines = ps;
+            draw.Draw();
+        }
+
+
         #endregion 
     }
 }

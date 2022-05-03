@@ -19,7 +19,7 @@ namespace Grid.Grids
                 List<string> data = new List<string>();
                 for (int j = 0; j < dataGridView.Columns.Count; j++)
                 {
-                    data.Add(dataGridView[i, j].Value.ToString());
+                    data.Add(dataGridView[j, i].Value.ToString());
                 }
                 list.Add(data);
             }
@@ -34,7 +34,7 @@ namespace Grid.Grids
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    dataGridView[i, j].Value = array[i, j];
+                    dataGridView[j, i].Value = array[i, j];
                 }
             }
         }
@@ -52,12 +52,32 @@ namespace Grid.Grids
                     Name = item[0],
                     X = Convert.ToDouble(item[1]),
                     Y = Convert.ToDouble(item[2]),
-                    Z = Convert.ToDouble(item[4]),
+                    H = Convert.ToDouble(item[3]),
                 };
                 points.Add(point);
             }
 
             return points;
         }
+        public static DataGridView NewGrid(DataGridView data, int n = 11)
+        {
+            data.ColumnCount = 4;
+            data.RowCount = n;
+
+            for (int i = 0; i < data.ColumnCount; i++)
+            {
+                data.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                data.Columns[i].Width = (data.Width - 20) / data.ColumnCount;
+            }
+            data.RowHeadersVisible = false;
+            data.Columns[0].HeaderText = "点名";
+            data.Columns[1].HeaderText = "X分量";
+            data.Columns[2].HeaderText = "Y分量";
+            data.Columns[3].HeaderText = "H分量";
+
+            data.Show();
+            return data;
+        }
+
     }
 }

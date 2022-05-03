@@ -54,10 +54,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Side.cs" />
-    <Compile Include="TIN.cs" />
-    <Compile Include="Tpoint.cs" />
-    <Compile Include="Triangle.cs" />
     <EmbeddedResource Include="Grid.resx">
       <DependentUpon>Grid.cs</DependentUpon>
     </EmbeddedResource>

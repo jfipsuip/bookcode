@@ -52,6 +52,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Grid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Grid.designer.cs">
+      <DependentUpon>Grid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Grids\G.cs" />
     <Compile Include="Grids\Grid.cs" />
     <Compile Include="Grids\Point.cs" />
@@ -59,6 +65,9 @@
     <Compile Include="Grids\Triangle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Grid.resx">
+      <DependentUpon>Grid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

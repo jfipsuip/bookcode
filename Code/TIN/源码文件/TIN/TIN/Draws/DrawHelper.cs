@@ -15,7 +15,7 @@ namespace TIN.Draws
         /// <summary>
         /// 输入的点集
         /// </summary>
-        public TIN.Point[] Points
+        public List<TIN.Point> Points
         {
             get;
             set;
@@ -23,17 +23,7 @@ namespace TIN.Draws
         /// <summary>
         /// 输入的线集
         /// </summary>
-        public List<TIN.Point> PointsL { get; set; }
-
-        /// <summary>
-        /// 输入的线集
-        /// </summary>
         public List<TIN.Point> PointLines { get; set; }
-
-
-
-        internal List<TIN.Point> contourLine = new List<TIN.Point>(); //等高线
-
         // bool rdbcheck = false;
         /// <summary>
         /// 画图相关 
@@ -77,10 +67,6 @@ namespace TIN.Draws
             }
         }
         Image image;
-
-        public TIN.Point[] ph;
-        public Point[] q;
-        public Point[] qh;
         /// <summary>
         /// 图形大小
         /// </summary>
@@ -89,7 +75,6 @@ namespace TIN.Draws
         /// 偏移坐标
         /// </summary>
         public Point Go = new Point();
-        public bool Clicked = false;
 
         public DrawHelper()
         {
@@ -105,7 +90,7 @@ namespace TIN.Draws
         public void DrawPoint()
         {
             List<Point> points;
-            if (Points.Length == 0)
+            if (Points.Count() == 0)
             {
                 return;
             }
@@ -118,12 +103,12 @@ namespace TIN.Draws
         public void DrawLine()
         {
             List<Point> points;
-            if (PointsL.Count() == 0)
+            if (PointLines.Count() == 0)
             {
                 return;
             }
             //投影到图像坐标系
-            points = PointsL.Select(t => GetPoint(t)).ToList();
+            points = PointLines.Select(t => GetPoint(t)).ToList();
 
             // 画线
             DrawLine(image, points);
@@ -199,16 +184,9 @@ namespace TIN.Draws
 
         public void Draw()
         {
-            //Image image = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
-            //pictureBox.Image = image;
-            //List<Point> points;
 
-            //points = PointsL.Select(t => GetPoint(t)).ToList();
-
-            //DrawLine(image, points);
             DrawPoint();
             DrawLine();
-            //GetPic_Line();
         }
 
     }

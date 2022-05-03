@@ -60,12 +60,7 @@ namespace TIN.TIN
 
             richTextBox.Text = tin.Report();
 
-            Draws.DrawHelper draw = new Draws.DrawHelper(pictureBox);
-
-            draw.Points = tin.Points.ToArray();
-
             List<Point> ps = new List<Point>();
-
             tin.Triangles.ForEach(t =>
             {
                 ps.Add(t.PointA);
@@ -75,7 +70,10 @@ namespace TIN.TIN
                 ps.Add(t.PointB);
                 ps.Add(t.PointC);
             });
-            draw.PointsL = ps;
+
+            DrawHelper draw = new DrawHelper(pictureBox);
+            draw.Points = tin.Points;
+            draw.PointLines = ps;
             draw.Draw();
         }
         private static List<Point> GetPoints(DataGridView dataGrid)

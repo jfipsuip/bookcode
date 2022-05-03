@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TIN.Draws
+namespace Grid.Draws
 {
     public class DrawHelper
     {
@@ -15,7 +15,7 @@ namespace TIN.Draws
         /// <summary>
         /// 输入的点集
         /// </summary>
-        public List<TIN.Point> Points
+        public List<Grids.Point> Points
         {
             get;
             set;
@@ -23,7 +23,7 @@ namespace TIN.Draws
         /// <summary>
         /// 输入的线集
         /// </summary>
-        public List<TIN.Point> PointLines { get; set; }
+        public List<Grids.Point> PointLines { get; set; }
         // bool rdbcheck = false;
         /// <summary>
         /// 画图相关 
@@ -90,7 +90,7 @@ namespace TIN.Draws
         public void DrawPoint()
         {
             List<Point> points;
-            if (Points.Count() == 0)
+            if (Points == null || Points.Count() == 0)
             {
                 return;
             }
@@ -103,7 +103,7 @@ namespace TIN.Draws
         public void DrawLine()
         {
             List<Point> points;
-            if (PointLines.Count() == 0)
+            if (PointLines == null || PointLines.Count == 0)
             {
                 return;
             }
@@ -119,7 +119,7 @@ namespace TIN.Draws
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        private Point GetPoint(TIN.Point point)
+        private Point GetPoint(Grids.Point point)
         {
             Point result;
 

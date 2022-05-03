@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Draws\DrawHelper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +59,7 @@
     <Compile Include="Grid.designer.cs">
       <DependentUpon>Grid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Grids\Common.cs" />
     <Compile Include="Grids\G.cs" />
     <Compile Include="Grids\Grid.cs" />
     <Compile Include="Grids\Point.cs" />

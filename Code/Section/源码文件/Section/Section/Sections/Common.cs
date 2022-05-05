@@ -46,5 +46,31 @@ namespace Section.Sections
 
             return result;
         }
+        /// <summary>
+        /// 计算两个点距离
+        /// </summary>
+        /// <param name="pointA"></param>
+        /// <param name="pointB"></param>
+        /// <returns></returns>
+        public static double Distance(Point pointA, Point pointB)
+        {
+            return Distance(pointA.X, pointA.Y, pointB.X, pointB.Y);
+        }
+        /// <summary>
+        /// 计算距离
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <returns></returns>
+        private static double Distance(double x1, double y1, double x2, double y2)
+        {
+            double d;
+
+            d = Math.Sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+
+            return d;
+        }
     }
 }

@@ -31,6 +31,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.计算ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.计算纵断面面积ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.横断面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新建表格ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -60,9 +62,27 @@
             // 
             // 计算ToolStripMenuItem
             // 
+            this.计算ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.计算纵断面面积ToolStripMenuItem,
+            this.横断面ToolStripMenuItem});
             this.计算ToolStripMenuItem.Name = "计算ToolStripMenuItem";
             this.计算ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.计算ToolStripMenuItem.Text = "计算";
+            this.计算ToolStripMenuItem.Click += new System.EventHandler(this.计算ToolStripMenuItem_Click);
+            // 
+            // 计算纵断面面积ToolStripMenuItem
+            // 
+            this.计算纵断面面积ToolStripMenuItem.Name = "计算纵断面面积ToolStripMenuItem";
+            this.计算纵断面面积ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.计算纵断面面积ToolStripMenuItem.Text = "纵断面";
+            this.计算纵断面面积ToolStripMenuItem.Click += new System.EventHandler(this.计算纵断面面积ToolStripMenuItem_Click);
+            // 
+            // 横断面ToolStripMenuItem
+            // 
+            this.横断面ToolStripMenuItem.Name = "横断面ToolStripMenuItem";
+            this.横断面ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.横断面ToolStripMenuItem.Text = "横断面";
+            this.横断面ToolStripMenuItem.Click += new System.EventHandler(this.横断面ToolStripMenuItem_Click);
             // 
             // 新建表格ToolStripMenuItem
             // 
@@ -97,7 +117,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
+            this.tabPage2.Size = new System.Drawing.Size(327, 168);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -129,6 +149,8 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ToolStripMenuItem 计算纵断面面积ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 横断面ToolStripMenuItem;
     }
 }
 

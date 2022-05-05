@@ -1,16 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace MySection
 {
-    class ZongDuanMian
+    class Chazhi
     {
+
+
+        //public static List<Point> ToGetKs(DataGridView dataGridView)
+        //{
+        //    List<List<string>>list = new List<List<string>>();
+        //    for (int i = 0; i < dataGridView.Rows.Count; i++)
+        //    {
+        //        List<string> data = new List<string>();
+        //        for (int j = 0; j < dataGridView.Rows.Count; j++)
+        //        {
+        //            data.Add(dataGridView[j, i].Value.ToString());
+        //        }
+        //        list.Add(data);
+        //    }
+
+        //    return ;
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public Point pointNieChaP { get; set; }
+
+
         /// <summary>
         /// 找出K012，计算中点m1，m2
         /// </summary>
@@ -38,21 +69,23 @@ namespace MySection
             distance = Math.Sqrt((Kxj - Kxi) * (Kxj - Kxi) + (Kyj - Kyi) * (Kyj - Kyi));
             return distance;
         }
- 
-
-     
 
 
-        private List<ZongDuanMian> pointChaZhi = new List<ZongDuanMian>
+        public Point ZongDuanMianChaZhi
         {
+            get
+            {
+                Point pointCha;
+                pointCha = new Point();
+
+                pointCha.X = pointNieChaP.X + 5;
+                pointCha.Y = pointNieChaP.Y + 5;
+
+                return pointCha;
+
+            }
 
 
-        };
-
-
-
-
-
-
+        }
     }
 }

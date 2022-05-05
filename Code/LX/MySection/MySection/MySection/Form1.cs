@@ -40,20 +40,20 @@ namespace MySection
                 {
                     line = alllines[i].Split(',');
                     if (i == 0) tabControl1.Text = line[1];
-                    else if(i>=5)
+                    else if (i >= 5)
                     {
                         data[0, i - 5].Value = line[0];
                         data[1, i - 5].Value = line[1];
                         data[2, i - 5].Value = line[2];
                         data[3, i - 5].Value = line[3];
-                                              
+
                     }
 
 
                 }
 
             }
-       
+
         }
         /// <summary>
         /// 新建表格
@@ -63,7 +63,7 @@ namespace MySection
         private void 新建表格ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            tabPage1_Click(sender,e);
+            tabPage1_Click(sender, e);
         }
         /// <summary>
         /// 引用表格
@@ -79,7 +79,7 @@ namespace MySection
         /// </summary>
         /// <param name="data"></param>
         /// <param name="n"></param>
-        private void DataViewPoint(out DataGridView data,int n)
+        private void DataViewPoint(out DataGridView data, int n)
         {
             tabPage1.Controls.Clear();
             data = new DataGridView();
@@ -95,9 +95,23 @@ namespace MySection
             data.Columns[2].HeaderText = "Y(m)";
             data.Columns[3].HeaderText = "H(m)";
             tabControl1.SelectedTab = tabPage1;
-            
+
         }
 
-      
+        private void 计算ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          
+
+        }
+
+        private void 计算纵断面面积ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ZongDuanMian.;
+        }
+
+        private void 横断面ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            hengduanmian.;
+        }
     }
 }

@@ -329,5 +329,21 @@ namespace Grid.Grids
 
             return isL;
         }
+
+        public Draws.DrawHelper GetDarw(System.Windows.Forms.PictureBox pictureBox)
+        {
+            Draws.DrawHelper helper = new Draws.DrawHelper(pictureBox);
+
+            List<Point> pointLines = new List<Point>();
+            for (int i = 1; i < CH.Count; i++)
+            {
+                pointLines.Add(CH[i - 1]);
+                pointLines.Add(CH[i]);
+            }
+            helper.Points = Points;
+            helper.PointLines = pointLines;
+
+            return helper;
+        }
     }
 }

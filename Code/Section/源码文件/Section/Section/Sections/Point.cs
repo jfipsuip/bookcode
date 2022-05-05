@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Section.Sections
+{
+    public class Point
+    {
+        public string Name { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double H { get; set; }
+
+        public Point()
+        {
+
+        }
+        public Point(string name, double x, double y, double h = 0)
+        {
+            Name = name;
+            X = x;
+            Y = y;
+            H = h;
+        }
+        public Point(string line)
+        {
+            string[] strs = line.Split(',');
+            Name = strs[0];
+            X = Convert.ToDouble(strs[1]);
+            Y = Convert.ToDouble(strs[2]);
+            H = Convert.ToDouble(strs[3]);
+        }
+    }
+}

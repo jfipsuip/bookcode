@@ -89,5 +89,18 @@ namespace Section.Sections
 
             return h;
         }
+        /// <summary>
+        /// 计算梯形面积
+        /// </summary>
+        /// <param name="h1"></param>
+        /// <param name="h2"></param>
+        /// <param name="h"></param>
+        /// <param name="l"></param>
+        /// <returns></returns>
+        public static double GetS(double h1, double h2, double h, double l)
+        {
+            double s = ((h1 + h2) / 2 - h) * l;
+            return s;
+        }
     }
 }

@@ -72,5 +72,22 @@ namespace Section.Sections
 
             return d;
         }
+        /// <summary>
+        /// 内插点P的高程值计算
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="points"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static double GetH(Point point, IEnumerable<Point> points, int n = 5)
+        {
+            var list = points.Select(t => new { D = Distance(point, t), P = t }).ToList();
+            var data = list.OrderBy(t => t.D).Take(5).ToList();
+            double sumhd = data.Sum(t => t.P.H / t.D);
+            double sum1d = data.Sum(t => 1 / t.D);
+            double h = sumhd / sum1d;
+
+            return h;
+        }
     }
 }

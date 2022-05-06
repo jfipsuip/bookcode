@@ -8,10 +8,7 @@ using System.Windows.Forms;
 namespace MySection
 {
     class Chazhi
-    {
-
-
-        //public static List<Point> ToGetKs(DataGridView dataGridView)
+    {       //public static List<Point> ToGetKs(DataGridView dataGridView)
         //{
         //    List<List<string>>list = new List<List<string>>();
         //    for (int i = 0; i < dataGridView.Rows.Count; i++)
@@ -23,22 +20,8 @@ namespace MySection
         //        }
         //        list.Add(data);
         //    }
-
         //    return ;
         //}
-
-
-
-
-
-
-
-
-
-
-
-
-
         public Point pointNieChaP { get; set; }
 
 
@@ -56,7 +39,7 @@ namespace MySection
         }
 
         /// <summary>
-        /// 计算两个纵断面，KOK1，K1K2的长度
+        /// 计算直线距离，可以用来计算两个纵断面，KOK1，K1K2的长度
         /// </summary>
         /// <param name="Kxi"></param>
         /// <param name="Kxj"></param>
@@ -77,10 +60,11 @@ namespace MySection
             {
                 Point pointCha;
                 pointCha = new Point();
-
-                pointCha.X = pointNieChaP.X + 5;
-                pointCha.Y = pointNieChaP.Y + 5;
-
+                double l = 5;
+                double Cazi = azimuth.Cazi();
+                pointNieChaP.X = pointCha.X+l* Cazi;
+                pointNieChaP.Y = pointCha.Y;
+                ///两内插点之间距离应为5
                 return pointCha;
 
             }

@@ -19,18 +19,51 @@ namespace MySection
         public static double GetAzim(double x1, double y1, double x2, double y2)
         {
             double Azim;
-            Azim = Math.Atan((y2 - y1) / (x2 - x1));
+            double Cazim;
+            double y21 = y2 - y1;
+            double x21 = x2 - x1;    
+            Cazim=Math.Cos(y21 / x21);
+            Azim = Math.Atan(y21 / x21);
+            if (y21 > 0 && x21 > 0)
+            {
+                Azim = 1*Azim;
+            }
+            else if(y21 > 0 && x21 <0)
+            {
+                Azim = Math.PI-Azim;
+            }
+            else if (y21 < 0 && x21 < 0)
+            {
+                Azim = Math.PI + Azim;
+            }
+            else if (y21 < 0 && x21 >0)
+            {
+                Azim = 2 * Math.PI - Azim;
+            }
+            else if (y21 < 0 && x21 ==0)
+            {
+                Azim = 1.5*Math.PI ;
+            }
+            else if (y21 > 0 && x21 == 0)
+            {
+                Azim = 0.5 * Math.PI;
+            }
+
             return Azim;
+            return Cazim;
         }
 
-        //判断值域
-
-        private List<Point> pointPList = new List<Point>
+        public static double Cazi()
         {
-
-
-        };
-
+            double Cazim;
+            double Sazim;
+            double y21 = y2 - y1;
+            double x21 = x2 - x1;
+            Cazim = Math.Cos(y21 / x21);
+            Sazim= Math.Sin(y21 / x21);
+            return Cazim;
+        }
+        
 
     }
 }

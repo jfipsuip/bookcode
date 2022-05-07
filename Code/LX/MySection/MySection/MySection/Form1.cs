@@ -106,12 +106,12 @@ namespace MySection
 
         private void 计算纵断面面积ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ZongDuanMian.;
+            ZongDuanMian.JiSuan();
         }
 
         private void 横断面ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            hengduanmian.;
+            //hengduanmian.;
         }
     }
 }

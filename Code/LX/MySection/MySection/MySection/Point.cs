@@ -64,6 +64,14 @@ namespace MySection
             return point;
         }
 
+        public double GetFangweijiao(Point point)
+        {
+          return   azimuth.GetAzim(X, Y, point.X, point.Y);
+        }
+        public double GetDistince(Point point)
+        {
+            return Chazhi.
+        }
         public override string ToString()
         {
             return $"{ID} {X} {Y} {H}";

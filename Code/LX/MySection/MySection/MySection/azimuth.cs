@@ -19,10 +19,8 @@ namespace MySection
         public static double GetAzim(double x1, double y1, double x2, double y2)
         {
             double Azim;
-            double Cazim;
             double y21 = y2 - y1;
             double x21 = x2 - x1;    
-            Cazim=Math.Cos(y21 / x21);
             Azim = Math.Atan(y21 / x21);
             if (y21 > 0 && x21 > 0)
             {
@@ -50,17 +48,17 @@ namespace MySection
             }
 
             return Azim;
-            return Cazim;
         }
+        
 
         public static double Cazi()
         {
-            double Cazim;
+            double Cazim=0;
             double Sazim;
-            double y21 = y2 - y1;
-            double x21 = x2 - x1;
-            Cazim = Math.Cos(y21 / x21);
-            Sazim= Math.Sin(y21 / x21);
+            //double y21 = y2 - y1;
+            //double x21 = x2 - x1;
+            //Cazim = Math.Cos(y21 / x21);
+            //Sazim= Math.Sin(y21 / x21);
             return Cazim;
         }
         

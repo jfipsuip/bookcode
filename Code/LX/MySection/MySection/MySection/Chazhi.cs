@@ -46,7 +46,7 @@ namespace MySection
         /// <param name="Kyi"></param>
         /// <param name="Kyj"></param>
         /// <returns></returns>
-        private static double GetDistance(double Kxi, double Kxj, double Kyi, double Kyj)
+        public  static double GetDistance(double Kxi,double Kyi, double Kxj,  double Kyj)
         {
             double distance;
             distance = Math.Sqrt((Kxj - Kxi) * (Kxj - Kxi) + (Kyj - Kyi) * (Kyj - Kyi));

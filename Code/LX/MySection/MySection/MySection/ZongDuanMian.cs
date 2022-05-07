@@ -56,6 +56,8 @@ namespace MySection
             }
 
             double fangweijiao = k0.GetFangweijiao(k1);
+            Point v1 = k0.GetNextPoint(fangweijiao, 10);
+            v1.H = v1.GetH(points);
         }
     }
 }

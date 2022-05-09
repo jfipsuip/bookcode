@@ -54,22 +54,24 @@ namespace MySection
         }
 
 
-        public Point ZongDuanMianChaZhi
+        public Point ZongDuanMianChaZhi(Point pointA, Point pointB)
         {
-            get
-            {
-                Point pointCha;
-                pointCha = new Point();
-                double l = 5;
-                double Cazi = azimuth.Cazi();
-                pointNieChaP.X = pointCha.X+l* Cazi;
-                pointNieChaP.Y = pointCha.Y;
-                ///两内插点之间距离应为5
-                return pointCha;
+            Point pointCha;
+            pointCha = new Point();
+            double l = 5;
+            double fangweijiao = azimuth.GetAzim(pointA.X, pointA.Y, pointB.X, pointB.Y);
+            double Cazi = Math.Cos(fangweijiao);
+            double Sazi = Math.Sin(fangweijiao);
+            pointNieChaP.X = pointCha.X + l * Cazi;
+            pointNieChaP.Y = pointCha.Y + l * Sazi;
+            ///两内插点之间距离应为5
+            return pointCha;
 
-            }
 
 
         }
+
+
+    }
     }
 }

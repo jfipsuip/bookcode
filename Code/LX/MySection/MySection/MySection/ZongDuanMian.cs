@@ -23,7 +23,7 @@ namespace MySection
             Middle = (Kq + Kz) / 2;
             return Middle;
         }
-       
+
         private List<ZongDuanMian> pointChaZhi = new List<ZongDuanMian>
         {
 
@@ -42,22 +42,32 @@ namespace MySection
 
             List<Point> points = pointLines.Select(t => new Point(t)).ToList();
 
-            Point k0, k1, k2=null;
+            Point k0, k1, k2 = null;
 
             k0 = points.Where(t => t.ID == keys[0]).First();
             k1 = points.Where(t => t.ID == keys[1]).First();
             string k2Name = keys[2];
             foreach (Point point in points)
             {
-                if(point.ID==k2Name)
+                if (point.ID == k2Name)
                 {
                     k2 = point;
                 }
             }
-
+            List<Point> pointsNC = new List<Point>();
             double fangweijiao = k0.GetFangweijiao(k1);
-            Point v1 = k0.GetNextPoint(fangweijiao, 10);
-            v1.H = v1.GetH(points);
+            double dk0k1 = k0.GetDistince(k1);
+            pointsNC.Add(k0);
+            double l = 10;
+            for (int i = 1; i * l < dk0k1; i++)
+            {
+                Point v = k0.GetNextPoint(fangweijiao, i * l);
+
+                v.H = v.GetH(points);
+                pointsNC.Add(v);
+
+            }
+
         }
     }
 }

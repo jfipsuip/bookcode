@@ -20,8 +20,8 @@ namespace MySection
         {
             double Azim;
             double y21 = y2 - y1;
-            double x21 = x2 - x1;    
-            Azim = Math.Atan(y21 / x21);
+            double x21 = x2 - x1;
+            Azim = Math.Atan(Math.Abs(y21) / Math.Abs(x21));
             if (y21 > 0 && x21 > 0)
             {
                 Azim = 1*Azim;

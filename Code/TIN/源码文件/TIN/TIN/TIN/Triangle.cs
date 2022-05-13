@@ -83,21 +83,86 @@ namespace TIN.TIN
         {
             get
             {
-                return GetS(PointA.X, PointB.X, PointC.X, PointA.Y, PointB.Y, PointC.Y);
+                return GetS(PointA.X, PointA.Y, PointB.X, PointB.Y, PointC.X, PointC.Y);
             }
         }
         /// <summary>
         /// 斜三棱柱的体积
         /// </summary>
-        public double? V
+        public double V
         {
             get
             {
-                return S * H;
+                return Vcut + Vfill;
             }
         }
+        public double Vcut { get; set; }
+        public double Vfill { get; set; }
+        public ETriangle Type { get; set; }
+        public void CalculateV()
+        {
+            ETriangle etriangle;
+            double h1, h2, h3, h0, vcut, vfill, s;
+            Point pointA, pointB, pointC;
+            Point[] points = { PointA, PointB, PointC };
+            points = points.OrderBy(t => t.H).ToArray();
+            pointA = points[0];
+            pointB = points[1];
+            pointC = points[2];
+            h1 = pointA.H;
+            h2 = pointB.H;
+            h3 = pointC.H;
+            h0 = Hc ?? 0;
+            if (h1 >= h0)
+            {
+                vcut = S * H ?? 0;
+                vfill = 0;
+                etriangle = ETriangle.全挖方;
+            }
+            else if (h3 < h0)
+            {
+                vcut = 0;
+                vfill = S * H ?? 0;
+                etriangle = ETriangle.全填方;
+            }
+            else
+            {
+                double x1, y1, x2, y2;
+                x1 = GetValue(PointA.X, PointA.H, PointB.X, PointB.H, h0);
+                y1 = GetValue(PointA.Y, PointA.H, PointB.Y, PointB.H, h0);
+                x2 = GetValue(PointA.X, PointA.H, PointC.X, PointC.H, h0);
+                y2 = GetValue(PointA.Y, PointA.H, PointC.Y, PointC.H, h0);
+                s = GetS(x1, y1, x2, y2, pointA.X, pointA.Y);
+                if (h2 < h0)
+                {
+                    vcut = s * ((h1 + h0 + h0) / 3 - h0);
+                    vfill = (S - s) * ((h0 + h0 + h2 + h3) / 4 - h0);
+                    etriangle = ETriangle.两个顶点低;
+                }
+                else
+                {
+                    vfill = s * ((h1 + h0 + h0) / 3 - h0);
+                    vcut = (S - s) * ((h0 + h0 + h2 + h3) / 4 - h0);
+                    etriangle = ETriangle.一个顶点低;
+                }
+            }
+            Vcut = vcut;
+            Vfill = vfill;
+            Type = etriangle;
 
-        private double GetS(double x1, double x2, double x3, double y1, double y2, double y3)
+        }
+        private double GetValue(double x1, double h1, double x2, double h2, double h0)
+        {
+            double x = x1 + Math.Abs((h0 - h1) / (h2 - h1)) * (x2 - x1);
+            return x;
+        }
+
+        private double GetV(double hc, double h1, double h2, double h3)
+        {
+            throw new NotImplementedException();
+        }
+
+        private double GetS(double x1, double y1, double x2, double y2, double x3, double y3)
         {
             double s;
 

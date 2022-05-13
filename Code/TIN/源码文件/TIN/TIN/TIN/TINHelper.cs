@@ -11,7 +11,7 @@ namespace TIN.TIN
     {
 
         double xMax, xMin, yMax, yMin;
-        Point p1, p2, p3, p4;
+        Point p1, p2, p3, p4, p0;
 
         public List<Point> Points { get; }
 
@@ -78,13 +78,13 @@ namespace TIN.TIN
             InitialTriangets.AddRange(ts);
             Triangles.AddRange(ts);
             // 1.3 遍历离散点 生成平面三角网
-            foreach (var point in Points)
+            foreach (var point in M)
             {
                 // 生成点P的平面三角网
                 GetTriangles(Triangles, point);
             }
             // 1.4  删除包含初始矩形顶点的所有三角形
-            ReMoveTrianges(Triangles);
+            //ReMoveTrianges(Triangles);
 
             SetTinH(Triangles, H);
 
@@ -257,19 +257,19 @@ namespace TIN.TIN
         {
             List<Triangle> triangles;
 
-            xMax = points.Select(t => t.X).Max();
-            xMin = points.Select(t => t.X).Min();
-            yMax = points.Select(t => t.Y).Max();
-            yMin = points.Select(t => t.Y).Min();
-
-            p1 = new Point("P1", xMin - 1, yMin - 1);
-            p2 = new Point("P2", xMin - 1, yMax + 1);
-            p3 = new Point("P3", xMax + 1, yMax + 1);
-            p4 = new Point("P4", xMax + 1, yMin - 1);
-
+            CH = new List<Point>();
+            InitialPoint();
+            CalculatePoint();
             triangles = new List<Triangle>();
-            triangles.Add(new Triangle(p1, p3, p2));
-            triangles.Add(new Triangle(p1, p3, p4));
+
+            p0 = GetPoint(Points);
+            for (int i = 1; i < CH.Count; i++)
+            {
+                Point pointA, pointB;
+                pointA = CH[i];
+                pointB = CH[i - 1];
+                triangles.Add(new Triangle(pointA, pointB, p0));
+            }
 
             return triangles;
         }

@@ -144,6 +144,27 @@ namespace TIN.TIN
             list.Add($"{sumS:F3}");
             list.Add($"{he:F3}");
 
+            var cutFull = Triangles.Where(t => t.Type == ETriangle.全挖方).ToList();
+            list.Add($"{cutFull.Count:F3}");
+            list.Add($"{cutFull.Sum(t => t.V):F3}");
+
+            var fillFull = Triangles.Where(t => t.Type == ETriangle.全填方).ToList();
+            list.Add($"{fillFull.Count:F3}");
+            list.Add($"{fillFull.Sum(t => t.V):F3}");
+
+            var t2 = Triangles.Where(t => t.Type == ETriangle.两个顶点低).ToList();
+            list.Add($"{t2.Count:F3}");
+            list.Add($"{t2.Sum(t => t.V):F3}");
+
+            var t1 = Triangles.Where(t => t.Type == ETriangle.一个顶点低).ToList();
+            list.Add($"{t1.Count:F3}");
+            list.Add($"{t1.Sum(t => t.V):F3}");
+
+            list.Add($"{Triangles.Sum(t => t.Vcut):F3}");
+            list.Add($"{Triangles.Sum(t => t.Vfill):F3}");
+
+            list.Add($"{Triangles.Sum(t => t.V):F3}");
+
             return list;
         }
 
@@ -152,6 +173,7 @@ namespace TIN.TIN
             foreach (var triangle in triangles)
             {
                 triangle.Hc = hc;
+                triangle.CalculateV();
             }
         }
 

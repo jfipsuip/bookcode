@@ -48,6 +48,15 @@ namespace TIN.TIN
             }
         }
         /// <summary>
+        /// P1 到 P4 组成的 点集
+        /// </summary>
+        List<Point> PointsP;
+        public List<Point> M { get; set; }
+        /// <summary>
+        /// 凸包点集
+        /// </summary>
+        public List<Point> CH { get; set; } = new List<Point>();
+        /// <summary>
         /// 初始化三角网
         /// </summary>
         /// <param name="points">构成三角网的所有点</param>
@@ -264,5 +273,186 @@ namespace TIN.TIN
 
             return triangles;
         }
+
+        private Point GetPoint(List<Point> points)
+        {
+            double x = points.Select(t => t.X).Average();
+            double y = points.Select(t => t.Y).Average();
+            var list = points.Select(t => new { D = Point.GetDistance(t.X, t.Y, x, y), P = t }).ToList();
+            Point point = list.OrderBy(t => t.D).Select(t => t.P).First();
+            return point;
+        }
+
+        private void CalculatePoint()
+        {
+            CH.Add(p1);
+
+            for (int i = 0; i < PointsP.Count() - 1; i++)
+            {
+                Point pointA = PointsP[i];
+                Point pointB = PointsP[i + 1];
+                CalculatePoint(pointA, pointB, M);
+            }
+        }
+
+        /// <summary>
+        /// 获取凸包点
+        /// </summary>
+        /// <param name="pointA"></param>
+        /// <param name="pointB"></param>
+        /// <param name="points"></param>
+        private void CalculatePoint(Point pointA, Point pointB, List<Point> points)
+        {
+            //获取点A到点B左边的点集
+            List<Point> leftPoints = GetLeftPoints(pointA, pointB, points);
+
+            // 如果左边点集为空，刚点B为凸包点
+            if (leftPoints.Count == 0)
+            {
+                CH.Add(pointB);
+                M.Remove(pointB);
+            }
+            // 如果左边点集不为空，则获取最远点P进行递归运算，直到左边点集为空
+            else
+            {
+
+                Point point = GetFarPoint(pointA, pointB, leftPoints);
+                leftPoints.Remove(point);
+                // 计算点A 到 点P 凸包点
+                CalculatePoint(pointA, point, leftPoints);
+                // 计算点P 到 点B 凸包点
+                CalculatePoint(point, pointB, leftPoints);
+            }
+        }
+        /// <summary>
+        /// 获取离点A-B最远的点
+        /// </summary>
+        /// <param name="pointA"></param>
+        /// <param name="pointB"></param>
+        /// <param name="leftPoints"></param>
+        /// <returns></returns>
+        private static Point GetFarPoint(Point pointA, Point pointB, List<Point> leftPoints)
+        {
+            Point point;
+            List<Triangle> triangles;
+            Triangle triangle;
+
+            triangles = leftPoints.Select(t => new Triangle(pointA, pointB, t)).ToList();
+            triangle = triangles.OrderByDescending(t => t.Area).First();
+            point = triangle.PointC;
+
+            return point;
+        }
+
+        /// <summary>
+        /// 获取点A到点B左边的点集
+        /// </summary>
+        /// <param name="pointA"></param>
+        /// <param name="pointB"></param>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        private static List<Point> GetLeftPoints(Point pointA, Point pointB, List<Point> points)
+        {
+            List<Point> leftPoints = new List<Point>();
+            foreach (var point in points)
+            {
+                if (IsL(pointA, pointB, point))
+                {
+                    leftPoints.Add(point);
+                }
+            }
+
+            return leftPoints;
+        }
+        /// <summary>
+        /// 判断点C是否在线A-B的左边
+        /// </summary>
+        /// <param name="pointA"></param>
+        /// <param name="pointB"></param>
+        /// <param name="pointC"></param>
+        /// <returns></returns>
+        private static bool IsL(Point pointA, Point pointB, Point pointC)      //判断左转还是右转
+        {
+            bool isL = false;
+            double d;
+
+            d = pointA.X * pointB.Y - pointB.X * pointA.Y + pointC.X * (pointA.Y - pointB.Y) + pointC.Y * (pointB.X - pointA.X);
+            if (d > 0)
+            {
+                isL = true;
+            }
+
+            return isL;
+        }
+
+        private void InitialPoint()
+        {
+            xMin = Points.Min(t => t.X);
+            xMax = Points.Max(t => t.X);
+            yMin = Points.Min(t => t.Y);
+            yMax = Points.Max(t => t.Y);
+
+            p1 = Points.OrderBy(t => t.X).FirstOrDefault();
+            p2 = Points.OrderByDescending(t => t.Y).FirstOrDefault();
+            p3 = Points.OrderByDescending(t => t.X).FirstOrDefault();
+            p4 = Points.OrderBy(t => t.Y).FirstOrDefault();
+
+            M = Points.ToList();
+            M.Remove(p1);
+            M.Remove(p2);
+            M.Remove(p3);
+            M.Remove(p4);
+
+            PointsP = new List<Point>();
+            PointsP.Add(p1);
+            PointsP.Add(p2);
+            PointsP.Add(p3);
+            PointsP.Add(p4);
+            PointsP.Add(p1);
+        }
+        private static bool IsIN(List<Point> points, Point point)
+        {
+            bool isIn = false;
+            int sum = 0;
+            for (int i = 0; i < points.Count; i++)
+            {
+                Point pointA, pointB;
+
+                pointA = points[i];
+                if (i == points.Count - 1)
+                {
+                    pointB = points[0];
+                }
+                else
+                {
+                    pointB = points[i + 1];
+                }
+                int n = GetX(pointA.X, pointA.Y, pointB.X, pointB.Y, point.X, point.Y);
+                sum += n;
+            }
+
+            if (sum % 2 == 1)
+            {
+                isIn = true;
+            }
+
+            return isIn;
+        }
+        private static int GetX(double xi, double yi, double xj, double yj, double x, double y)
+        {
+            int result = 0;
+
+            if ((yi > y && yj < y) || (yi < y && yj > y))
+            {
+                double x2 = ((xj - xi) / (yj - yi)) * (y - yi) + xi;
+                if (x2 > x)
+                {
+                    result = 1;
+                }
+            }
+
+            return result;
+        }
+
     }
 }

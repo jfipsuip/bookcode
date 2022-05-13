@@ -163,6 +163,17 @@ namespace TIN.TIN
             }
             return false;
         }
+        public double Area
+        {
+            get
+            {
+                double area;
+                area = Math.Abs((1.0 / 2) * (PointA.X * (PointB.Y - PointC.Y) + PointB.X * (PointC.Y - PointA.Y) + PointC.X * (PointA.Y - PointB.Y)));
+
+                return area;
+            }
+        }
+
         public override string ToString()
         {
             return $"{PointA.Name} {PointB.Name} {PointC.Name}";

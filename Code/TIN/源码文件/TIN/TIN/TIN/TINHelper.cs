@@ -138,10 +138,14 @@ namespace TIN.TIN
             list.Add($"{Triangles.Where(t => t.IsContain(CH[2])).Count()}");
             list.Add($"{Triangles.Where(t => t.IsContain(CH[4])).Count()}");
             list.Add($"{Triangles.Count()}");
-            list.Add($"{Triangles.Select(t => t.Area).Sum():F3}");
+            double sumHS = Triangles.Select(t => t.Hp * t.S).Sum();
+            double sumS = Triangles.Select(t => t.S).Sum();
+            double he = sumHS / sumS;
+            list.Add($"{sumS:F3}");
+            list.Add($"{he:F3}");
+
             return list;
         }
-
 
         private static void SetTinH(List<Triangle> triangles, double hc)
         {

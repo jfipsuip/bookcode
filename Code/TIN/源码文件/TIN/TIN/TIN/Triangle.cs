@@ -35,6 +35,13 @@ namespace TIN.TIN
                 return result;
             }
         }
+        public double Hp
+        {
+            get
+            {
+                return (PointA.H + PointB.H + PointC.H) / 3;
+            }
+        }
         /// <summary>
         /// 参考高程
         /// </summary>

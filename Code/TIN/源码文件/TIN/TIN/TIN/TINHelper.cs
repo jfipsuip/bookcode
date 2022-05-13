@@ -120,6 +120,27 @@ namespace TIN.TIN
 
             return result;
         }
+        public List<string> ProgramRigth()
+        {
+            List<string> list = new List<string>();
+            list.Add($"{p2.X:F3}");
+            list.Add($"{p2.Y:F3}");
+            list.Add($"{p4.X:F3}");
+            list.Add($"{p4.Y:F3}");
+            list.Add($"{CH[2].X:F3}");
+            list.Add($"{CH[2].Y:F3}");
+            list.Add($"{CH[4].X:F3}");
+            list.Add($"{CH[4].Y:F3}");
+            list.Add($"{p0.X:F3}");
+            list.Add($"{p0.Y:F3}");
+            list.Add($"{InitialTriangets.Count}");
+            list.Add($"{Triangles.Where(t => t.IsContain(CH[0])).Count()}");
+            list.Add($"{Triangles.Where(t => t.IsContain(CH[2])).Count()}");
+            list.Add($"{Triangles.Where(t => t.IsContain(CH[4])).Count()}");
+            list.Add($"{Triangles.Count()}");
+            list.Add($"{Triangles.Select(t => t.Area).Sum():F3}");
+            return list;
+        }
 
 
         private static void SetTinH(List<Triangle> triangles, double hc)

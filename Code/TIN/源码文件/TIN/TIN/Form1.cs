@@ -14,7 +14,7 @@ namespace TIN
 {
     public partial class Form1 : Form
     {
-
+        TINHelper tINHelper;
         OpenFileDialog OpenFileDialog = new OpenFileDialog();
 
         public Form1()
@@ -79,12 +79,12 @@ namespace TIN
         }
         public void Calculate()
         {
-            Common.Calculate(dataGridView1, richTextBox1, pictureBox1);
+           tINHelper= Common.Calculate(dataGridView1, richTextBox1, pictureBox1);
         }
 
         private void 计算三角网体积ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Calculate();
+           Calculate();
         }
 
         private void 放大ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -99,7 +99,7 @@ namespace TIN
 
         private void 保存程序正确性ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var v = tINHelper?.ProgramRigth();
         }
 
         private void 保存计算结果ToolStripMenuItem_Click(object sender, EventArgs e)

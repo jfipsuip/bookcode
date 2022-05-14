@@ -120,6 +120,10 @@ namespace TIN.TIN
 
             return result;
         }
+        /// <summary>
+        /// 程序正确性
+        /// </summary>
+        /// <returns></returns>
         public List<string> ProgramRigth()
         {
             List<string> list = new List<string>();
@@ -194,13 +198,28 @@ P0 点的平面坐标 y
 挖方总体积
 填方总体积
 总体积";
-            string[] remarks = remark.Replace("\r\n","\n").Split('\n').ToArray();
+            string[] remarks = remark.Replace("\r\n", "\n").Split('\n').ToArray();
             for (int i = 0; i < list.Count; i++)
             {
                 string s = $"{i + 1},{list[i]},{remarks[i]}";
                 data.Add(s);
             }
             return data;
+        }
+        /// <summary>
+        /// 计算结果
+        /// </summary>
+        /// <returns></returns>
+        public List<string> CalculateResult()
+        {
+            List<string> list = new List<string>();
+            list.Add("序号,点名 1,点名 2,点名 3,挖方体积,填方体积,总体积");
+            int i = 1;
+            foreach (var item in Triangles)
+            {
+                list.Add($"{i++},{item.PointA.Name},{item.PointB.Name},{item.PointC.Name},{item.Vcut:F3},{item.Vfill:F3},{item.V:F3}");
+            }
+            return list;
         }
 
         private static void SetTinH(List<Triangle> triangles, double hc)

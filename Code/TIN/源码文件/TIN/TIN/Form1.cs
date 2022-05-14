@@ -80,17 +80,17 @@ namespace TIN
         }
         public void Calculate()
         {
-           tINHelper= Common.Calculate(dataGridView1, richTextBox1, pictureBox1);
+            tINHelper = Common.Calculate(dataGridView1, richTextBox1, pictureBox1);
         }
 
         private void 计算三角网体积ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           Calculate();
+            Calculate();
         }
 
         private void 放大ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void 缩小ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -114,7 +114,16 @@ namespace TIN
 
         private void 保存计算结果ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            var contents = tINHelper?.CalculateResult();
+            saveFileDialog.Filter = "文本文件|*.txt";
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            string path = saveFileDialog.FileName;
+
+            File.WriteAllLines(path, contents);
         }
 
         private void 保存ToolStripMenuItem1_Click(object sender, EventArgs e)

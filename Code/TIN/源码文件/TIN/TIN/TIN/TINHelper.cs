@@ -120,6 +120,45 @@ namespace TIN.TIN
 
             return result;
         }
+        public List<string> ReportResult()
+        {
+            List<string> list = new List<string>();
+            list.Add($"P1 至 P4  4 个点的点名和平面坐标");
+            list.Add($"P1: {p1.Name},{p1.X:F3},{p1.Y:F3}");
+            list.Add($"P2: {p2.Name},{p2.X:F3},{p2.Y:F3}");
+            list.Add($"P3: {p3.Name},{p3.X:F3},{p3.Y:F3}");
+            list.Add($"P4: {p4.Name},{p4.X:F3},{p4.Y:F3}");
+            list.Add($"所有凸包点的点名和平面坐标");
+            for (int i = 0; i < CH.Count; i++)
+            {
+                Point point = CH[i];
+                list.Add($"凸包点{i + 1}: {point.Name},{point.X:F3},{point.Y:F3}");
+            }
+            list.Add($"P0 平面坐标: {p0.Name},{p0.X:F3},{p0.Y:F3}");
+            list.Add($"初始三角形的个数 :{InitialTriangets.Count}");
+            list.Add($"所有的三角形结果 :{Triangles.Count}");
+            for (int i = 0; i < Triangles.Count; i++)
+            {
+                Triangle triangle = Triangles[i];
+                list.Add($"三角形{i + 1}：{triangle.PointA.Name},{triangle.PointB.Name},{triangle.PointC.Name}");
+            }
+            double sumHS = Triangles.Select(t => t.Hp * t.S).Sum();
+            double sumS = Triangles.Select(t => t.S).Sum();
+            double he = sumHS / sumS;
+            list.Add($"三角形投影底面面积之和: {sumS:F3}");
+            list.Add($"平衡高程: {he:F3}");
+            list.Add($"所有三角形的挖填方体积， 并标注挖填方类型");
+            for (int i = 0; i < Triangles.Count; i++)
+            {
+                Triangle triangle = Triangles[i];
+                list.Add($"三角形{i + 1}：{triangle.PointA.Name},{triangle.PointB.Name},{triangle.PointC.Name},{triangle.Type2}");
+            }
+            list.Add($"挖方总体积: {Triangles.Sum(t => t.Vcut):F3}");
+            list.Add($"挖方总体积: {Triangles.Sum(t => t.Vfill):F3}");
+            list.Add($"总体积: {Triangles.Sum(t => t.V):F3}");
+
+            return list;
+        }
         /// <summary>
         /// 程序正确性
         /// </summary>

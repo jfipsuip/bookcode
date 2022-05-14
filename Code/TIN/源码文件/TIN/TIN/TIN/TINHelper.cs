@@ -194,7 +194,7 @@ P0 点的平面坐标 y
 挖方总体积
 填方总体积
 总体积";
-            string[] remarks = remark.Split('\n').ToArray();
+            string[] remarks = remark.Replace("\r\n","\n").Split('\n').ToArray();
             for (int i = 0; i < list.Count; i++)
             {
                 string s = $"{i + 1},{list[i]},{remarks[i]}";

@@ -96,5 +96,20 @@ namespace TIN
         {
 
         }
+
+        private void 保存程序正确性ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 保存计算结果ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 保存ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

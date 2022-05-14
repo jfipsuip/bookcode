@@ -58,7 +58,7 @@ namespace TIN.TIN
 
             var tin = Common.GetTIN(points, 25);
 
-            richTextBox.Text = tin.Report();
+            richTextBox.Lines = tin.ReportResult().ToArray();
 
             List<Point> ps = new List<Point>();
             tin.Triangles.ForEach(t =>

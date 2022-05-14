@@ -164,8 +164,43 @@ namespace TIN.TIN
             list.Add($"{Triangles.Sum(t => t.Vfill):F3}");
 
             list.Add($"{Triangles.Sum(t => t.V):F3}");
-
-            return list;
+            List<string> data = new List<string>();
+            data.Add("序号,输出,说明");
+            string remark = @"P2 点的平面坐标 x
+P2 点的平面坐标 y
+P4 点的平面坐标 x
+P4 点的平面坐标 y
+第 3 个凸包点的平面坐标 x
+第 3 个凸包点的平面坐标 y
+第 5 个凸包点的平面坐标 x
+第 5 个凸包点的平面坐标 y
+P0 点的平面坐标 x
+P0 点的平面坐标 y
+初始三角形的个数
+包含第 1 个凸包点的三角形个数
+包含第 3 个凸包点的三角形个数
+包含第 5 个凸包点的三角形个数
+总的三角形个数
+三角形投影底面面积之和
+平衡高程
+全挖方三角形的个数
+全挖方三角形的挖方体积之和
+全填方三角形的个数
+全填方三角形的填方体积之和
+有 2 个顶点低于参考高程的三角形个数
+有 2 个顶点低于参考高程的三角形的填方体积之和
+有 1 个顶点低于参考高程的三角形个数
+有 1 个顶点低于参考高程的三角形的挖方体积之和
+挖方总体积
+填方总体积
+总体积";
+            string[] remarks = remark.Split('\n').ToArray();
+            for (int i = 0; i < list.Count; i++)
+            {
+                string s = $"{i + 1},{list[i]},{remarks[i]}";
+                data.Add(s);
+            }
+            return data;
         }
 
         private static void SetTinH(List<Triangle> triangles, double hc)

@@ -77,9 +77,11 @@ namespace TIN.TIN
             var ts = GetInitialTriangets(Points);
             InitialTriangets.AddRange(ts);
             Triangles.AddRange(ts);
+            int n = M.Count;
             // 1.3 遍历离散点 生成平面三角网
-            foreach (var point in M)
+            for (int i = 0; i < n; i++)
             {
+                Point point = M[i];
                 // 生成点P的平面三角网
                 GetTriangles(Triangles, point);
             }
@@ -350,9 +352,28 @@ P0 点的平面坐标 y
             }
 
             // 获取删除公共边后的边列表 
-            result = GetSide(sides);
+            result = DeleteCommonSide(sides);
 
             return result;
+        }
+        private static List<Side> DeleteCommonSide(List<Side> sides)
+        {
+            List<Side> list = sides;
+            for (int i = 0; i < list.Count; i++)
+            {
+                for (int j = i; j < list.Count; j++)
+                {
+                    if (list[i].IsCommonSide(list[j]))
+                    {
+                        list.RemoveAt(j);
+                        list.RemoveAt(i);
+                        i--;
+                        break;
+                    }
+                }
+            }
+
+            return list;
         }
         /// <summary>
         /// 获取删除公共边后的边列表
@@ -379,7 +400,7 @@ P0 点的平面坐标 y
         {
             foreach (var sideB in sides)
             {
-                if (sideA != sideB && sideA.IsCommonSide(sideB))
+                if (sideA.IsCommonSide(sideB))
                 {
                     return true;
                 }
@@ -403,6 +424,7 @@ P0 点的平面坐标 y
             triangles = new List<Triangle>();
 
             p0 = GetPoint(Points);
+            M.Remove(p0);
             for (int i = 1; i < CH.Count; i++)
             {
                 Point pointA, pointB;

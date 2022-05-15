@@ -70,7 +70,7 @@ namespace TIN.Draws
         /// <summary>
         /// 图形大小
         /// </summary>
-        public double Zoom = 3.00;
+        public double Zoom = 2.00;
         /// <summary>
         /// 偏移坐标
         /// </summary>
@@ -99,6 +99,13 @@ namespace TIN.Draws
 
             //画点
             DrawPoint(image, points);
+            Graphics graphics = Graphics.FromImage(image);
+            foreach (var point in Points)
+            {
+                graphics.DrawString(point.Name, new Font("Verdana", (10)), new SolidBrush(Color.Red), GetPoint(point));
+
+            }
+
         }
         public void DrawLine()
         {

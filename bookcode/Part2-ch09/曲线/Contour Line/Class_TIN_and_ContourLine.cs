@@ -15,12 +15,21 @@ namespace Contour_Line
         public double x;
         public double y;
         public double z;
+        public override string ToString()
+        {
+            return $"{PointName}";
+        }
     }
 
     //线结构
     public struct side
     {
         public List<point> Sp;
+
+        public override string ToString()
+        {
+            return $"{Sp[0].PointName} {Sp[1].PointName}";
+        }
     }
 
     //三角形结构
@@ -28,6 +37,10 @@ namespace Contour_Line
     {
         public List<point> Tp;
         public List<side> Ts;
+        public override string ToString()
+        {
+            return $"{Tp[0]} {Tp[1]} {Tp[2]}";
+        }
     }
 
     //等高线结构
@@ -358,11 +371,11 @@ namespace Contour_Line
         }
 
         //计算三角形面积
-        public double Area(point A,point B,point C)
+        public double Area(point A, point B, point C)
         {
-            double s=0;
+            double s = 0;
 
-            double a,b,c;
+            double a, b, c;
 
 
             a = Math.Sqrt(Math.Pow(B.x - C.x, 2) + Math.Pow(B.y - C.y, 2));
@@ -379,7 +392,7 @@ namespace Contour_Line
         }
 
         //判断点是否位于三角形内
-        public bool PinT(point p,triangle t)
+        public bool PinT(point p, triangle t)
         {
             bool In = true;
 
@@ -390,7 +403,7 @@ namespace Contour_Line
             s3 = Area(t.Tp[1], t.Tp[2], p);
             s4 = Area(t.Tp[0], t.Tp[2], p);
 
-            if (Math.Round(s1,4) == Math.Round((s2 + s3 + s4),4))
+            if (Math.Round(s1, 4) == Math.Round((s2 + s3 + s4), 4))
             {
                 In = true;
             }
@@ -407,7 +420,14 @@ namespace Contour_Line
         //构建初始三角网
         public void BuildInitialTin()
         {
+            CP = CP.OrderBy(t => t.PointName).ToList();
             int a = CP.Count;
+
+            var v = PO.ToList();
+            v.AddRange(PO);
+            v.Reverse();
+            PO = v.Skip(4).Take(18).ToList();
+            PO.RemoveAt(12);
 
             for (int i = 0; i < PO.Count - 1; i++)
             {
@@ -465,18 +485,20 @@ namespace Contour_Line
 
                 //定位
                 List<triangle> FT = new List<triangle>();
-                for (int k = 0; k < T3.Count; k++)
-                {
-                    if (PinT(CP[i], T3[k]))
-                    {
-                        FT.Add(T3[k]);
-                        T3.Remove(T3[k]);
-                        break;
-                    }
-                }
+                FT.AddRange(T3);
+                //for (int k = 0; k < T3.Count; k++)
+                //{
+                //    if (PinT(CP[i], T3[k]))
+                //    {
+                //        FT.Add(T3[k]);
+                //        T3.Remove(T3[k]);
+                //        break;
+                //    }
+                //}
 
                 if (FT.Count > 0)
                 {
+                    /*
                     if (T3.Count > 0)
                     {
                         int[] Tnote = new int[T3.Count];
@@ -523,7 +545,7 @@ namespace Contour_Line
                             }
                         }
                     }
-
+                    */
                     //将三角形加入到T2中
                     T2.AddRange(FT);
 
@@ -744,7 +766,7 @@ namespace Contour_Line
 
             double x = 0, y = 0;
 
-            double x1,y1,z1,x2,y2,z2;
+            double x1, y1, z1, x2, y2, z2;
 
             if (S.Sp[0].z == h || S.Sp[1].z == h)
             {
@@ -866,7 +888,7 @@ namespace Contour_Line
             {
                 Tri_Note[i] = 0;
             }
-         
+
             point p1 = new point();
 
             //遍历高程为"h"的等高线所穿过的三角形
@@ -1252,7 +1274,7 @@ namespace Contour_Line
         public void Draw_DXF(string FileName)
         {
             //调用绘图类
-            Class_Draw_DXF dxf= new Class_Draw_DXF();
+            Class_Draw_DXF dxf = new Class_Draw_DXF();
 
             dxf.sw = new System.IO.StreamWriter(FileName);
 
@@ -1364,8 +1386,8 @@ namespace Contour_Line
 
         struct H_S
         {
-           public  double H;
-           public  double S;
+            public double H;
+            public double S;
         }
 
         //计算报告
@@ -1435,7 +1457,7 @@ namespace Contour_Line
                     Contour1.Remove(Contour2[ll]);
                 }
 
-                
+
             }
 
             a += "\n------------------等高线信息------------------\n";

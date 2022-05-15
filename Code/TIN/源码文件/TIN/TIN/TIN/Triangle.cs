@@ -99,6 +99,32 @@ namespace TIN.TIN
         public double Vcut { get; set; }
         public double Vfill { get; set; }
         public ETriangle Type { get; set; }
+        public string Type2
+        {
+            get
+            {
+                string type;
+                switch (Type)
+                {
+                    case ETriangle.全挖方:
+                        type = "全挖方";
+                        break;
+                    case ETriangle.全填方:
+                        type = "全填方";
+                        break;
+                    case ETriangle.两个顶点低:
+                        type = "既有挖方又有填方";
+                        break;
+                    case ETriangle.一个顶点低:
+                        type = "既有挖方又有填方";
+                        break;
+                    default:
+                        type = "";
+                        break;
+                }
+                return type;
+            }
+        }
         public void CalculateV()
         {
             ETriangle etriangle;

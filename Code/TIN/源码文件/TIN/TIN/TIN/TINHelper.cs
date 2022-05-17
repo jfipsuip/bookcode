@@ -197,11 +197,11 @@ namespace TIN.TIN
 
             var t2 = Triangles.Where(t => t.Type == ETriangle.两个顶点低).ToList();
             list.Add($"{t2.Count:F3}");
-            list.Add($"{t2.Sum(t => t.V):F3}");
+            list.Add($"{t2.Sum(t => t.Vfill):F3}");
 
             var t1 = Triangles.Where(t => t.Type == ETriangle.一个顶点低).ToList();
             list.Add($"{t1.Count:F3}");
-            list.Add($"{t1.Sum(t => t.V):F3}");
+            list.Add($"{t1.Sum(t => t.Vcut):F3}");
 
             list.Add($"{Triangles.Sum(t => t.Vcut):F3}");
             list.Add($"{Triangles.Sum(t => t.Vfill):F3}");
@@ -350,9 +350,28 @@ P0 点的平面坐标 y
             }
 
             // 获取删除公共边后的边列表 
-            result = GetSide(sides);
+            result = DeleteCommonSide(sides);
 
             return result;
+        }
+        private static List<Side> DeleteCommonSide(List<Side> sides)
+        {
+            List<Side> list = sides;
+            for (int i = 0; i < list.Count; i++)
+            {
+                for (int j = i; j < list.Count; j++)
+                {
+                    if (list[i].IsCommonSide(list[j]))
+                    {
+                        list.RemoveAt(j);
+                        list.RemoveAt(i);
+                        i--;
+                        break;
+                    }
+                }
+            }
+
+            return list;
         }
         /// <summary>
         /// 获取删除公共边后的边列表
@@ -379,7 +398,7 @@ P0 点的平面坐标 y
         {
             foreach (var sideB in sides)
             {
-                if (sideA != sideB && sideA.IsCommonSide(sideB))
+                if (sideA.IsCommonSide(sideB))
                 {
                     return true;
                 }
@@ -403,6 +422,7 @@ P0 点的平面坐标 y
             triangles = new List<Triangle>();
 
             p0 = GetPoint(Points);
+            M.Remove(p0);
             for (int i = 1; i < CH.Count; i++)
             {
                 Point pointA, pointB;

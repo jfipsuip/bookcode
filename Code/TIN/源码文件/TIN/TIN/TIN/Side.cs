@@ -28,8 +28,11 @@ namespace TIN.TIN
         public bool IsCommonSide(Side side)
         {
             bool isCommon = false;
-
-            if (PointA == side.PointA && PointB == side.PointB)
+            if (this == side)
+            {
+                isCommon = false;
+            }
+            else if (PointA == side.PointA && PointB == side.PointB)
             {
                 isCommon = true;
             }

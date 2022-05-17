@@ -129,48 +129,64 @@ namespace TIN.TIN
         {
             ETriangle etriangle;
             double h1, h2, h3, h0, vcut, vfill, s;
-            Point pointA, pointB, pointC;
+            double x1, y1, x2, y2;
             Point[] points = { PointA, PointB, PointC };
-            points = points.OrderBy(t => t.H).ToArray();
-            pointA = points[0];
-            pointB = points[1];
-            pointC = points[2];
-            h1 = pointA.H;
-            h2 = pointB.H;
-            h3 = pointC.H;
-            h0 = Hc ?? 0;
-            if (h1 >= h0)
+            Point pointA, pointB, pointC;
+            int count = points.Where(t => t.H < Hc.Value).Count();
+
+            if (count == 0)
             {
                 vcut = S * H ?? 0;
                 vfill = 0;
                 etriangle = ETriangle.全挖方;
             }
-            else if (h3 < h0)
+            else if (count == 2)
+            {
+                points = points.OrderByDescending(t => t.H).ToArray();
+                pointA = points[0];
+                pointB = points[1];
+                pointC = points[2];
+                h1 = pointA.H;
+                h2 = pointB.H;
+                h3 = pointC.H;
+                h0 = Hc ?? 0;
+
+                x1 = GetValue(pointA.X, pointA.H, pointB.X, pointB.H, h0);
+                y1 = GetValue(pointA.Y, pointA.H, pointB.Y, pointB.H, h0);
+                x2 = GetValue(pointA.X, pointA.H, pointC.X, pointC.H, h0);
+                y2 = GetValue(pointA.Y, pointA.H, pointC.Y, pointC.H, h0);
+                s = GetS(x1, y1, x2, y2, pointA.X, pointA.Y);
+                vcut = s * ((h1 + h0 + h0) / 3 - h0);
+                vfill = (S - s) * ((h0 + h0 + h2 + h3) / 4 - h0);
+                etriangle = ETriangle.两个顶点低;
+
+            }
+            else if (count == 1)
+            {
+                points = points.OrderBy(t => t.H).ToArray();
+                pointA = points[0];
+                pointB = points[1];
+                pointC = points[2];
+                h1 = pointA.H;
+                h2 = pointB.H;
+                h3 = pointC.H;
+                h0 = Hc ?? 0;
+                x1 = GetValue(pointA.X, pointA.H, pointB.X, pointB.H, h0);
+                y1 = GetValue(pointA.Y, pointA.H, pointB.Y, pointB.H, h0);
+                x2 = GetValue(pointA.X, pointA.H, pointC.X, pointC.H, h0);
+                y2 = GetValue(pointA.Y, pointA.H, pointC.Y, pointC.H, h0);
+                s = GetS(x1, y1, x2, y2, pointA.X, pointA.Y);
+
+                vfill = s * ((h1 + h0 + h0) / 3 - h0);
+                vcut = (S - s) * ((h0 + h0 + h2 + h3) / 4 - h0);
+                etriangle = ETriangle.一个顶点低;
+
+            }
+            else
             {
                 vcut = 0;
                 vfill = S * H ?? 0;
                 etriangle = ETriangle.全填方;
-            }
-            else
-            {
-                double x1, y1, x2, y2;
-                x1 = GetValue(PointA.X, PointA.H, PointB.X, PointB.H, h0);
-                y1 = GetValue(PointA.Y, PointA.H, PointB.Y, PointB.H, h0);
-                x2 = GetValue(PointA.X, PointA.H, PointC.X, PointC.H, h0);
-                y2 = GetValue(PointA.Y, PointA.H, PointC.Y, PointC.H, h0);
-                s = GetS(x1, y1, x2, y2, pointA.X, pointA.Y);
-                if (h2 < h0)
-                {
-                    vcut = s * ((h1 + h0 + h0) / 3 - h0);
-                    vfill = (S - s) * ((h0 + h0 + h2 + h3) / 4 - h0);
-                    etriangle = ETriangle.两个顶点低;
-                }
-                else
-                {
-                    vfill = s * ((h1 + h0 + h0) / 3 - h0);
-                    vcut = (S - s) * ((h0 + h0 + h2 + h3) / 4 - h0);
-                    etriangle = ETriangle.一个顶点低;
-                }
             }
             Vcut = vcut;
             Vfill = vfill;

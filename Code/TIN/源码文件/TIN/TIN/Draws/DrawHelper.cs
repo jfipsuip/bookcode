@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace TIN.Draws
 {
-    public class DrawHelper
+    public class DrawHelper<T> where T : IPoint
     {
         public PictureBox PictureBox { get; }
         Graphics graphics;
@@ -16,7 +16,7 @@ namespace TIN.Draws
         /// <summary>
         /// 输入的点集
         /// </summary>
-        public List<TIN.Point> Points
+        public List<T> Points
         {
             get;
             set;
@@ -24,7 +24,7 @@ namespace TIN.Draws
         /// <summary>
         /// 输入的线集
         /// </summary>
-        public List<TIN.Point> PointLines { get; set; }
+        public List<T> PointLines { get; set; }
         // bool rdbcheck = false;
         /// <summary>
         /// 画图相关 
@@ -120,7 +120,7 @@ namespace TIN.Draws
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        private Point GetPoint(TIN.Point point)
+        private Point GetPoint(IPoint point)
         {
             Point result;
 
@@ -138,19 +138,6 @@ namespace TIN.Draws
             {
                 graphics.DrawImage(map, point);
             }
-        }
-        private static void DrawLine(PictureBox pictureBox, List<Point> points)
-        {
-            Image image = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
-            Graphics graphics = Graphics.FromImage(image);
-            Bitmap map = CreateMap();
-
-            for (int i = 0; i < points.Count(); i++)
-            {
-                graphics.DrawLine(new Pen(Color.Black), points[i], points[i++]);
-
-            }
-            pictureBox.Image = image;
         }
         private static void DrawLine(Graphics graphics, List<Point> points)
         {

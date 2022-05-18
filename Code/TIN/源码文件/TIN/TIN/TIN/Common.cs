@@ -71,7 +71,7 @@ namespace TIN.TIN
                 ps.Add(t.PointC);
             });
 
-            DrawHelper draw = new DrawHelper(pictureBox);
+            var draw = new DrawHelper<Point>(pictureBox);
             draw.Points = tin.Points;
             draw.PointLines = ps;
             draw.Draw();

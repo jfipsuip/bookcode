@@ -10,6 +10,10 @@ namespace TIN.Draws
 {
     public class DrawHelper<T> where T : IPoint
     {
+        /// <summary>
+        /// 画图相关 
+        /// </summary>
+        double xAverage, yAverage, xMax, yMax, picHeight;
         public PictureBox PictureBox { get; }
         Graphics graphics;
 
@@ -26,47 +30,7 @@ namespace TIN.Draws
         /// </summary>
         public List<T> PointLines { get; set; }
         // bool rdbcheck = false;
-        /// <summary>
-        /// 画图相关 
-        /// </summary>
-        double x_average
-        {
-            get
-            {
-                return Points.Average(t => t.X);
-            }
-        }
-        double y_average
-        {
-            get
-            {
-                return Points.Average(t => t.Y);
-            }
-        }
-        double x_max
-        {
-            get
-            {
-                double result = Points.Max(t => Math.Abs(t.X - x_average));
-                return Math.Max(result, 1);
-            }
-        }
-        double y_max
-        {
-            get
-            {
-                double result = Points.Max(t => Math.Abs(t.Y - y_average));
-                return Math.Max(result, 1);
-            }
-        }
 
-        double pic_H
-        {
-            get
-            {
-                return PictureBox.Size.Height;
-            }
-        }
         /// <summary>
         /// 图形大小
         /// </summary>
@@ -76,16 +40,25 @@ namespace TIN.Draws
         /// </summary>
         public Point Go = new Point();
 
-        public DrawHelper()
-        {
-
-        }
-        public DrawHelper(PictureBox pictureBox) : this()
+        public DrawHelper(PictureBox pictureBox)
         {
             PictureBox = pictureBox;
             Image image = new Bitmap(PictureBox.Size.Width, PictureBox.Size.Height);
             PictureBox.Image = image;
             graphics = Graphics.FromImage(image);
+        }
+        /// <summary>
+        /// 计算画图基础参数
+        /// </summary>
+        void Initial()
+        {
+            xAverage = Points.Average(t => t.X);
+            yAverage = Points.Average(t => t.Y);
+
+            xMax = Math.Max(Points.Max(t => Math.Abs(t.X - xAverage)), 1);
+            yMax = Math.Max(Points.Max(t => Math.Abs(t.Y - yAverage)), 1);
+
+            picHeight = PictureBox.Size.Height;
         }
 
         public void DrawPoint()
@@ -124,8 +97,8 @@ namespace TIN.Draws
         {
             Point result;
 
-            int x = (int)(pic_H / 2 + Go.X + (point.X - x_average) * pic_H / x_max / Zoom);
-            int y = (int)(pic_H / 2 - Go.Y - (point.Y - y_average) * pic_H / y_max / Zoom);
+            int x = (int)(picHeight / 2 + Go.X + (point.X - xAverage) * picHeight / xMax / Zoom);
+            int y = (int)(picHeight / 2 - Go.Y - (point.Y - yAverage) * picHeight / yMax / Zoom);
             result = new Point(x, y);
 
             return result;
@@ -170,7 +143,7 @@ namespace TIN.Draws
 
         public void Draw()
         {
-
+            Initial();
             DrawPoint();
             DrawLine();
         }

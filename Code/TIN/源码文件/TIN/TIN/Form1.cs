@@ -89,7 +89,10 @@ namespace TIN
         }
         public void Calculate()
         {
-            tINHelper = Common.Calculate(dataGridView1, richTextBox1, pictureBox1);
+            tINHelper = Common.Calculate(dataGridView1);
+            richTextBox1.Lines = tINHelper.ReportResult();
+            var draw = tINHelper.GetDrawHelper(pictureBox1);
+            draw.Draw();
         }
 
         private void 计算三角网体积ToolStripMenuItem_Click(object sender, EventArgs e)

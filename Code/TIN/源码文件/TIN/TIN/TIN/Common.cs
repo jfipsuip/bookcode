@@ -50,7 +50,7 @@ namespace TIN.TIN
             return data;
         }
 
-        public static TINHelper Calculate(DataGridView dataGrid, RichTextBox richTextBox, PictureBox pictureBox)
+        public static TINHelper Calculate(DataGridView dataGrid)
         {
             List<Point> points;
 
@@ -58,23 +58,6 @@ namespace TIN.TIN
 
             var tin = Common.GetTIN(points, 25);
 
-            richTextBox.Lines = tin.ReportResult().ToArray();
-
-            List<Point> ps = new List<Point>();
-            tin.Triangles.ForEach(t =>
-            {
-                ps.Add(t.PointA);
-                ps.Add(t.PointB);
-                ps.Add(t.PointA);
-                ps.Add(t.PointC);
-                ps.Add(t.PointB);
-                ps.Add(t.PointC);
-            });
-
-            var draw = new DrawHelper<Point>(pictureBox);
-            draw.Points = tin.Points;
-            draw.PointLines = ps;
-            draw.Draw();
 
             return tin;
         }

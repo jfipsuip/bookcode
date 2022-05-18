@@ -89,7 +89,10 @@ namespace TIN.TIN
             SetTinH(Triangles, H);
 
         }
-
+        /// <summary>
+        /// 报告
+        /// </summary>
+        /// <returns></returns>
         public string Report()
         {
             List<string> list = new List<string>();
@@ -120,7 +123,11 @@ namespace TIN.TIN
 
             return result;
         }
-        public List<string> ReportResult()
+        /// <summary>
+        /// 计算报告
+        /// </summary>
+        /// <returns></returns>
+        public string[] ReportResult()
         {
             List<string> list = new List<string>();
             list.Add($"P1 至 P4  4 个点的点名和平面坐标");
@@ -157,7 +164,7 @@ namespace TIN.TIN
             list.Add($"挖方总体积: {Triangles.Sum(t => t.Vfill):F3}");
             list.Add($"总体积: {Triangles.Sum(t => t.V):F3}");
 
-            return list;
+            return list.ToArray();
         }
         /// <summary>
         /// 程序正确性
@@ -260,7 +267,29 @@ P0 点的平面坐标 y
             }
             return list;
         }
+        /// <summary>
+        /// 图形文件
+        /// </summary>
+        /// <returns></returns>
+        public Draws.DrawHelper<Point> GetDrawHelper(System.Windows.Forms.PictureBox pictureBox)
+        {
+            List<Point> ps = new List<Point>();
+            Triangles.ForEach(t =>
+            {
+                ps.Add(t.PointA);
+                ps.Add(t.PointB);
+                ps.Add(t.PointA);
+                ps.Add(t.PointC);
+                ps.Add(t.PointB);
+                ps.Add(t.PointC);
+            });
 
+            var draw = new Draws.DrawHelper<Point>(pictureBox);
+            draw.Points = Points;
+            draw.PointLines = ps;
+
+            return draw;
+        }
         private static void SetTinH(List<Triangle> triangles, double hc)
         {
             foreach (var triangle in triangles)

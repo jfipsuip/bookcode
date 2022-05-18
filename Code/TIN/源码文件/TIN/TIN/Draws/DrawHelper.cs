@@ -41,6 +41,15 @@ namespace TIN.Draws
             graphics = Graphics.FromImage(image);
         }
         /// <summary>
+        /// 画图
+        /// </summary>
+        public void Draw()
+        {
+            Initial();
+            DrawPoint();
+            DrawLine();
+        }
+        /// <summary>
         /// 计算画图基础参数
         /// </summary>
         void Initial()
@@ -137,12 +146,6 @@ namespace TIN.Draws
         }
 
 
-        public void Draw()
-        {
-            Initial();
-            DrawPoint();
-            DrawLine();
-        }
 
     }
 }

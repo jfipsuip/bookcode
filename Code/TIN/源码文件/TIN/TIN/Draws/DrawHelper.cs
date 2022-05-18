@@ -11,6 +11,7 @@ namespace TIN.Draws
     public class DrawHelper
     {
         public PictureBox PictureBox { get; }
+        Graphics graphics;
 
         /// <summary>
         /// 输入的点集
@@ -66,7 +67,6 @@ namespace TIN.Draws
                 return PictureBox.Size.Height;
             }
         }
-        Image image;
         /// <summary>
         /// 图形大小
         /// </summary>
@@ -83,8 +83,9 @@ namespace TIN.Draws
         public DrawHelper(PictureBox pictureBox) : this()
         {
             PictureBox = pictureBox;
-            image = new Bitmap(PictureBox.Size.Width, PictureBox.Size.Height);
+            Image image = new Bitmap(PictureBox.Size.Width, PictureBox.Size.Height);
             PictureBox.Image = image;
+            graphics = Graphics.FromImage(image);
         }
 
         public void DrawPoint()
@@ -98,7 +99,7 @@ namespace TIN.Draws
             points = Points.Select(t => GetPoint(t)).ToList();
 
             //画点
-            DrawPoint(image, points);
+            DrawPoint(graphics, points);
         }
         public void DrawLine()
         {
@@ -111,7 +112,7 @@ namespace TIN.Draws
             points = PointLines.Select(t => GetPoint(t)).ToList();
 
             // 画线
-            DrawLine(image, points);
+            DrawLine(graphics, points);
         }
 
         /// <summary>
@@ -130,9 +131,8 @@ namespace TIN.Draws
             return result;
         }
 
-        private static void DrawPoint(Image image, IEnumerable<Point> points)
+        private static void DrawPoint(Graphics graphics, IEnumerable<Point> points)
         {
-            Graphics graphics = Graphics.FromImage(image);
             Bitmap map = CreateMap();
             foreach (var point in points)
             {
@@ -152,9 +152,8 @@ namespace TIN.Draws
             }
             pictureBox.Image = image;
         }
-        private static void DrawLine(Image image, List<Point> points)
+        private static void DrawLine(Graphics graphics, List<Point> points)
         {
-            Graphics graphics = Graphics.FromImage(image);
             Bitmap map = CreateMap();
 
             for (int i = 0; i < points.Count(); i++)

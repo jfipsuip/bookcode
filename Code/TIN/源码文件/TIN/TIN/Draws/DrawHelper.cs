@@ -14,31 +14,24 @@ namespace TIN.Draws
         /// 画图相关 
         /// </summary>
         double xAverage, yAverage, xMax, yMax, picHeight;
-        public PictureBox PictureBox { get; }
         Graphics graphics;
-
+        /// <summary>
+        /// 图形大小
+        /// </summary>
+        double Zoom = 3.00;
+        /// <summary>
+        /// 偏移坐标
+        /// </summary>
+        Point Go = new Point();
+        public PictureBox PictureBox { get; }
         /// <summary>
         /// 输入的点集
         /// </summary>
-        public List<T> Points
-        {
-            get;
-            set;
-        }   //输入的点集
+        public List<T> Points { get; set; }
         /// <summary>
         /// 输入的线集
         /// </summary>
         public List<T> PointLines { get; set; }
-        // bool rdbcheck = false;
-
-        /// <summary>
-        /// 图形大小
-        /// </summary>
-        public double Zoom = 3.00;
-        /// <summary>
-        /// 偏移坐标
-        /// </summary>
-        public Point Go = new Point();
 
         public DrawHelper(PictureBox pictureBox)
         {
@@ -87,18 +80,21 @@ namespace TIN.Draws
             // 画线
             DrawLine(graphics, points);
         }
-
+        private Point GetPoint(IPoint point)
+        {
+            return GetPoint(point, picHeight, xAverage, yAverage, xMax, yMax, Zoom, Go.X, Go.Y);
+        }
         /// <summary>
         /// 转换一个输入坐标为图像坐标
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        private Point GetPoint(IPoint point)
+        private static Point GetPoint(IPoint point, double picHeight, double xAverage, double yAverage, double xMax, double yMax, double Zoom, double xGo, double yGo)
         {
             Point result;
 
-            int x = (int)(picHeight / 2 + Go.X + (point.X - xAverage) * picHeight / xMax / Zoom);
-            int y = (int)(picHeight / 2 - Go.Y - (point.Y - yAverage) * picHeight / yMax / Zoom);
+            int x = (int)(picHeight / 2 + xGo + (point.X - xAverage) * picHeight / xMax / Zoom);
+            int y = (int)(picHeight / 2 - yGo - (point.Y - yAverage) * picHeight / yMax / Zoom);
             result = new Point(x, y);
 
             return result;

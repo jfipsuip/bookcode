@@ -40,55 +40,6 @@ namespace TIN.Draws
             PictureBox.Image = image;
             graphics = Graphics.FromImage(image);
         }
-        /// <summary>
-        /// 画图
-        /// </summary>
-        public void Draw()
-        {
-            Initial();
-            DrawPoint();
-            DrawLine();
-        }
-        /// <summary>
-        /// 计算画图基础参数
-        /// </summary>
-        void Initial()
-        {
-            xAverage = Points.Average(t => t.X);
-            yAverage = Points.Average(t => t.Y);
-
-            xMax = Math.Max(Points.Max(t => Math.Abs(t.X - xAverage)), 1);
-            yMax = Math.Max(Points.Max(t => Math.Abs(t.Y - yAverage)), 1);
-
-            picHeight = PictureBox.Size.Height;
-        }
-
-        public void DrawPoint()
-        {
-            List<Point> points;
-            if (Points.Count() == 0)
-            {
-                return;
-            }
-            //投影到图像坐标系      
-            points = Points.Select(t => GetPoint(t)).ToList();
-
-            //画点
-            DrawPoint(graphics, points);
-        }
-        public void DrawLine()
-        {
-            List<Point> points;
-            if (PointLines.Count() == 0)
-            {
-                return;
-            }
-            //投影到图像坐标系
-            points = PointLines.Select(t => GetPoint(t)).ToList();
-
-            // 画线
-            DrawLine(graphics, points);
-        }
         private Point GetPoint(IPoint point)
         {
             return GetPoint(point, picHeight, xAverage, yAverage, xMax, yMax, Zoom, Go.X, Go.Y);
@@ -108,24 +59,51 @@ namespace TIN.Draws
 
             return result;
         }
-
-        private static void DrawPoint(Graphics graphics, IEnumerable<Point> points)
+        /// <summary>
+        /// 画图
+        /// </summary>
+        public void Draw()
         {
-            Bitmap map = CreateMap();
-            foreach (var point in points)
+            Initial();
+            // 画点
+            Points?.ForEach(p =>
             {
-                graphics.DrawImage(map, point);
-            }
+                DrawPoint(p);
+            });
+            // 画线
+            DrawLine(PointLines);
         }
-        private static void DrawLine(Graphics graphics, List<Point> points)
+        /// <summary>
+        /// 计算画图基础参数
+        /// </summary>
+        void Initial()
+        {
+            xAverage = Points.Average(t => t.X);
+            yAverage = Points.Average(t => t.Y);
+
+            xMax = Math.Max(Points.Max(t => Math.Abs(t.X - xAverage)), 1);
+            yMax = Math.Max(Points.Max(t => Math.Abs(t.Y - yAverage)), 1);
+
+            picHeight = PictureBox.Size.Height;
+        }
+
+        private void DrawPoint(IPoint point)
         {
             Bitmap map = CreateMap();
-
+            graphics.DrawImage(map, GetPoint(point));
+        }
+        private void DrawLine(List<T> points)
+        {
             for (int i = 0; i < points.Count(); i++)
             {
-                graphics.DrawLine(new Pen(Color.Black), points[i], points[++i]);
+                DrawLine(points[i], points[++i]);
 
             }
+        }
+        private void DrawLine(IPoint pointA, IPoint pointB)
+        {
+            graphics.DrawLine(new Pen(Color.Black), GetPoint(pointA), GetPoint(pointB));
+
         }
         /// <summary>
         /// 画一个点

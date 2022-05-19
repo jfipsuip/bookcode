@@ -22,7 +22,7 @@ namespace TIN.Draws
         /// <summary>
         /// 偏移坐标
         /// </summary>
-        Point Go = new Point();
+        public Point Go { get; set; } = new Point();
         public PictureBox PictureBox { get; }
         /// <summary>
         /// 点集 凸包点
@@ -71,9 +71,9 @@ namespace TIN.Draws
         }
         private Point ConvertPoint(IPoint point)
         {
-            return ConvertPoint(point, raid * Zoom, x1, y1, x2, y2);
+            return ConvertPoint(point, x1, y1, raid * Zoom, x2 + Go.X, y2 + Go.Y);
         }
-        private static Point ConvertPoint(IPoint point, double raid, double x1, double y1, double x2, double y2)
+        private static Point ConvertPoint(IPoint point, double x1, double y1, double raid, double x2, double y2)
         {
             Point p;
 
@@ -93,7 +93,28 @@ namespace TIN.Draws
             Initial();
             DrawData();
         }
-        public void DrawData()
+        public void Reset()
+        {
+            // 设置初始参数
+            Zoom = 0.9;
+            Go = new Point();
+
+            Draw();
+        }
+        public void Magnify()
+        {
+            Zoom = Zoom * 1.1;
+            Draw();
+        }
+        public void Minish()
+        {
+            Zoom = Zoom * 0.9;
+            Draw();
+        }
+        /// <summary>
+        /// 修改方法 画图
+        /// </summary>
+        private void DrawData()
         {
 
             // 画线
@@ -118,18 +139,7 @@ namespace TIN.Draws
             });
         }
 
-        public void Magnify()
-        {
-            graphics.Clear(Color.White);
-            Zoom = Zoom * 1.1;
-            Draw();
-        }
-        public void Minish()
-        {
-            graphics.Clear(Color.White);
-            Zoom = Zoom * 0.9;
-            Draw();
-        }
+
         /// <summary>
         /// 画一个点 用黑色○标记
         /// </summary>

@@ -95,42 +95,42 @@ namespace TIN
             // 新建ToolStripMenuItem
             // 
             this.新建ToolStripMenuItem.Name = "新建ToolStripMenuItem";
-            this.新建ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.新建ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.新建ToolStripMenuItem.Text = "新建";
             this.新建ToolStripMenuItem.Click += new System.EventHandler(this.新建ToolStripMenuItem_Click);
             // 
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.打开ToolStripMenuItem.Text = "打开";
             this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
             // 
             // 保存ToolStripMenuItem
             // 
             this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.保存ToolStripMenuItem.Text = "保存";
             this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
             // 
             // 保存程序正确性ToolStripMenuItem
             // 
             this.保存程序正确性ToolStripMenuItem.Name = "保存程序正确性ToolStripMenuItem";
-            this.保存程序正确性ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.保存程序正确性ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.保存程序正确性ToolStripMenuItem.Text = "保存程序正确性";
             this.保存程序正确性ToolStripMenuItem.Click += new System.EventHandler(this.保存程序正确性ToolStripMenuItem_Click);
             // 
             // 保存计算结果ToolStripMenuItem
             // 
             this.保存计算结果ToolStripMenuItem.Name = "保存计算结果ToolStripMenuItem";
-            this.保存计算结果ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.保存计算结果ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.保存计算结果ToolStripMenuItem.Text = "保存计算结果";
             this.保存计算结果ToolStripMenuItem.Click += new System.EventHandler(this.保存计算结果ToolStripMenuItem_Click);
             // 
             // 保存ToolStripMenuItem1
             // 
             this.保存ToolStripMenuItem1.Name = "保存ToolStripMenuItem1";
-            this.保存ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.保存ToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.保存ToolStripMenuItem1.Text = "保存图形文件";
             this.保存ToolStripMenuItem1.Click += new System.EventHandler(this.保存ToolStripMenuItem1_Click);
             // 
@@ -241,7 +241,7 @@ namespace TIN
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(784, 359);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "数据表格";
@@ -261,7 +261,7 @@ namespace TIN
             this.tabPage2.Controls.Add(this.pictureBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(784, 359);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "示意图";
@@ -277,6 +277,11 @@ namespace TIN
             this.pictureBox1.Size = new System.Drawing.Size(775, 347);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // tabPage3
             // 

@@ -25,13 +25,21 @@ namespace TIN.Draws
         Point Go = new Point();
         public PictureBox PictureBox { get; }
         /// <summary>
-        /// 输入的点集
+        /// 点集 凸包点
         /// </summary>
         public List<T> Points { get; set; }
         /// <summary>
-        /// 输入的线集
+        /// 点集 内部点
         /// </summary>
-        public List<T> PointLines { get; set; }
+        public List<T> Points2 { get; set; }
+        /// <summary>
+        /// 线集  绘三角形边线
+        /// </summary>
+        public List<List<T>> Lines { get; set; }
+        /// <summary>
+        /// 线集 绘制凸多边形
+        /// </summary>
+        public List<List<T>> Lines2 { get; set; }
 
         public DrawHelper(PictureBox pictureBox)
         {
@@ -65,13 +73,27 @@ namespace TIN.Draws
         public void Draw()
         {
             Initial();
+
+            // 画线
+            Lines?.ForEach(ps =>
+            {
+                DrawLineGray(ps);
+            });
+            // 画线
+            Lines2?.ForEach(ps =>
+            {
+                DrawLineRed(ps);
+            });
+            // 画点
+            Points2?.ForEach(p =>
+            {
+                DrawPointBlack(p);
+            });
             // 画点
             Points?.ForEach(p =>
             {
-                DrawPoint(p);
+                DrawPointRed(p);
             });
-            // 画线
-            DrawLine(PointLines);
         }
         /// <summary>
         /// 计算画图基础参数
@@ -86,44 +108,50 @@ namespace TIN.Draws
 
             picHeight = PictureBox.Size.Height;
         }
-
-        private void DrawPoint(IPoint point)
+        /// <summary>
+        /// 画一个点 用黑色○标记
+        /// </summary>
+        /// <param name="point"></param>
+        private void DrawPointBlack(IPoint point)
         {
-            Bitmap map = CreateMap();
-            graphics.DrawImage(map, GetPoint(point));
-        }
-        private void DrawLine(List<T> points)
-        {
-            for (int i = 0; i < points.Count(); i++)
-            {
-                DrawLine(points[i], points[++i]);
-
-            }
-        }
-        private void DrawLine(IPoint pointA, IPoint pointB)
-        {
-            graphics.DrawLine(new Pen(Color.Black), GetPoint(pointA), GetPoint(pointB));
-
+            int n = 10;
+            int m = n / 2;
+            var p = GetPoint(point);
+            graphics.DrawEllipse(Pens.Black, p.X - m, p.Y - m, 10, 10);
         }
         /// <summary>
-        /// 画一个点
+        /// 画一个点 用红色□标记
         /// </summary>
-        /// <returns></returns>
-        private static Bitmap CreateMap()
+        /// <param name="point"></param>
+        private void DrawPointRed(IPoint point)
         {
-            Bitmap map = new Bitmap(3, 3);
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    map.SetPixel(i, j, Color.Red);
-                }
-            }
-
-            return map;
+            int n = 10;
+            int m = n / 2;
+            var p = GetPoint(point);
+            var pen = new Pen(Color.Red, 2);
+            graphics.DrawRectangle(pen, p.X - m, p.Y - m, 10, 10);
         }
-
-
-
+        /// <summary>
+        /// 红色实线
+        /// </summary>
+        /// <param name="pointA"></param>
+        /// <param name="pointB"></param>
+        private void DrawLineRed(List<T> points)
+        {
+            var ps = points.Select(t => GetPoint(t)).ToArray();
+            var pen = new Pen(Color.Red, 3);
+            graphics.DrawLines(pen, ps);
+        }
+        /// <summary>
+        /// 灰色虚线
+        /// </summary>
+        /// <param name="pointA"></param>
+        /// <param name="pointB"></param>
+        private void DrawLineGray(List<T> points)
+        {
+            var ps = points.Select(t => GetPoint(t)).ToArray();
+            var pen = new Pen(Color.Gray, 1);
+            graphics.DrawLines(pen, ps);
+        }
     }
 }

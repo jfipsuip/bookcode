@@ -273,20 +273,23 @@ P0 点的平面坐标 y
         /// <returns></returns>
         public Draws.DrawHelper<Point> GetDrawHelper(System.Windows.Forms.PictureBox pictureBox)
         {
-            List<Point> ps = new List<Point>();
+            var draw = new Draws.DrawHelper<Point>(pictureBox);
+            List<List<Point>> ps = new List<List<Point>>();
             Triangles.ForEach(t =>
             {
-                ps.Add(t.PointA);
-                ps.Add(t.PointB);
-                ps.Add(t.PointA);
-                ps.Add(t.PointC);
-                ps.Add(t.PointB);
-                ps.Add(t.PointC);
+                List<Point> list = new List<Point>();
+                list.Add(t.PointA);
+                list.Add(t.PointB);
+                list.Add(t.PointC);
+                list.Add(t.PointA);
+                ps.Add(list);
             });
 
-            var draw = new Draws.DrawHelper<Point>(pictureBox);
-            draw.Points = Points;
-            draw.PointLines = ps;
+            draw.Points = CH;
+            draw.Points2 = Points;
+            draw.Lines = ps;
+            draw.Lines2 = new List<List<Point>>();
+            draw.Lines2.Add(CH);
 
             return draw;
         }

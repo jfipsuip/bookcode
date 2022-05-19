@@ -130,6 +130,8 @@ namespace TIN.Draws
             var p = GetPoint(point);
             var pen = new Pen(Color.Red, 2);
             graphics.DrawRectangle(pen, p.X - m, p.Y - m, 10, 10);
+
+            graphics.DrawString(point.Name, SystemFonts.DefaultFont, Brushes.Red, p.X, p.Y);
         }
         /// <summary>
         /// 红色实线

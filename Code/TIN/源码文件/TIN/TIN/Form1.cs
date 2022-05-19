@@ -115,41 +115,29 @@ namespace TIN
         {
             var contents = tINHelper?.ProgramRigth();
             saveFileDialog.Filter = "文本文件|*.txt";
-            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                return;
+                File.WriteAllLines(saveFileDialog.FileName, contents);
             }
-
-            string path = saveFileDialog.FileName;
-
-            File.WriteAllLines(path, contents);
         }
 
         private void 保存计算结果ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var contents = tINHelper?.CalculateResult();
             saveFileDialog.Filter = "文本文件|*.txt";
-            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                return;
+                File.WriteAllLines(saveFileDialog.FileName, contents);
             }
-
-            string path = saveFileDialog.FileName;
-
-            File.WriteAllLines(path, contents);
         }
 
         private void 保存ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            saveFileDialog.Filter = "图形文件|*.Jpeg";
-            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            saveFileDialog.Filter = "图形文件|*.jpg";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                return;
+                pictureBox1.Image?.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
             }
-
-            string path = saveFileDialog.FileName;
-
-            pictureBox1.Image?.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
         }
     }
 }

@@ -51,6 +51,7 @@ namespace TIN.Draws
             Image image = new Bitmap(PictureBox.Size.Width, PictureBox.Size.Height);
             PictureBox.Image = image;
             graphics = Graphics.FromImage(image);
+            graphics.Clear(Color.White);
 
             double xMin, yMin, xMax, yMax;
             xMin = Points.Min(t => t.X);

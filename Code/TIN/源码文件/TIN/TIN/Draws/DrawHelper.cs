@@ -79,7 +79,7 @@ namespace TIN.Draws
 
 
             int x = (int)((point.X - x1) * raid + x2);
-            int y = (int)((point.Y - y1) * raid + y2);
+            int y = (int)(-(point.Y - y1) * raid + y2);
 
             p = new Point(x, y);
 

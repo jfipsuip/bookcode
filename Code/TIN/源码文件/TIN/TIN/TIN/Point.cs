@@ -9,7 +9,7 @@ namespace TIN.TIN
     /// <summary>
     /// 点
     /// </summary>
-    public class Point : Draws.IPoint
+    public class Point
     {
         /// <summary>
         /// 名称

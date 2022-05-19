@@ -14,7 +14,7 @@ namespace TIN
     public partial class Form1 : Form
     {
         TIN.TINHelper tINHelper;
-        Draws.DrawHelper<TIN.Point> draw;
+        Draws.DrawHelper draw;
 
         //记录鼠标位置
         double Mouse_X1, Mouse_Y1;

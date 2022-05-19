@@ -95,42 +95,42 @@ namespace TIN
             // 新建ToolStripMenuItem
             // 
             this.新建ToolStripMenuItem.Name = "新建ToolStripMenuItem";
-            this.新建ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.新建ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.新建ToolStripMenuItem.Text = "新建";
             this.新建ToolStripMenuItem.Click += new System.EventHandler(this.新建ToolStripMenuItem_Click);
             // 
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.打开ToolStripMenuItem.Text = "打开";
             this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
             // 
             // 保存ToolStripMenuItem
             // 
             this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存ToolStripMenuItem.Text = "保存";
             this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
             // 
             // 保存程序正确性ToolStripMenuItem
             // 
             this.保存程序正确性ToolStripMenuItem.Name = "保存程序正确性ToolStripMenuItem";
-            this.保存程序正确性ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存程序正确性ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存程序正确性ToolStripMenuItem.Text = "保存程序正确性";
             this.保存程序正确性ToolStripMenuItem.Click += new System.EventHandler(this.保存程序正确性ToolStripMenuItem_Click);
             // 
             // 保存计算结果ToolStripMenuItem
             // 
             this.保存计算结果ToolStripMenuItem.Name = "保存计算结果ToolStripMenuItem";
-            this.保存计算结果ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存计算结果ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存计算结果ToolStripMenuItem.Text = "保存计算结果";
             this.保存计算结果ToolStripMenuItem.Click += new System.EventHandler(this.保存计算结果ToolStripMenuItem_Click);
             // 
             // 保存ToolStripMenuItem1
             // 
             this.保存ToolStripMenuItem1.Name = "保存ToolStripMenuItem1";
-            this.保存ToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
+            this.保存ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.保存ToolStripMenuItem1.Text = "保存图形文件";
             this.保存ToolStripMenuItem1.Click += new System.EventHandler(this.保存ToolStripMenuItem1_Click);
             // 
@@ -145,7 +145,7 @@ namespace TIN
             // 计算三角网体积ToolStripMenuItem
             // 
             this.计算三角网体积ToolStripMenuItem.Name = "计算三角网体积ToolStripMenuItem";
-            this.计算三角网体积ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.计算三角网体积ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.计算三角网体积ToolStripMenuItem.Text = "计算三角网体积";
             this.计算三角网体积ToolStripMenuItem.Click += new System.EventHandler(this.计算三角网体积ToolStripMenuItem_Click);
             // 
@@ -210,22 +210,22 @@ namespace TIN
             // 
             // toolStrip1
             // 
-            this.toolStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.toolStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Location = new System.Drawing.Point(0, 23);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(111, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(43, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // tabControl1
             // 
             this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
@@ -233,7 +233,7 @@ namespace TIN
             this.tabControl1.Location = new System.Drawing.Point(8, 53);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(792, 385);
+            this.tabControl1.Size = new System.Drawing.Size(792, 408);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -242,7 +242,7 @@ namespace TIN
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(784, 359);
+            this.tabPage1.Size = new System.Drawing.Size(784, 382);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "数据表格";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -269,8 +269,8 @@ namespace TIN
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(6, 6);
             this.pictureBox1.Name = "pictureBox1";
@@ -305,7 +305,7 @@ namespace TIN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 493);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Point = TIN.TIN.Point;
 
 namespace TIN.Draws
 {
-    public class DrawHelper<T> where T : IPoint
+    public class DrawHelper
     {
         /// <summary>
         /// 画图相关 
@@ -22,24 +23,24 @@ namespace TIN.Draws
         /// <summary>
         /// 偏移坐标
         /// </summary>
-        public Point Go { get; set; } = new Point();
+        public System.Drawing.Point Go { get; set; } = new System.Drawing.Point();
         public PictureBox PictureBox { get; }
         /// <summary>
         /// 点集 凸包点
         /// </summary>
-        public List<T> Points { get; set; }
+        public List<Point> Points { get; set; }
         /// <summary>
         /// 点集 内部点
         /// </summary>
-        public List<T> Points2 { get; set; }
+        public List<Point> Points2 { get; set; }
         /// <summary>
         /// 线集  绘三角形边线
         /// </summary>
-        public List<List<T>> Lines { get; set; }
+        public List<List<Point>> Lines { get; set; }
         /// <summary>
         /// 线集 绘制凸多边形
         /// </summary>
-        public List<List<T>> Lines2 { get; set; }
+        public List<List<Point>> Lines2 { get; set; }
 
         public DrawHelper(PictureBox pictureBox)
         {
@@ -69,19 +70,19 @@ namespace TIN.Draws
             //计算缩放系数
             raid = Math.Min(PictureBox.Width / (xMax - xMin), PictureBox.Height / (yMax - yMin));
         }
-        private Point ConvertPoint(IPoint point)
+        private System.Drawing.Point ConvertPoint(Point point)
         {
             return ConvertPoint(point, x1, y1, raid * Zoom, x2 + Go.X, y2 + Go.Y);
         }
-        private static Point ConvertPoint(IPoint point, double x1, double y1, double raid, double x2, double y2)
+        private static System.Drawing.Point ConvertPoint(Point point, double x1, double y1, double raid, double x2, double y2)
         {
-            Point p;
+            System.Drawing.Point p;
 
 
             int x = (int)((point.X - x1) * raid + x2);
             int y = (int)(-(point.Y - y1) * raid + y2);
 
-            p = new Point(x, y);
+            p = new System.Drawing.Point(x, y);
 
             return p;
         }
@@ -97,7 +98,7 @@ namespace TIN.Draws
         {
             // 设置初始参数
             Zoom = 0.9;
-            Go = new Point();
+            Go = new System.Drawing.Point();
 
             Draw();
         }
@@ -116,7 +117,6 @@ namespace TIN.Draws
         /// </summary>
         private void DrawData()
         {
-
             // 画线
             Lines?.ForEach(ps =>
             {
@@ -144,7 +144,7 @@ namespace TIN.Draws
         /// 画一个点 用黑色○标记
         /// </summary>
         /// <param name="point"></param>
-        private void DrawPointBlack(IPoint point)
+        private void DrawPointBlack(Point point)
         {
             // 点的半径 直径
             int n = 5, m = 2 * n;
@@ -155,7 +155,7 @@ namespace TIN.Draws
         /// 画一个点 用红色□标记
         /// </summary>
         /// <param name="point"></param>
-        private void DrawPointRed(IPoint point)
+        private void DrawPointRed(Point point)
         {
             // 点的半径
             int n = 5;
@@ -170,7 +170,7 @@ namespace TIN.Draws
         /// </summary>
         /// <param name="pointA"></param>
         /// <param name="pointB"></param>
-        private void DrawLineRed(List<T> points)
+        private void DrawLineRed(List<Point> points)
         {
             var ps = points.Select(t => ConvertPoint(t)).ToArray();
             var pen = new Pen(Color.Red, 3);
@@ -181,7 +181,7 @@ namespace TIN.Draws
         /// </summary>
         /// <param name="pointA"></param>
         /// <param name="pointB"></param>
-        private void DrawLineGray(List<T> points)
+        private void DrawLineGray(List<Point> points)
         {
             var ps = points.Select(t => ConvertPoint(t)).ToArray();
             var pen = new Pen(Color.Gray, 1);

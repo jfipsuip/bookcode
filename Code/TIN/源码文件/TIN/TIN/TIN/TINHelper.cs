@@ -271,9 +271,9 @@ P0 点的平面坐标 y
         /// 图形文件
         /// </summary>
         /// <returns></returns>
-        public Draws.DrawHelper<Point> GetDrawHelper(System.Windows.Forms.PictureBox pictureBox)
+        public Draws.DrawHelper GetDrawHelper(System.Windows.Forms.PictureBox pictureBox)
         {
-            var draw = new Draws.DrawHelper<Point>(pictureBox);
+            var draw = new Draws.DrawHelper(pictureBox);
 
             var points2 = Points.ToList();
             CH.ForEach(item =>

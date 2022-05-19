@@ -15,6 +15,7 @@ namespace TIN
     public partial class Form1 : Form
     {
         TINHelper tINHelper;
+        Draws.DrawHelper<TIN.Point> draw;
         OpenFileDialog OpenFileDialog = new OpenFileDialog();
         SaveFileDialog saveFileDialog = new SaveFileDialog();
 
@@ -91,7 +92,7 @@ namespace TIN
         {
             tINHelper = Common.Calculate(dataGridView1);
             richTextBox1.Lines = tINHelper.ReportResult();
-            var draw = tINHelper.GetDrawHelper(pictureBox1);
+            draw = tINHelper.GetDrawHelper(pictureBox1);
             draw.Draw();
         }
 
@@ -102,12 +103,12 @@ namespace TIN
 
         private void 放大ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            draw.Magnify();
         }
 
         private void 缩小ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            draw.Minish();
         }
 
         private void 保存程序正确性ToolStripMenuItem_Click(object sender, EventArgs e)

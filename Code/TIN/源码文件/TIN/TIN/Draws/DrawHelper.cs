@@ -44,9 +44,6 @@ namespace TIN.Draws
         public DrawHelper(PictureBox pictureBox)
         {
             PictureBox = pictureBox;
-            Image image = new Bitmap(PictureBox.Size.Width, PictureBox.Size.Height);
-            PictureBox.Image = image;
-            graphics = Graphics.FromImage(image);
         }
         private Point GetPoint(IPoint point)
         {
@@ -95,11 +92,26 @@ namespace TIN.Draws
                 DrawPointRed(p);
             });
         }
+
+        public void Magnify()
+        {
+            Zoom = Zoom * 0.8;
+            Draw();
+        }
+        public void Minish()
+        {
+            Zoom = Zoom * 1.2;
+            Draw();
+        }
         /// <summary>
         /// 计算画图基础参数
         /// </summary>
         void Initial()
         {
+            Image image = new Bitmap(PictureBox.Size.Width, PictureBox.Size.Height);
+            PictureBox.Image = image;
+            graphics = Graphics.FromImage(image);
+
             xAverage = Points.Average(t => t.X);
             yAverage = Points.Average(t => t.Y);
 

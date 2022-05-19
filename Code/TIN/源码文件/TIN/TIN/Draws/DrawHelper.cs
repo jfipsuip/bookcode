@@ -175,6 +175,8 @@ namespace TIN.Draws
         {
             var ps = points.Select(t => ConvertPoint(t)).ToArray();
             var pen = new Pen(Color.Gray, 1);
+            // 虚线
+            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
             graphics.DrawLines(pen, ps);
         }
     }

@@ -13,12 +13,12 @@ namespace TIN.Draws
         /// <summary>
         /// 画图相关 
         /// </summary>
-        double xAverage, yAverage, xMax, yMax, picHeight;
+        double x1, y1, x2, y2, raid;
         Graphics graphics;
         /// <summary>
         /// 图形大小
         /// </summary>
-        double Zoom = 3.00;
+        double Zoom { get; set; } = 0.9;
         /// <summary>
         /// 偏移坐标
         /// </summary>
@@ -45,24 +45,44 @@ namespace TIN.Draws
         {
             PictureBox = pictureBox;
         }
-        private Point GetPoint(IPoint point)
+        private void Initial()
         {
-            return GetPoint(point, picHeight, xAverage, yAverage, xMax, yMax, Zoom, Go.X, Go.Y);
+
+            Image image = new Bitmap(PictureBox.Size.Width, PictureBox.Size.Height);
+            PictureBox.Image = image;
+            graphics = Graphics.FromImage(image);
+
+            double xMin, yMin, xMax, yMax;
+            xMin = Points.Min(t => t.X);
+            yMin = Points.Min(t => t.Y);
+            xMax = Points.Max(t => t.X);
+            yMax = Points.Max(t => t.Y);
+
+            //计算中心坐标
+            x1 = (xMin + xMax) / 2;
+            y1 = (yMin + yMax) / 2;
+
+            x2 = PictureBox.Width / 2;
+            y2 = PictureBox.Height / 2;
+
+            //计算缩放系数
+            raid = Math.Min(PictureBox.Width / (xMax - xMin), PictureBox.Height / (yMax - yMin));
         }
-        /// <summary>
-        /// 转换一个输入坐标为图像坐标
-        /// </summary>
-        /// <param name="point"></param>
-        /// <returns></returns>
-        private static Point GetPoint(IPoint point, double picHeight, double xAverage, double yAverage, double xMax, double yMax, double Zoom, double xGo, double yGo)
+        private Point ConvertPoint(IPoint point)
         {
-            Point result;
+            return ConvertPoint(point, raid * Zoom, x1, y1, x2, y2);
+        }
+        private static Point ConvertPoint(IPoint point, double raid, double x1, double y1, double x2, double y2)
+        {
+            Point p;
 
-            int x = (int)(picHeight / 2 + xGo + (point.X - xAverage) * picHeight / xMax / Zoom);
-            int y = (int)(picHeight / 2 - yGo - (point.Y - yAverage) * picHeight / yMax / Zoom);
-            result = new Point(x, y);
 
-            return result;
+            int x = (int)((point.X - x1) * raid + x2);
+            int y = (int)((point.Y - y1) * raid + y2);
+
+            p = new Point(x, y);
+
+            return p;
         }
         /// <summary>
         /// 画图
@@ -70,6 +90,10 @@ namespace TIN.Draws
         public void Draw()
         {
             Initial();
+            DrawData();
+        }
+        public void DrawData()
+        {
 
             // 画线
             Lines?.ForEach(ps =>
@@ -95,30 +119,15 @@ namespace TIN.Draws
 
         public void Magnify()
         {
-            Zoom = Zoom * 0.8;
+            graphics.Clear(Color.White);
+            Zoom = Zoom * 1.1;
             Draw();
         }
         public void Minish()
         {
-            Zoom = Zoom * 1.2;
+            graphics.Clear(Color.White);
+            Zoom = Zoom * 0.9;
             Draw();
-        }
-        /// <summary>
-        /// 计算画图基础参数
-        /// </summary>
-        void Initial()
-        {
-            Image image = new Bitmap(PictureBox.Size.Width, PictureBox.Size.Height);
-            PictureBox.Image = image;
-            graphics = Graphics.FromImage(image);
-
-            xAverage = Points.Average(t => t.X);
-            yAverage = Points.Average(t => t.Y);
-
-            xMax = Math.Max(Points.Max(t => Math.Abs(t.X - xAverage)), 1);
-            yMax = Math.Max(Points.Max(t => Math.Abs(t.Y - yAverage)), 1);
-
-            picHeight = PictureBox.Size.Height;
         }
         /// <summary>
         /// 画一个点 用黑色○标记
@@ -126,10 +135,10 @@ namespace TIN.Draws
         /// <param name="point"></param>
         private void DrawPointBlack(IPoint point)
         {
-            int n = 10;
-            int m = n / 2;
-            var p = GetPoint(point);
-            graphics.DrawEllipse(Pens.Black, p.X - m, p.Y - m, 10, 10);
+            // 点的半径 直径
+            int n = 5, m = 2 * n;
+            var p = ConvertPoint(point);
+            graphics.DrawEllipse(Pens.Black, p.X - n, p.Y - n, m, m);
         }
         /// <summary>
         /// 画一个点 用红色□标记
@@ -137,11 +146,11 @@ namespace TIN.Draws
         /// <param name="point"></param>
         private void DrawPointRed(IPoint point)
         {
-            int n = 10;
-            int m = n / 2;
-            var p = GetPoint(point);
+            // 点的半径
+            int n = 5;
+            var p = ConvertPoint(point);
             var pen = new Pen(Color.Red, 2);
-            graphics.DrawRectangle(pen, p.X - m, p.Y - m, 10, 10);
+            graphics.DrawRectangle(pen, p.X - n, p.Y - n, 2 * n, 2 * n);
 
             graphics.DrawString(point.Name, SystemFonts.DefaultFont, Brushes.Red, p.X, p.Y);
         }
@@ -152,7 +161,7 @@ namespace TIN.Draws
         /// <param name="pointB"></param>
         private void DrawLineRed(List<T> points)
         {
-            var ps = points.Select(t => GetPoint(t)).ToArray();
+            var ps = points.Select(t => ConvertPoint(t)).ToArray();
             var pen = new Pen(Color.Red, 3);
             graphics.DrawLines(pen, ps);
         }
@@ -163,7 +172,7 @@ namespace TIN.Draws
         /// <param name="pointB"></param>
         private void DrawLineGray(List<T> points)
         {
-            var ps = points.Select(t => GetPoint(t)).ToArray();
+            var ps = points.Select(t => ConvertPoint(t)).ToArray();
             var pen = new Pen(Color.Gray, 1);
             graphics.DrawLines(pen, ps);
         }

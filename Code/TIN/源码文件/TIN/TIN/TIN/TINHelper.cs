@@ -274,7 +274,13 @@ P0 点的平面坐标 y
         public Draws.DrawHelper<Point> GetDrawHelper(System.Windows.Forms.PictureBox pictureBox)
         {
             var draw = new Draws.DrawHelper<Point>(pictureBox);
-            List<List<Point>> ps = new List<List<Point>>();
+
+            var points2 = Points.ToList();
+            CH.ForEach(item =>
+            {
+                points2.Remove(item);
+            });
+            List<List<Point>> lines = new List<List<Point>>();
             Triangles.ForEach(t =>
             {
                 List<Point> list = new List<Point>();
@@ -282,14 +288,16 @@ P0 点的平面坐标 y
                 list.Add(t.PointB);
                 list.Add(t.PointC);
                 list.Add(t.PointA);
-                ps.Add(list);
+                lines.Add(list);
             });
 
+            List<List<Point>> lines2 = new List<List<Point>>();
+            lines2.Add(CH);
+
             draw.Points = CH;
-            draw.Points2 = Points;
-            draw.Lines = ps;
-            draw.Lines2 = new List<List<Point>>();
-            draw.Lines2.Add(CH);
+            draw.Points2 = points2;
+            draw.Lines = lines;
+            draw.Lines2 = lines2;
 
             return draw;
         }

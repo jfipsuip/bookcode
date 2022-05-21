@@ -114,6 +114,8 @@ namespace TIN
             tabControl1.SelectedTab = tabPage1;
             NewFile(points.Length);
             TIN.Common.BindData(dataGridView1, points);
+
+            toolStripStatusLabel1.Text = "数据导入成功！";
         }
         public void Calculate()
         {

@@ -61,7 +61,7 @@ namespace TIN.TIN
 
             return tin;
         }
-        private static List<Point> GetPoints(DataGridView dataGrid)
+        public static List<Point> GetPoints(DataGridView dataGrid)
         {
             List<Point> points = new List<Point>();
             for (int i = 0; i < dataGrid.Rows.Count; i++)

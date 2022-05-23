@@ -81,7 +81,23 @@ namespace TIN.Draws
             Initialize();
             DrawImage();
         }
-
+        public void Reset()
+        {
+            // 设置初始参数
+            Rate = rate;
+            Move = new Point();
+            Draw();
+        }
+        public void Magnify()
+        {
+            Rate = Rate * 1.1;
+            Draw();
+        }
+        public void Minish()
+        {
+            Rate = Rate * 0.9;
+            Draw();
+        }
         protected virtual void DrawImage()
         {
             int n = 5, m = 2 * n;

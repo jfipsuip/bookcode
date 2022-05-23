@@ -88,14 +88,25 @@ namespace TIN.Draws
             Move = new Point();
             Draw();
         }
+        /// <summary>
+        /// 图表放大
+        /// </summary>
         public void Magnify()
         {
             Rate = Rate * 1.1;
             Draw();
         }
+        /// <summary>
+        /// 图表变小
+        /// </summary>
         public void Minish()
         {
             Rate = Rate * 0.9;
+            Draw();
+        }
+        public void MoveImage(Point move)
+        {
+            Move = move;
             Draw();
         }
         protected virtual void DrawImage()

@@ -28,7 +28,7 @@ namespace TIN
         //图形移动辅助参数
         int P1_X1 = 0, P1_Y1 = 0;
 
-        Point position, go, location;
+        Point position, move, location;
 
         OpenFileDialog OpenFileDialog = new OpenFileDialog();
         SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -179,7 +179,7 @@ namespace TIN
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             isMove = false;
-            location = go;
+            location = move;
         }
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -192,13 +192,12 @@ namespace TIN
                     Y = Cursor.Position.Y - position.Y,
                 };
                 //图形移动后的位置
-                go.X = location.X + move.X;
-                go.Y = location.Y + move.Y;
+                move.X = location.X + move.X;
+                move.Y = location.Y + move.Y;
 
 
                 //pictureBox1.Location = location;
-                draw.Move = go;
-                draw.Draw();
+                draw.MoveImage(move);
             }
         }
         private void pictureBox1_Click(object sender, EventArgs e)

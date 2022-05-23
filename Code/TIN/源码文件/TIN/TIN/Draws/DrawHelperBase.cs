@@ -32,6 +32,7 @@ namespace TIN.Draws
         public DrawHelperBase(PictureBox pictureBox)
         {
             PictureBox = pictureBox;
+            AddEvent();
         }
         public void Initialize()
         {
@@ -118,5 +119,65 @@ namespace TIN.Draws
                 Graphics.DrawEllipse(Pens.Red, point.X - n, point.Y - n, m, m);
             });
         }
+        #region
+
+        //判断是否进行图形的移动
+        bool isMove = false;
+        Point position, move, location;
+
+
+        public void AddEvent()
+        {
+            PictureBox.DoubleClick += PictureBox_DoubleClick;
+            PictureBox.MouseWheel += PictureBox_MouseWheel;
+            PictureBox.MouseDown += PictureBox_MouseDown;
+            PictureBox.MouseUp += PictureBox_MouseUp;
+            PictureBox.MouseMove += PictureBox_MouseMove;
+        }
+
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            position = Cursor.Position;
+            isMove = true;
+        }
+        private void PictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            location = move;
+            isMove = false;
+        }
+        private void PictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMove)
+            {
+                //X、Y方向上的移动距离
+                Point go = new Point
+                {
+                    X = Cursor.Position.X - position.X,
+                    Y = Cursor.Position.Y - position.Y,
+                };
+                //图形移动后的位置
+                move.X = location.X + go.X;
+                move.Y = location.Y + go.Y;
+
+                MoveImage(move);
+            }
+        }
+        private void PictureBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                Magnify();
+            }
+            else if (e.Delta < 0)
+            {
+                Minish();
+            }
+        }
+
+        private void PictureBox_DoubleClick(object sender, EventArgs e)
+        {
+            Reset();
+        }
+        #endregion
     }
 }

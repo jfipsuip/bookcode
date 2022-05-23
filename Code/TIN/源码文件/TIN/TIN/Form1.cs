@@ -16,19 +16,6 @@ namespace TIN
         TIN.TINHelper tINHelper;
         Draws.DrawHelper draw;
 
-        //记录鼠标位置
-        double Mouse_X1, Mouse_Y1;
-
-        //判断是否进行图形的移动
-        bool isMove = false;
-
-        //pictubox的初始位置
-        int P1_X = 0, P1_Y = 0;
-
-        //图形移动辅助参数
-        int P1_X1 = 0, P1_Y1 = 0;
-
-        Point position, move, location;
 
         OpenFileDialog OpenFileDialog = new OpenFileDialog();
         SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -41,14 +28,7 @@ namespace TIN
 
         private void PictureBox1_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (e.Delta > 0)
-            {
-                draw?.Magnify();
-            }
-            else if (e.Delta <= 0)
-            {
-                draw?.Minish();
-            }
+
         }
 
         private void 新建ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -114,7 +94,7 @@ namespace TIN
             tabControl1.SelectedTab = tabPage1;
             NewFile(points.Length);
             TIN.Common.BindData(dataGridView1, points);
-            
+
             toolStripStatusLabel1.Text = "数据导入成功！";
         }
         public void Calculate()
@@ -127,18 +107,15 @@ namespace TIN
 
         private void 计算三角网体积ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pictureBox1.Location = new Point();
             Calculate();
         }
 
         private void 放大ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            draw.Magnify();
         }
 
         private void 缩小ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            draw.Minish();
         }
 
         private void 保存程序正确性ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -173,32 +150,12 @@ namespace TIN
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            position = Cursor.Position;
-            isMove = true;
         }
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            isMove = false;
-            location = move;
         }
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMove)
-            {
-                //X、Y方向上的移动距离
-                Point move = new Point
-                {
-                    X = Cursor.Position.X - position.X,
-                    Y = Cursor.Position.Y - position.Y,
-                };
-                //图形移动后的位置
-                move.X = location.X + move.X;
-                move.Y = location.Y + move.Y;
-
-
-                //pictureBox1.Location = location;
-                draw.MoveImage(move);
-            }
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -206,7 +163,6 @@ namespace TIN
         }
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
-            draw.Reset();
         }
 
     }

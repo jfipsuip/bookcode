@@ -9,23 +9,37 @@ using PointC = TIN.TIN.Point;
 
 namespace TIN.Draws
 {
-    class DrawHelperBase
+    public class DrawHelperBase
     {
+        static double rate = 0.9;
         int xImage, yImage;
         double xMin, xMax, yMin, yMax, width, height, xCenter, yCenter, zoom;
 
         public PictureBox PictureBox { get; set; }
         protected Graphics Graphics { get; set; }
+        /// <summary>
+        /// 图像偏移坐标
+        /// </summary>
+        public Point Move { get; set; }
+        /// <summary>
+        /// 图像放大变小比率
+        /// </summary>
+        public double Rate { get; set; } = rate;
+        /// <summary>
+        /// 图像要画的点
+        /// </summary>
         public List<PointC> Points { get; set; }
         public DrawHelperBase(PictureBox pictureBox)
         {
             PictureBox = pictureBox;
-            Bitmap image = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
-            pictureBox.Image = image;
-            Graphics = Graphics.FromImage(image);
         }
         public void Initialize()
         {
+            Bitmap image = new Bitmap(PictureBox.Size.Width, PictureBox.Size.Height);
+            PictureBox.Image = image;
+            Graphics = Graphics.FromImage(image);
+            Graphics.Clear(Color.White);
+
             // 图形矩形的中心
             xImage = PictureBox.Width / 2;
             yImage = PictureBox.Height / 2;
@@ -50,7 +64,7 @@ namespace TIN.Draws
 
         public Point ConvertPoint(PointC point)
         {
-            return ConvertPoint(point, xCenter, yCenter, zoom, xImage, yImage);
+            return ConvertPoint(point, xCenter, yCenter, zoom * Rate, xImage + Move.X, yImage + Move.Y);
         }
         private static Point ConvertPoint(PointC point, double x, double y, double zoom, int xMove, int yMove)
         {
@@ -69,6 +83,8 @@ namespace TIN.Draws
         }
 
         private void DrawImage()
+        {
+        protected virtual void DrawImage()
         {
             int n = 5, m = 2 * n;
             Points?.ForEach(p =>

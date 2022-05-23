@@ -15,7 +15,7 @@ namespace TIN.Draws
         double xMin, xMax, yMin, yMax, width, height, xCenter, yCenter, zoom;
 
         public PictureBox PictureBox { get; set; }
-        public Graphics Graphics { get; set; }
+        protected Graphics Graphics { get; set; }
         public List<PointC> Points { get; set; }
         public DrawHelperBase(PictureBox pictureBox)
         {

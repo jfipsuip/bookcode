@@ -82,8 +82,6 @@ namespace TIN.Draws
             DrawImage();
         }
 
-        private void DrawImage()
-        {
         protected virtual void DrawImage()
         {
             int n = 5, m = 2 * n;

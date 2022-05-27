@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TIN.TIN;
 
 namespace TIN
 {
@@ -99,7 +100,8 @@ namespace TIN
         }
         public void Calculate()
         {
-            tINHelper = TIN.Common.Calculate(dataGridView1);
+            tINHelper = new TINHelper(dataGridView1.ToList<TIN.Point>(), 25);
+            tINHelper.Calculate();
             richTextBox1.Lines = tINHelper.ReportResult();
             draw = tINHelper.GetDrawHelper(pictureBox1);
             draw.Draw();
@@ -121,10 +123,10 @@ namespace TIN
         private void 保存程序正确性ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var contents = tINHelper?.ProgramRigth();
-            saveFileDialog.Filter = "文本文件|*.txt";
+            saveFileDialog.Filter = "文本文件|*.xlsx";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                File.WriteAllLines(saveFileDialog.FileName, contents);
+                contents.Save(saveFileDialog.FileName);
             }
         }
         private void 保存计算结果ToolStripMenuItem_Click(object sender, EventArgs e)

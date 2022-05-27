@@ -170,7 +170,7 @@ namespace TIN.TIN
         /// 程序正确性
         /// </summary>
         /// <returns></returns>
-        public List<string> ProgramRigth()
+        public List<ProgramRigthDto> ProgramRigth()
         {
             List<string> list = new List<string>();
             list.Add($"{p2.X:F3}");
@@ -214,8 +214,7 @@ namespace TIN.TIN
             list.Add($"{Triangles.Sum(t => t.Vfill):F3}");
 
             list.Add($"{Triangles.Sum(t => t.V):F3}");
-            List<string> data = new List<string>();
-            data.Add("序号,输出,说明");
+            List<ProgramRigthDto> data = new List<ProgramRigthDto>();
             string remark = @"P2 点的平面坐标 x
 P2 点的平面坐标 y
 P4 点的平面坐标 x
@@ -247,8 +246,13 @@ P0 点的平面坐标 y
             string[] remarks = remark.Replace("\r\n", "\n").Split('\n').ToArray();
             for (int i = 0; i < list.Count; i++)
             {
-                string s = $"{i + 1},{list[i]},{remarks[i]}";
-                data.Add(s);
+                ProgramRigthDto dto = new ProgramRigthDto
+                {
+                    序号 = i + 1,
+                    输出 = Convert.ToDouble(list[i]),
+                    说明 = remarks[i],
+                };
+                data.Add(dto);
             }
             return data;
         }

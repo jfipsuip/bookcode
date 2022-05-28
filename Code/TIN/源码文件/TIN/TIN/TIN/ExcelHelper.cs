@@ -37,6 +37,7 @@ namespace TIN.TIN
                 {
                     var property = propertys[j];
                     type = property.PropertyType;
+                    //创建之后就可以赋值了
                     if (type == typeof(double) || type == typeof(int))
                     {
                         double value = Convert.ToDouble(propertys[j].GetValue(data));
@@ -47,7 +48,6 @@ namespace TIN.TIN
                         string value = propertys[j].GetValue(data).ToString();
                         row2.CreateCell(j).SetCellValue(value);
                     }
-                    //创建之后就可以赋值了
                 }
             }
             FileStream stream = new FileStream(path, FileMode.Create);

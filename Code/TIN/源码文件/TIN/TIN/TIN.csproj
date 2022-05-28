@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TIN\CalculateResultDto.cs" />
     <Compile Include="TIN\Common.cs" />
     <Compile Include="Draws\DrawHelper.cs" />
     <Compile Include="TIN\ETriangle.cs" />

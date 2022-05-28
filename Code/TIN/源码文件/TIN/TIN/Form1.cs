@@ -90,6 +90,8 @@ namespace TIN
             tINHelper = new TINHelper(dataGridView1.ToList<TIN.Point>(), 25);
             tINHelper.Calculate();
             richTextBox1.Lines = tINHelper.ReportResult();
+            var list = tINHelper.CalculateResult();
+            dataGridView2.BindData(list);
             draw = tINHelper.GetDrawHelper(pictureBox1);
             draw.Draw();
         }
@@ -122,7 +124,7 @@ namespace TIN
             saveFileDialog.Filter = "文本文件|*.txt";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                File.WriteAllLines(saveFileDialog.FileName, contents);
+                File.WriteAllLines(saveFileDialog.FileName, dataGridView2.ToLines());
             }
         }
 

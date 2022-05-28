@@ -260,14 +260,23 @@ P0 点的平面坐标 y
         /// 计算结果
         /// </summary>
         /// <returns></returns>
-        public List<string> CalculateResult()
+        public List<CalculateResultDto> CalculateResult()
         {
-            List<string> list = new List<string>();
-            list.Add("序号,点名 1,点名 2,点名 3,挖方体积,填方体积,总体积");
+            List<CalculateResultDto> list = new List<CalculateResultDto>();
             int i = 1;
             foreach (var item in Triangles)
             {
-                list.Add($"{i++},{item.PointA.Name},{item.PointB.Name},{item.PointC.Name},{item.Vcut:F3},{item.Vfill:F3},{item.V:F3}");
+                CalculateResultDto dto = new CalculateResultDto
+                {
+                    序号 = i++,
+                    点名1 = item.PointA.Name,
+                    点名2 = item.PointB.Name,
+                    点名3 = item.PointC.Name,
+                    挖方体积 = $"{item.Vcut:F3}",
+                    填方体积 = $"{item.Vfill:F3}",
+                    总体积 = $"{item.V:F3}",
+                };
+                list.Add(dto);
             }
             return list;
         }

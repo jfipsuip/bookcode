@@ -11,12 +11,6 @@ namespace TIN.TIN
 {
     public class Common
     {
-        public static void NewFile()
-        {
-
-        }
-
-
         public static void BindData(DataGridView data, string[] lines)
         {
             string[] strs;
@@ -48,68 +42,6 @@ namespace TIN.TIN
 
             data.Show();
             return data;
-        }
-
-        public static TINHelper Calculate(DataGridView dataGrid)
-        {
-            List<Point> points;
-
-            points = GetPoints(dataGrid);
-
-            var tin = Common.GetTIN(points, 25);
-
-
-            return tin;
-        }
-        public static List<Point> GetPoints(DataGridView dataGrid)
-        {
-            List<Point> points = new List<Point>();
-            for (int i = 0; i < dataGrid.Rows.Count; i++)
-            {
-                Point point = GetPoint(dataGrid.Rows[i]);
-                points.Add(point);
-            }
-
-            return points;
-        }
-
-        private static Point GetPoint(DataGridViewRow dataGrid)
-        {
-            string name;
-            double x, y, h;
-            Point point;
-
-            name = Convert.ToString(dataGrid.Cells[0].Value);
-            x = Convert.ToDouble(dataGrid.Cells[1].Value);
-            y = Convert.ToDouble(dataGrid.Cells[2].Value);
-            h = Convert.ToDouble(dataGrid.Cells[3].Value);
-
-            point = new Point(name, x, y, h);
-
-            return point;
-        }
-
-        public static void GetTIN(string path)
-        {
-            List<Point> points = GetPoints(path);
-            var tin = new TINHelper(points, 9);
-            tin.Calculate();
-        }
-
-        public static TINHelper GetTIN(List<Point> points, double h)
-        {
-            var tin = new TINHelper(points, h);
-            tin.Calculate();
-
-            return tin;
-        }
-        private static List<Point> GetPoints(string path)
-        {
-            string[] lines = File.ReadAllLines(path);
-            string[] strs = lines.Where(t => t.Split(',').Length >= 4).ToArray();
-            List<Point> points = strs.Select(t => new Point(t)).ToList();
-
-            return points;
         }
     }
 }

@@ -25,6 +25,9 @@ namespace TIN
         {
             InitializeComponent();
             pictureBox1.MouseWheel += PictureBox1_MouseWheel;
+            dataGridView1.SetColumnName("点名", "X分量", "Y分量", "H分量");
+            dataGridView1.RowCount = 20;
+
         }
 
         private void PictureBox1_MouseWheel(object sender, MouseEventArgs e)
@@ -34,7 +37,6 @@ namespace TIN
 
         private void 新建ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewFile();
         }
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -64,39 +66,24 @@ namespace TIN
         {
 
         }
-
-        private void NewFile(int n = 11)
-        {
-            tabPage1.Controls.Clear();
-            dataGridView1 = new DataGridView();
-            tabPage1.Controls.Add(dataGridView1);
-            dataGridView1.Dock = DockStyle.Fill;
-
-            TIN.Common.NewGrid(dataGridView1, n);
-
-            tabControl1.SelectedTab = tabPage1;
-
-        }
-
         public void Open()
         {
             OpenFileDialog.Filter = "*.txt|*.txt";
-            if (OpenFileDialog.ShowDialog() != DialogResult.OK)
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                return;
+                string[] comtents = File.ReadAllLines(OpenFileDialog.FileName);
+                string[] lines = comtents.SkipWhile(t => t.Split(',').Length < 4).ToArray();
+
+                dataGridView1.BindData(lines);
+
+                tabControl1.SelectedTab = tabPage1;
+                toolStripStatusLabel1.Text = "数据导入成功！";
             }
+            else
+            {
+                toolStripStatusLabel1.Text = "数据导入取消！";
 
-            string path = OpenFileDialog.FileName;
-            string[] lines = File.ReadAllLines(path);
-
-            string[] points = lines.Where(t => t.Split(',').Length >= 4).ToArray();
-
-
-            tabControl1.SelectedTab = tabPage1;
-            NewFile(points.Length);
-            TIN.Common.BindData(dataGridView1, points);
-
-            toolStripStatusLabel1.Text = "数据导入成功！";
+            }
         }
         public void Calculate()
         {

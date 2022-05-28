@@ -19,10 +19,5 @@ namespace TIN.TIN
             Triangle triangle = new Triangle(new Point("P1,0,0,0"), new Point("P1,4,0,0"), new Point("P1,0,2,0"));
 
         }
-        public static void Usage()
-        {
-            string path = @"D:\github\jfipsuip\bookcode\Code\TIN\测试数据\1.txt";
-            Common.GetTIN(path);
-        }
     }
 }

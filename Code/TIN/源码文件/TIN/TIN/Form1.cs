@@ -75,6 +75,9 @@ namespace TIN
                 string[] lines = comtents.SkipWhile(t => t.Split(',').Length < 4).ToArray();
 
                 dataGridView1.BindData(lines);
+                draw = new Draws.DrawHelper(pictureBox1);
+                draw.Points = dataGridView1.ToList<TIN.Point>();
+                draw.Draw();
 
                 tabControl1.SelectedTab = tabPage1;
                 toolStripStatusLabel1.Text = "数据导入成功！";

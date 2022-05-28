@@ -27,7 +27,7 @@ namespace TIN
             pictureBox1.MouseWheel += PictureBox1_MouseWheel;
             dataGridView1.SetColumnName("点名", "X分量", "Y分量", "H分量");
             dataGridView1.RowCount = 20;
-
+            dataGridView2.SetColumnName("序号", "点名1", "点名2", "点名3", "挖方体积", "填方体积", "总体积");
         }
 
         private void PictureBox1_MouseWheel(object sender, MouseEventArgs e)

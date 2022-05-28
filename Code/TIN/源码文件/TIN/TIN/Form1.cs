@@ -38,19 +38,9 @@ namespace TIN
         private void 新建ToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
-        private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Open();
-        }
 
-        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            saveFileDialog.Filter = "文本文件|*.txt";
-            if (saveFileDialog.ShowDialog() != DialogResult.OK)
-            {
-                File.WriteAllLines(saveFileDialog.FileName, richTextBox1.Lines);
-            }
-        }
+
+
 
         private void 文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -60,6 +50,10 @@ namespace TIN
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+        private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Open();
         }
         public void Open()
         {
@@ -83,6 +77,12 @@ namespace TIN
 
             }
         }
+
+
+        private void 计算三角网体积ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Calculate();
+        }
         public void Calculate()
         {
             tINHelper = new TINHelper(dataGridView1.ToList<TIN.Point>(), 25);
@@ -94,19 +94,15 @@ namespace TIN
             draw.Draw();
         }
 
-        private void 计算三角网体积ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Calculate();
-        }
 
-        private void 放大ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            saveFileDialog.Filter = "文本文件|*.txt";
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                File.WriteAllLines(saveFileDialog.FileName, richTextBox1.Lines);
+            }
         }
-
-        private void 缩小ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
         private void 保存程序正确性ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var contents = tINHelper?.ProgramRigth();
@@ -135,8 +131,13 @@ namespace TIN
             }
         }
 
+        private void 放大ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
 
-
+        private void 缩小ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
         }

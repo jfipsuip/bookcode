@@ -45,16 +45,11 @@ namespace TIN
 
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var contents = tINHelper?.ReportResult();
             saveFileDialog.Filter = "文本文件|*.txt";
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
             {
-                return;
+                File.WriteAllLines(saveFileDialog.FileName, richTextBox1.Lines);
             }
-
-            string path = saveFileDialog.FileName;
-
-            File.WriteAllLines(path, contents);
         }
 
         private void 文件ToolStripMenuItem_Click(object sender, EventArgs e)

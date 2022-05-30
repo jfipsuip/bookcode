@@ -54,6 +54,7 @@ namespace Surveying
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -159,6 +160,7 @@ namespace Surveying
             this.toolStripButton4,
             this.toolStripSeparator4,
             this.toolStripButton5,
+            this.toolStripSeparator5,
             this.toolStripLabel1,
             this.toolStripTextBox1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
@@ -238,6 +240,11 @@ namespace Surveying
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(100, 37);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 37);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -283,6 +290,7 @@ namespace Surveying
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }
 

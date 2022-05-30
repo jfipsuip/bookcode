@@ -32,31 +32,41 @@ namespace Surveying
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.算法ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存程序正确性ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存计算结果ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存成果图形ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.算法ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.放大ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.缩小ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -84,6 +94,36 @@ namespace Surveying
             this.文件ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.文件ToolStripMenuItem.Text = "文件";
             // 
+            // 打开ToolStripMenuItem
+            // 
+            this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.打开ToolStripMenuItem.Text = "打开";
+            // 
+            // 保存ToolStripMenuItem
+            // 
+            this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存ToolStripMenuItem.Text = "保存";
+            // 
+            // 保存程序正确性ToolStripMenuItem
+            // 
+            this.保存程序正确性ToolStripMenuItem.Name = "保存程序正确性ToolStripMenuItem";
+            this.保存程序正确性ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存程序正确性ToolStripMenuItem.Text = "保存程序正确性";
+            // 
+            // 保存计算结果ToolStripMenuItem
+            // 
+            this.保存计算结果ToolStripMenuItem.Name = "保存计算结果ToolStripMenuItem";
+            this.保存计算结果ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存计算结果ToolStripMenuItem.Text = "保存计算结果";
+            // 
+            // 保存成果图形ToolStripMenuItem
+            // 
+            this.保存成果图形ToolStripMenuItem.Name = "保存成果图形ToolStripMenuItem";
+            this.保存成果图形ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存成果图形ToolStripMenuItem.Text = "保存成果图形";
+            // 
             // 算法ToolStripMenuItem
             // 
             this.算法ToolStripMenuItem.Name = "算法ToolStripMenuItem";
@@ -99,53 +139,23 @@ namespace Surveying
             this.显示ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.显示ToolStripMenuItem.Text = "显示";
             // 
-            // 帮助ToolStripMenuItem
-            // 
-            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.帮助ToolStripMenuItem.Text = "帮助";
-            // 
-            // 打开ToolStripMenuItem
-            // 
-            this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.打开ToolStripMenuItem.Text = "打开";
-            // 
-            // 保存ToolStripMenuItem
-            // 
-            this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.保存ToolStripMenuItem.Text = "保存";
-            // 
-            // 保存程序正确性ToolStripMenuItem
-            // 
-            this.保存程序正确性ToolStripMenuItem.Name = "保存程序正确性ToolStripMenuItem";
-            this.保存程序正确性ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.保存程序正确性ToolStripMenuItem.Text = "保存程序正确性";
-            // 
-            // 保存计算结果ToolStripMenuItem
-            // 
-            this.保存计算结果ToolStripMenuItem.Name = "保存计算结果ToolStripMenuItem";
-            this.保存计算结果ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.保存计算结果ToolStripMenuItem.Text = "保存计算结果";
-            // 
-            // 保存成果图形ToolStripMenuItem
-            // 
-            this.保存成果图形ToolStripMenuItem.Name = "保存成果图形ToolStripMenuItem";
-            this.保存成果图形ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.保存成果图形ToolStripMenuItem.Text = "保存成果图形";
-            // 
             // 放大ToolStripMenuItem
             // 
             this.放大ToolStripMenuItem.Name = "放大ToolStripMenuItem";
-            this.放大ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.放大ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.放大ToolStripMenuItem.Text = "放大";
             // 
             // 缩小ToolStripMenuItem
             // 
             this.缩小ToolStripMenuItem.Name = "缩小ToolStripMenuItem";
-            this.缩小ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.缩小ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.缩小ToolStripMenuItem.Text = "缩小";
+            // 
+            // 帮助ToolStripMenuItem
+            // 
+            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.帮助ToolStripMenuItem.Text = "帮助";
             // 
             // toolStrip1
             // 
@@ -177,6 +187,11 @@ namespace Surveying
             this.toolStripButton1.Size = new System.Drawing.Size(66, 34);
             this.toolStripButton1.Text = "打开";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 37);
+            // 
             // toolStripButton2
             // 
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
@@ -184,6 +199,11 @@ namespace Surveying
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(66, 34);
             this.toolStripButton2.Text = "保存";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 37);
             // 
             // toolStripButton3
             // 
@@ -193,6 +213,11 @@ namespace Surveying
             this.toolStripButton3.Size = new System.Drawing.Size(66, 34);
             this.toolStripButton3.Text = "解算";
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 37);
+            // 
             // toolStripButton4
             // 
             this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
@@ -200,6 +225,11 @@ namespace Surveying
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(66, 34);
             this.toolStripButton4.Text = "放大";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 37);
             // 
             // toolStripButton5
             // 
@@ -209,25 +239,10 @@ namespace Surveying
             this.toolStripButton5.Size = new System.Drawing.Size(66, 34);
             this.toolStripButton5.Text = "缩小";
             // 
-            // toolStripSeparator1
+            // toolStripSeparator5
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 37);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 37);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 37);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 37);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 37);
             // 
             // toolStripLabel1
             // 
@@ -237,19 +252,91 @@ namespace Surveying
             // 
             // toolStripTextBox1
             // 
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(100, 37);
             // 
-            // toolStripSeparator5
+            // tabControl1
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 37);
+            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Location = new System.Drawing.Point(12, 65);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1246, 580);
+            this.tabControl1.TabIndex = 2;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 4);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1238, 554);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "输入数据";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1238, 554);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "图形";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 4);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1238, 554);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "报告";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 4);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(1238, 554);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "程序正确性";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 653);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1270, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(44, 17);
+            this.toolStripStatusLabel2.Text = "提示：";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1270, 675);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -259,6 +346,9 @@ namespace Surveying
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,6 +381,14 @@ namespace Surveying
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

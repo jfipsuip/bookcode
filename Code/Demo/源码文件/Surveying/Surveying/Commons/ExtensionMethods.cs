@@ -79,8 +79,12 @@ namespace Surveying.Commons
                 }
             }
         }
-        public static void BindData<T>(this DataGridView dataGridView, List<T> list) where T : new()
+        public static void BindData<T>(this DataGridView dataGridView, List<T> list, bool isSetColumnName = false) where T : new()
         {
+            if (isSetColumnName)
+            {
+                dataGridView.SetColumnName(typeof(T));
+            }
             dataGridView.RowCount = list.Count;
             Type type = typeof(T);
             var propertys = type.GetProperties();
@@ -107,6 +111,23 @@ namespace Surveying.Commons
             {
                 dataGridView.Columns[i].Width = (dataGridView.Width - 20) / dataGridView.ColumnCount;
                 dataGridView.Columns[i].Name = columnMames[i];
+            }
+        }
+        /// <summary>
+        /// 设置列名
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <param name="columnMames"></param>
+        public static void SetColumnName(this DataGridView dataGridView, Type type)
+        {
+            dataGridView.RowHeadersVisible = false;
+            var propertys = type.GetProperties();
+
+            dataGridView.ColumnCount = propertys.Length;
+            for (int i = 0; i < dataGridView.ColumnCount; i++)
+            {
+                dataGridView.Columns[i].Width = (dataGridView.Width - 20) / dataGridView.ColumnCount;
+                dataGridView.Columns[i].Name = propertys[i].Name;
             }
         }
     }

@@ -95,6 +95,8 @@ namespace TIN
             dataGridView2.BindData(list);
             draw = tINHelper.GetDrawHelper(pictureBox1);
             draw.Draw();
+
+            toolStripStatusLabel1.Text = "解算成功！！！";
         }
 
 

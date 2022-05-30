@@ -19,12 +19,12 @@ namespace Surveying
 
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Open();
         }
 
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Save();
         }
 
         private void 保存程序正确性ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -44,17 +44,17 @@ namespace Surveying
 
         private void 算法ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            JiSuan();
         }
 
         private void 放大ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FangDa();
         }
 
         private void 缩小ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            SuoXiao();
         }
 
         private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,25 +64,46 @@ namespace Surveying
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-
+            Open();
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-
+            Save();
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-
+            JiSuan();
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-
+            FangDa();
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            SuoXiao();
+        }
+
+        private void Open()
+        {
+
+        }
+        private void Save()
+        {
+
+        }
+        private void JiSuan()
+        {
+
+        }
+        private void FangDa()
+        {
+
+        }
+        private void SuoXiao()
         {
 
         }

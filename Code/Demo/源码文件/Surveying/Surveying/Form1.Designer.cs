@@ -107,38 +107,44 @@ namespace Surveying
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.打开ToolStripMenuItem.Text = "打开";
+            this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
             // 
             // 保存ToolStripMenuItem
             // 
             this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存ToolStripMenuItem.Text = "保存";
+            this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
             // 
             // 保存程序正确性ToolStripMenuItem
             // 
             this.保存程序正确性ToolStripMenuItem.Name = "保存程序正确性ToolStripMenuItem";
-            this.保存程序正确性ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存程序正确性ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存程序正确性ToolStripMenuItem.Text = "保存程序正确性";
+            this.保存程序正确性ToolStripMenuItem.Click += new System.EventHandler(this.保存程序正确性ToolStripMenuItem_Click);
             // 
             // 保存计算结果ToolStripMenuItem
             // 
             this.保存计算结果ToolStripMenuItem.Name = "保存计算结果ToolStripMenuItem";
-            this.保存计算结果ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存计算结果ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存计算结果ToolStripMenuItem.Text = "保存计算结果";
+            this.保存计算结果ToolStripMenuItem.Click += new System.EventHandler(this.保存计算结果ToolStripMenuItem_Click);
             // 
             // 保存成果图形ToolStripMenuItem
             // 
             this.保存成果图形ToolStripMenuItem.Name = "保存成果图形ToolStripMenuItem";
-            this.保存成果图形ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存成果图形ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存成果图形ToolStripMenuItem.Text = "保存成果图形";
+            this.保存成果图形ToolStripMenuItem.Click += new System.EventHandler(this.保存成果图形ToolStripMenuItem_Click);
             // 
             // 算法ToolStripMenuItem
             // 
             this.算法ToolStripMenuItem.Name = "算法ToolStripMenuItem";
             this.算法ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.算法ToolStripMenuItem.Text = "算法";
+            this.算法ToolStripMenuItem.Click += new System.EventHandler(this.算法ToolStripMenuItem_Click);
             // 
             // 显示ToolStripMenuItem
             // 
@@ -152,20 +158,23 @@ namespace Surveying
             // 放大ToolStripMenuItem
             // 
             this.放大ToolStripMenuItem.Name = "放大ToolStripMenuItem";
-            this.放大ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.放大ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.放大ToolStripMenuItem.Text = "放大";
+            this.放大ToolStripMenuItem.Click += new System.EventHandler(this.放大ToolStripMenuItem_Click);
             // 
             // 缩小ToolStripMenuItem
             // 
             this.缩小ToolStripMenuItem.Name = "缩小ToolStripMenuItem";
-            this.缩小ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.缩小ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.缩小ToolStripMenuItem.Text = "缩小";
+            this.缩小ToolStripMenuItem.Click += new System.EventHandler(this.缩小ToolStripMenuItem_Click);
             // 
             // 帮助ToolStripMenuItem
             // 
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
             this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.帮助ToolStripMenuItem.Text = "帮助";
+            this.帮助ToolStripMenuItem.Click += new System.EventHandler(this.帮助ToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -196,6 +205,7 @@ namespace Surveying
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(66, 34);
             this.toolStripButton1.Text = "打开";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripSeparator1
             // 
@@ -209,6 +219,7 @@ namespace Surveying
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(66, 34);
             this.toolStripButton2.Text = "保存";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // toolStripSeparator2
             // 
@@ -222,6 +233,7 @@ namespace Surveying
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(66, 34);
             this.toolStripButton3.Text = "解算";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // toolStripSeparator3
             // 
@@ -235,6 +247,7 @@ namespace Surveying
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(66, 34);
             this.toolStripButton4.Text = "放大";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // toolStripSeparator4
             // 
@@ -248,6 +261,7 @@ namespace Surveying
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(66, 34);
             this.toolStripButton5.Text = "缩小";
+            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripSeparator5
             // 

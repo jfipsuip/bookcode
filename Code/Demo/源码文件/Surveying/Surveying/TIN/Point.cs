@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Surveying.Commons
+namespace TIN.TIN
 {
     /// <summary>
     /// 点
@@ -27,6 +27,18 @@ namespace Surveying.Commons
         /// H坐标
         /// </summary>
         public double H { get; set; }
+        public Point()
+        {
+
+        }
+        public Point(string line)
+        {
+            string[] strs = line.Split(',');
+            Name = strs[0];
+            X = Convert.ToDouble(strs[1]);
+            Y = Convert.ToDouble(strs[2]);
+            H = Convert.ToDouble(strs[3]);
+        }
 
         public Point(string name, double x, double y, double h = 0)
         {
@@ -36,10 +48,18 @@ namespace Surveying.Commons
             H = h;
         }
 
+        public static double GetDistance(double x1, double y1, double x2, double y2)
+        {
+            double d;
+
+            d = Math.Sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+
+            return d;
+        }
+
         public override string ToString()
         {
             return $"{Name} {X} {Y} {H}";
         }
     }
-
 }

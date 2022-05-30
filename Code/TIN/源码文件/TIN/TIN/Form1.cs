@@ -60,8 +60,10 @@ namespace TIN
             OpenFileDialog.Filter = "*.txt|*.txt";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string[] comtents = File.ReadAllLines(OpenFileDialog.FileName);
-                string[] lines = comtents.SkipWhile(t => t.Split(',').Length < 4).ToArray();
+                string[] contents = File.ReadAllLines(OpenFileDialog.FileName);
+
+                toolStripTextBox1.Text = contents[0].Split(',')[1];
+                string[] lines = contents.SkipWhile(t => t.Split(',').Length < 4).ToArray();
 
                 dataGridView1.BindData(lines);
                 draw = new Draws.DrawHelper(pictureBox1);
@@ -85,7 +87,8 @@ namespace TIN
         }
         public void Calculate()
         {
-            tINHelper = new TINHelper(dataGridView1.ToList<TIN.Point>(), 25);
+            double h = Convert.ToDouble(toolStripTextBox1.Text);
+            tINHelper = new TINHelper(dataGridView1.ToList<TIN.Point>(), h);
             tINHelper.Calculate();
             richTextBox1.Lines = tINHelper.ReportResult();
             var list = tINHelper.CalculateResult();
@@ -155,5 +158,14 @@ namespace TIN
         {
         }
 
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            Open();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            Calculate();
+        }
     }
 }

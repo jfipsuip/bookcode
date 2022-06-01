@@ -63,13 +63,14 @@ namespace Surveying
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.保存报告ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -80,9 +81,9 @@ namespace Surveying
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -105,7 +106,8 @@ namespace Surveying
             this.保存ToolStripMenuItem,
             this.保存程序正确性ToolStripMenuItem,
             this.保存计算结果ToolStripMenuItem,
-            this.保存成果图形ToolStripMenuItem});
+            this.保存成果图形ToolStripMenuItem,
+            this.保存报告ToolStripMenuItem});
             this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
             this.文件ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.文件ToolStripMenuItem.Text = "文件";
@@ -113,35 +115,35 @@ namespace Surveying
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.打开ToolStripMenuItem.Text = "打开";
             this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
             // 
             // 保存ToolStripMenuItem
             // 
             this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存ToolStripMenuItem.Text = "保存";
             this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
             // 
             // 保存程序正确性ToolStripMenuItem
             // 
             this.保存程序正确性ToolStripMenuItem.Name = "保存程序正确性ToolStripMenuItem";
-            this.保存程序正确性ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存程序正确性ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存程序正确性ToolStripMenuItem.Text = "保存程序正确性";
             this.保存程序正确性ToolStripMenuItem.Click += new System.EventHandler(this.保存程序正确性ToolStripMenuItem_Click);
             // 
             // 保存计算结果ToolStripMenuItem
             // 
             this.保存计算结果ToolStripMenuItem.Name = "保存计算结果ToolStripMenuItem";
-            this.保存计算结果ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存计算结果ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存计算结果ToolStripMenuItem.Text = "保存计算结果";
             this.保存计算结果ToolStripMenuItem.Click += new System.EventHandler(this.保存计算结果ToolStripMenuItem_Click);
             // 
             // 保存成果图形ToolStripMenuItem
             // 
             this.保存成果图形ToolStripMenuItem.Name = "保存成果图形ToolStripMenuItem";
-            this.保存成果图形ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存成果图形ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存成果图形ToolStripMenuItem.Text = "保存成果图形";
             this.保存成果图形ToolStripMenuItem.Click += new System.EventHandler(this.保存成果图形ToolStripMenuItem_Click);
             // 
@@ -282,6 +284,7 @@ namespace Surveying
             // 
             // toolStripTextBox1
             // 
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(100, 37);
             // 
@@ -379,6 +382,26 @@ namespace Surveying
             this.dataGridView2.Size = new System.Drawing.Size(1238, 554);
             this.dataGridView2.TabIndex = 0;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.dataGridView3);
+            this.tabPage5.Location = new System.Drawing.Point(4, 4);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(1238, 554);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "计算结果";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView3.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.RowTemplate.Height = 23;
+            this.dataGridView3.Size = new System.Drawing.Size(1238, 554);
+            this.dataGridView3.TabIndex = 0;
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -405,25 +428,12 @@ namespace Surveying
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // tabPage5
+            // 保存报告ToolStripMenuItem
             // 
-            this.tabPage5.Controls.Add(this.dataGridView3);
-            this.tabPage5.Location = new System.Drawing.Point(4, 4);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1238, 554);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "计算结果";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView3.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowTemplate.Height = 23;
-            this.dataGridView3.Size = new System.Drawing.Size(1238, 554);
-            this.dataGridView3.TabIndex = 0;
+            this.保存报告ToolStripMenuItem.Name = "保存报告ToolStripMenuItem";
+            this.保存报告ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.保存报告ToolStripMenuItem.Text = "保存报告";
+            this.保存报告ToolStripMenuItem.Click += new System.EventHandler(this.保存报告ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -449,10 +459,10 @@ namespace Surveying
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -501,6 +511,7 @@ namespace Surveying
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.ToolStripMenuItem 保存报告ToolStripMenuItem;
     }
 }
 

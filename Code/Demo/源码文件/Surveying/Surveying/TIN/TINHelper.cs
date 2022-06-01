@@ -272,9 +272,9 @@ P0 点的平面坐标 y
                     点名1 = item.PointA.Name,
                     点名2 = item.PointB.Name,
                     点名3 = item.PointC.Name,
-                    挖方体积 = $"{item.Vcut:F3}",
-                    填方体积 = $"{item.Vfill:F3}",
-                    总体积 = $"{item.V:F3}",
+                    挖方体积 = item.Vcut,
+                    填方体积 = item.Vfill,
+                    总体积 = item.V,
                 };
                 list.Add(dto);
             }

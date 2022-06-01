@@ -131,7 +131,7 @@ namespace Surveying
         }
         private void JiSuan()
         {
-            tin = new TIN.TIN.TINHelper(dataGridView1.ToList<TIN.TIN.Point>(), 25);
+            tin = new TIN.TIN.TINHelper(dataGridView1.ToList<TIN.TIN.Point>(), Convert.ToDouble(toolStripTextBox1.Text));
             tin.Calculate();
             richTextBox1.Lines = tin.ReportResult();
             dataGridView2.BindData(tin.ProgramRigth(), true);

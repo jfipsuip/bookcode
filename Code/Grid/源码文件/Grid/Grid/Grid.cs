@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.IO;
 using Grid.Grids;
 using Grid.Draws;
+using Grid;
+using System.Xml.Linq;
 
 namespace TIN
 {
@@ -52,6 +54,45 @@ namespace TIN
 
         private void Open_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            string[] paths = openFileDialog.FileNames;
+            Geotiff geotiff = new Geotiff();
+            List<Array> arrays = new List<Array>();
+            foreach (var path in paths)
+            {
+                var array = geotiff.GetRasterValuesFromFilePath(path, false);
+                arrays.Add(array);
+            }
+            var v = arrays[0];
+            System.Array v3 = Array.CreateInstance(typeof(byte), v.GetLength(0), v.GetLength(1));
+
+            for (int i = 0; i < v.GetLength(0); i++)
+            {
+                for (int j = 0; j < v.GetLength(1); j++)
+                {
+                    List<byte> list = new List<byte>();
+                    foreach (var item in arrays)
+                    {
+                        list.Add((byte)item.GetValue(i, j));
+                    }
+                    byte n3 = Average(list.ToArray());
+                    v3.SetValue(n3, i, j);
+                }
+            }
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "*.tif|*.tif";
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            var filename=  saveFileDialog.FileName;
+            geotiff.CreateRasterFromModuleFilePath(@"C: \Users\HP\Pictures\2015bak", filename, "TIFF", paths[0], v3, "0");
 
         }
         /// <summary>
@@ -208,6 +249,27 @@ namespace TIN
 
             DrawHelper draw = grid.GetDarw(pictureBox1);
             draw.Draw();
+        }
+        static byte Average(params byte[] values)
+        {
+            int sum = 0, count = 0, average;
+            foreach (var item in values)
+            {
+                if (item != 255)
+                {
+                    sum += item;
+                    count++;
+                }
+            }
+            if (count == 0)
+            {
+                average = -1;
+            }
+            else
+            {
+                average = sum / count;
+            }
+            return (byte)average;
         }
 
 

@@ -71,7 +71,8 @@ namespace Grid
             }
 
 
-            Dataset result = driver.Create(geotiffOutputPath, countColumn, countRow, bandCount, dataType, null);
+            string[] options = new string[] { "TILED=YES", "COMPRESS=LZW" };
+            Dataset result = driver.Create(geotiffOutputPath, countColumn, countRow, bandCount, dataType, options);
 
             //set attributes
             result.SetGeoTransform(transform);
